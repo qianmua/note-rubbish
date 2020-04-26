@@ -1,6 +1,7 @@
 package _a_juc_._阻塞队列_;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -90,13 +91,19 @@ public class Main {
     }
 
     /** 超时阻塞*/
-    public static void d4(){
+    public static void d4() throws InterruptedException {
         ArrayBlockingQueue queue = new ArrayBlockingQueue(3);
         queue.offer("a");
         queue.offer("a");
         queue.offer("a");
         //超时
-        queue.offer("a");
+        queue.offer("a" , 2,TimeUnit.SECONDS);
+
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        //超时等待
+        System.out.println(queue.poll(2,TimeUnit.SECONDS));
 
     }
 
