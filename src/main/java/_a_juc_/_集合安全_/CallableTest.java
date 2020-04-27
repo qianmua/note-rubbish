@@ -1,4 +1,4 @@
-package _a_juc_;
+package _a_juc_._集合安全_;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
