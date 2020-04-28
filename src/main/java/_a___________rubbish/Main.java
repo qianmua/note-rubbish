@@ -1,6 +1,7 @@
 package _a___________rubbish;
 
-import java.util.Scanner;
+import java.util.*;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -12,7 +13,15 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        f1();
+        List<Character[]> list = new ArrayList<>(500);
+        while (true){
+            list.add(new Character[1024 * 1024]);
+            System.out.println(list.size());
+        }
+        // 398 OOM
+
+
+//        f1();
     }
 
     private static void f1(){

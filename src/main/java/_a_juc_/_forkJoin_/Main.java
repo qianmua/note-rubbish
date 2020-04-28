@@ -41,9 +41,11 @@ public class Main {
             sum += i;
         }
         long e = System.currentTimeMillis();*/
+
         //stream 并行流
 
         long s = System.currentTimeMillis();
+
         //并行\结果
         long reduce = LongStream
                 .rangeClosed(0, 10_0000_0000)
