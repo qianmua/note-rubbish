@@ -16,11 +16,34 @@ public class Main {
 
 //        f1();
 //        f4();
+
+    }
+
+    private static void f6(){
+        //没写完，不想写了
+        int x = 10;
+        //酒瓶数
+        int temp =x>>1;
+        temp += x&1;
+        //瓶盖
+        int count = temp;
+        int  count2 = temp;
+        //处理瓶盖
+        while (count >=4 || count2 >= 2){
+            temp += count/4;
+            count = count%4 + count/4;
+            temp += count2/2;
+            count2 = count2%2 + count2/2;
+        }
+        System.out.println(temp);
+
+    }
+
+    private static void f5(){
         int arr1[] = {1,2,3,4,5,6,7,8,9};
         Arrays.stream(arr1)
                 .filter( i -> (i&1) == 1)
                 .forEach(System.out::println);
-
     }
 
 
