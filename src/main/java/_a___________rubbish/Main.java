@@ -15,11 +15,34 @@ public class Main {
     public static void main(String[] args) {
 
 //        f1();
+//        f4();
+        int arr1[] = {1,2,3,4,5,6,7,8,9};
+        Arrays.stream(arr1)
+                .filter( i -> (i&1) == 1)
+                .forEach(System.out::println);
 
+    }
+
+
+    private static void f4(){
+        int a = 2;
+        int t1 = a&1;
+        //10010 18 1001 -> 9 -> /2
+        // 5 101
+        int t2 = 0b101 >> 1;
+        // 5 101 -> 1010 -> 20
+        int t3 = 0b101 << 1;
+
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(t3);
+
+    }
+
+    private static void f3(){
         Shape shape = new Circle(10);
         shape.a();
         shape.show();
-
     }
 
 
