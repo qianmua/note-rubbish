@@ -13,6 +13,19 @@ import java.util.*;
  */
 public class Main {
     public static void main(String[] args) {
+
+//        f1();
+
+        Shape shape = new Circle(10);
+        shape.a();
+        shape.show();
+
+    }
+
+
+
+
+    private static void f2(){
         List<Character[]> list = new ArrayList<>(500);
         while (true){
             list.add(new Character[1024 * 1024]);
@@ -21,7 +34,6 @@ public class Main {
         // 398 OOM
 
 
-//        f1();
     }
 
     private static void f1(){
@@ -33,5 +45,40 @@ public class Main {
         }else {
             System.out.println(temp);
         }
+    }
+}
+
+abstract class Shape{
+    double a;
+    double p;
+    abstract void a();
+    abstract void p();
+
+    void show(){
+        System.out.println(a+ " shape " + p);
+    }
+}
+
+class Circle extends Shape{
+    double pi = 3.14;
+    double r;
+
+    Circle(double r){
+        this.r = r;
+    }
+
+    @Override
+    void a() {
+        a = pi * r * r;
+    }
+
+    @Override
+    void show() {
+        System.out.println( " c" + a);
+    }
+
+    @Override
+    void p() {
+
     }
 }
