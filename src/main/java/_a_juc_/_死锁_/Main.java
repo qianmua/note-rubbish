@@ -28,13 +28,8 @@ public class Main {
                 new ThreadPoolExecutor.DiscardPolicy()
         );
 
-        executor.execute( () -> {
-           deal.getA();
-        });
-
-        executor.execute( () -> {
-            deal.getB();
-        });
+        executor.execute(deal::getA);
+        executor.execute(deal::getB);
 
 //        TimeUnit.SECONDS.sleep(5);
         //别关线程池呐
