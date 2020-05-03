@@ -65,7 +65,13 @@ public class Main {
 
         executor.shutdown();
 
+        int a = 1 < 2? f() : f();
 
+
+    }
+
+    private static int f(){
+        return 1;
     }
 }
 
