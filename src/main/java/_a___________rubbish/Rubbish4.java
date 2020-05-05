@@ -1,5 +1,7 @@
 package _a___________rubbish;
 
+import java.util.ArrayList;
+
 /**
  * Created by IntelliJ IDEA.
  *
