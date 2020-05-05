@@ -15,8 +15,7 @@ public class Rubbish4 {
      * 有意思 ， 那么会输出什么，为什么？
      * */
     public static void main(String[] args) {
-        B b = new B();
-        System.out.println(b.b);
+        System.out.println(new B().b);
     }
 
     static class A{
@@ -32,9 +31,7 @@ public class Rubbish4 {
 
     static class B extends A{
         int b = 33;
-        B(){
-
-        }
+        B(){ }
 
         @Override
         void t() {
