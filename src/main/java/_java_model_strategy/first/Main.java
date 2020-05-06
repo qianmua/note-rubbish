@@ -13,8 +13,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        GreenDuck greenDuck = new GreenDuck();
-        RedDuck redDuck = new RedDuck();
+        Duck greenDuck = new GreenDuck();
+        Duck redDuck = new RedDuck();
 
         greenDuck.display();
         greenDuck.say();
