@@ -1,4 +1,4 @@
-package _java_model_strategy;
+package _java_model_strategy.sec.display;
 
 /**
  * Created by IntelliJ IDEA.
@@ -6,8 +6,8 @@ package _java_model_strategy;
  * @author HJC
  * @version 1.0
  * 谦谦君子 卑以自牧也
- * @date 2020/5/5
- * @time 22:25
+ * @date 2020/5/6
+ * @time 12:52
  */
-public class Duck {
+public interface Duck {
 }
