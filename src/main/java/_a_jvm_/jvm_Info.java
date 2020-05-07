@@ -47,5 +47,17 @@ public class jvm_Info {
     * concurrent mark sweep 并发标记
     *
     *
+    *
+    * Object 32bit
+    * 对象信息
+    *
+    *
+    *
+    *
+    *
      * */
+
+
+    //-server -Xcomp -XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly -XX:CompileCommand=compileonly,*TestInterrupt2.main
+    //-XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly
 }

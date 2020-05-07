@@ -10,6 +10,8 @@ package _a_jvm_;
  * @time 12:39
  */
 public class ClassLoaderTest {
+    //汇编指令
+    //-XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly
     /**
      * 类加载器
      *

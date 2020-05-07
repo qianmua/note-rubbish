@@ -41,6 +41,11 @@ public class MapTest {
         *
         *
         * */
+        HashMap<String, String> map1 = new HashMap<>(1);
+        // 红黑树 使hash查找快
+        map1.put("1","2");
+
+
         Map<String, String> map = new ConcurrentHashMap<>();
 
 
