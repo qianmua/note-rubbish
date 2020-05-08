@@ -90,7 +90,6 @@ class MyLock{
 
     public void lock(){
         System.out.println(Thread.currentThread().getName() + " -> get lock");
-
         while ( !atomicReference.compareAndSet(1 , 2)){
             //自旋
         }
@@ -98,7 +97,7 @@ class MyLock{
     }
 
     public void unlock(){
-        System.out.println(Thread.currentThread().getName() + " -> unlock");
         atomicReference.compareAndSet(2,1);
+        System.out.println(Thread.currentThread().getName() + " -> unlock");
     }
 }
