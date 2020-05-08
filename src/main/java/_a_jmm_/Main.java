@@ -10,4 +10,14 @@ package _a_jmm_;
  * @time 21:58
  */
 public class Main {
+
+    private static int[] arr = new int[10];
+
+    public static void main(String[] args) {
+        f(arr);
+    }
+
+    private static void f(int[] arr){
+
+    }
 }
