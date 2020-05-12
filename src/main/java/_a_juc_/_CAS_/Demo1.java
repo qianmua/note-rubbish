@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicStampedReference;
 public class Demo1 {
 
     public static void main(String[] args) {
+        //原子Integer // 使用了无锁机制（CAS）
 //        AtomicInteger integer = new AtomicInteger(100);
         // value 和 版本号，乐观锁喽
         //泛型是包装类，会有对象的引用问题

@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class VolatileTest {
     /*
-    *   volatile 是java 虚拟提供的轻量同步机制
+    *   volatile 是java 虚拟提供的轻量同步机制 ， 相当于一个弱化了的synchronized
     *
-    *   保证可见性
+    *   保证可见性(这个线程我修改了，另一个线程要知道我修改了这个)
     *       什么是jmm？
     *       java内存模型，不存在，概念！，约定！
     *       some：
@@ -26,12 +26,14 @@ public class VolatileTest {
     *       加锁和解锁 是同一把锁
     *
     *   不保证原子性
+    * 保证可见性
     *
     *   禁止指令重排
     * */
 
-
-    //加上volatile
+    /**
+     *     加上volatile
+     */
     private static volatile int num = 0;
     public static void main(String[] args) throws InterruptedException {
 
@@ -55,14 +57,12 @@ public class VolatileTest {
         // 原子性，不可分割诺
         //volatile不保证原子性
 
-
         //原子类Atomic
         //AtomicInteger  CAS
 
         AtomicInteger atomicInteger = new AtomicInteger();
         // +1   Unsafe是一个特殊得类  CAS
         atomicInteger.getAndIncrement();
-
 
         //指令重排
         //计算机执行得过程和你编写得不一样
@@ -77,8 +77,25 @@ public class VolatileTest {
         *
         * //要是在线程中呢？
         *
+        * 不保证原子性
+        *
+        * 操作某个数值时在内存中分为好几步
+        * 这是要是有其他线程修改数据
+        * 就会出现脏数据了
+        * 有的就会失效，比如两个同时都修改了1
+        *
         *
         * */
+
+        // 等待线程执行
+        // main线程和其他下称
+        int count = 2;
+        while(Thread.activeCount() > count){
+            //main让出其他线程 ///礼让
+            Thread.yield();
+        }
+
+        System.out.println("..");
 
     }
 }

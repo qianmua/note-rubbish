@@ -1,5 +1,9 @@
 package _b_mysql_;
 
+
+import java.io.FileNotFoundException;
+
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -10,4 +14,7 @@ package _b_mysql_;
  * @time 19:05
  */
 public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException {
+    }
 }
