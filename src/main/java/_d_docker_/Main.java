@@ -170,6 +170,75 @@ public class Main {
     * 修改配置文件 -e
     * docker run -d --name es1 -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms64m -Xmx512m" elstaticsearch:7.6.2
     *
+    * 可视化 docker portainer
+    *
+    * docker 镜像
+    * 镜像是一种轻量的 可视化的独立软件包，包含运行的代码 库 环境变量和配置文件
+    *
+    * 加载原理
+    * unionFs  联合文件系统
+    * 分层文件系统，一次同时加载多个文件系统，把文件联合起来
+    *
+    * 镜像层组合
+    * 打包之后会把文件层组合
+    *
+    * docker 镜像事只读的，容器启动时会加一个新的可写层 就是容器层 容器之下都是可写层
+    *
+    * commit 镜像
+    * docker commit -m="描述信息" -a="作者" 容器id 目标镜像tag
+    * 提交到 docker
+    * 保存当前容器的状态，提交得到个image
+    * 相当于快照，备份当前状态
+    *
+    * 容器数据卷
+    * docker 理念 将应用与环境打包程镜像
+    * 但是数据呢？
+    * 把数据挂载到外部（数据共享）
+    *
+    * docker -v 挂载
+    * docker run -v /usr/local/sof/test:/容器目录 容器
+    * docker inspect 查看容器信息 查看是否挂载ok
+    * 挂载后 容器内外部文件会同步
+    *
+    * mysql 配置密码
+    * docker run -e MYSQL_ROOT_PASSWORD=mysqlpassword --name mysqld mysql:8.0.16
+    *
+    * 挂载
+    * docker run -d -p 3306:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql --name aaa tag
+    *
+    * 具名挂载 匿名挂载
+    *
+    * -v 容器内路径 （ 没指定目录 会自动挂载到外部一个目录 ， 下面可以查看）
+    *
+    * docker volume ls 查看卷 （没有指定就是匿名的）
+    *
+    * docker run -d -P -v 名字(不加/):/etc/nginx 给 匿名指定一个名字 就是具名
+    * 查看具名路径
+    * docker volume inspect 具名 得到挂载的外部目录
+    *
+    * -v /宿柱路径:容器路径 自定路径挂载
+    *
+    * 后面 可以跟上 :ro 或者 :rw 设置可读可写权限
+    * docker -v /usr:/etc:ro
+    *
+    *
+    * docker file
+    * 用来构建docker镜像的文件
+    * 脚本文件 命令
+    * docker build -f /filepath -t imagename/image:tag .
+    * 可以生成镜像时挂载哦 VOLUME ( 匿名挂载)
+    *
+    * 数据卷容器
+    * 容器与容器数据同步（数据共享） --volumes-form
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
     *
     *
     *
