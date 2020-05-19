@@ -230,10 +230,153 @@ public class Main {
     *
     * 数据卷容器
     * 容器与容器数据同步（数据共享） --volumes-form
+    * docker run --name j1 --volumes-form j2 tag
+    * 实现数据同步了 相当于继承 实现数据共享
+    * 只要有一个容器在，共享数据就不会被删掉
+    * 相当于拷贝
+    *
+    * 数据卷 生命周期 直到 没有容器使用
+    * 如果持久到本地 那么就永久存在
+    *
+    * docker file
+    * docker build 构建
+    * docker run 运行
+    * docker push 发布镜像
+    * 官方镜像是基础包，我们可以自己制定images （eg： jdk + tomcat + jar）
+    *
+    * 基础
+    * 指令 都是大写
+    * 从上到下执行
+    * # 表示注释
+    * 每个指令都会提交一个镜像层
+    *
+    * FROM 基础镜像
+    * MAINTAINER 镜像作者 （邮箱）
+    * RUN 镜像构建需要执行得命令
+    * ADD 添加内容层
+    * WORKDIR 工作目录
+    * VOLUME 挂载卷
+    * EXPOSE 指定暴露端口
+    * CMD 指定容器启动时运行命令 只有最后一个指令会生效，可以被代替 启动容器之后会执行这条命令
+    * ENTRYPOINT 同cmd 可以追加命令
+    * ONBUILD 当构建一个被继承得 就会运行 ， 触发指令
+    * COPY 将文件拷贝到镜像中
+    * ENV 构建时设置环境变量 (设置内存大小，mysql用户名啥的)
+    *
+    * docker history 查看镜像构建步骤
+    *
+    * tomcat test
+    *
+    * 编写 Dockerfile
+    * FROM centos
+    * MAINTAINER qianmuna<151561@qq.com>
+    * COPY read.txt /usr/loc/read.text
+    * ADD jdk8 /usr/local
+    * ADD tomcat /usr/local
+    * RUN yum install vim
+    * ENV MYPATH /usr/local
+    * WORKDIR $MYPATH
+    * ENV JAVA_HOME /usr/local/jdk8
+    * ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+    * ENV CATALINA_HOME /usr/local/tomcat
+    * ENV CATALINA_BASH /usr/local/tomcat
+    * PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+    * EXPORT 8080
+    * CMD /usr/local/tomcat/bin/startup.sh && tail -F /usr/local/tomcat/bin/logs/out.logs
+    *
+    *
+    * 构建 docker build -t tomcats
+    *
+    * 发布镜像
+    * DockerHub
+    * docker login --help
+    * 登录docker -u username -p password
+    *
+    * push
+    * docker push username/镜像:版本
+    *
+    * 增加一个tag
+    * docker tag imageId tag名
+    *
+    * 阿里云
+    * 在镜像仓库 创建命名空间
+    * 官方文档 直接操作
+    *
+    *
+    * docker 网络
+    *
+    * ip addr
+    * lo 本机回环地址
+    * eth0 阿里云内网地址
+    * docker0 docker生成的网卡地址
+    * docker exec -it tom1 tomcat ip addr 查看容器内部ip
+    *
+    * 本机可以 ping同 这个ip
+    *
+    * 每次启动一个docker 就会分配一个ip docker0
+    * 桥接模式 使用的时evth-pair技术 产生得是一对一对得网卡
+    *
+    * evth-pair 就是一堆虚拟接口 成对出现 一段链接协议，一段彼此相连
+    * 充当一个桥梁
+    *
+    * 就是 给linux 还有容器 两边对接一个接口
+    *
+    * 链接各种虚拟网络接口
+    *
+    * docker0 相当于一个路由器 给容器 分配 ip
+    *
+    * 容器删除时 网桥也就没有喽
     *
     *
     *
+    * 容器互联
     *
+    * 跟cloud一样 直接通过服务名去调用ip
+    * docker 容器每次都会重新分配ip的哦
+    *
+    * --link
+    *
+    * docker run -d -P tomcat1 --link tomcat2 tomcat
+    * 这种link 是单向的
+    * 1 只 打通了2
+    *
+    * docker inspect tomcat1 查看info
+    *
+    * --link可以ping原理
+    *
+    * 相当于在容器host 直接写 上了  ip 容器
+    * 172.1.18 tomcat1 容器id
+    *
+    * 查看方法 docker exec -it tomcat1 cat /etc/hosts
+    *
+    *
+    *
+    * 自定义网络 支持容器名相互访问
+    *
+    * docker network ls 显示所有网卡网络
+    *
+    * 网络模式
+    * 桥接 bridge （Main）
+    * none 不配置网络
+    * host 主机模式 跟宿主机共享网络
+    * container 容器之间互联（局限很大）
+    *
+    * 直接启动是 默认有一个 --net bridge
+    * docker run -d -P --net bridge tom1 tomcat
+    *
+    * 自定义
+    * docker network create --driver bridge --subnet 192.168.0.0/16 --gateway(路由网关 顶级路由) 192.168.0.1 mynet
+    *
+    * 查看 docker network inspect mynet
+    *
+    * 将容器 分配到我们自己的网络
+    *
+    * docker run -d -P tomcat1 --net mynet tomcat
+    *
+    * 分配之后 就可以互联啦
+    * 就是我们自己维护了个局域网 由docker维护
+    *
+    * 网络联通
     *
     *
     *
