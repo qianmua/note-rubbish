@@ -376,27 +376,46 @@ public class Main {
     * 分配之后 就可以互联啦
     * 就是我们自己维护了个局域网 由docker维护
     *
-    * 网络联通
     *
     *
+    * 网络连通
+    * 上面自定义网段 之间 联通
+    * 跨网络连通 使用 docker network connect
+    * docker network connect mynet tomcat2
+    * 直接 将tomc2 加到mynet中 ， 一个容器2个ip
     *
     *
+    * shell 脚本创建6个 容器 集群
+    * for port in $(seq 1 6);
+    * do
+    * mkdir -p /mydata/redis/node-${port}/conf
+    * touch /mydata/redis/node-${port}/conf/redis.conf
+    * cat <<EOF>>/mydata/redis/node_${port}conf/redis.conf
+    * port 6379
+    * bind 0.0.0.0
+    * cluster-enabled yes
+    * cluster-config-file node.conf
+    * cluster-node-timeout 5000
+    * cluster-announce-ip 172.0.0.1${port}
+    * cluster-announce-port 6379
+    * cluster-announce-bus-port 16379
+    * appendonly yes
+    * EOF
+    * done
     *
     *
+    * springboot 打包docker 镜像
+    * Dockerfile
+    * # 构建镜像
+    * FROM java:8
+    * COPY *.jar /app.jar
+    * CMD ["--server port=8080"]
+    * EXPORT 8080
+    * ENTRYPORINT ["java","-jar","/app.jar"]
     *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
+    * 将dockerfile 文件 和jar 一起上传服务器
+    * docker build 打包镜像
+    * run 启动 ok！
     *
     *
     *
