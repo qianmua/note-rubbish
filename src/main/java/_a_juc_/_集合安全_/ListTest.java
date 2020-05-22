@@ -2,6 +2,7 @@ package _a_juc_._集合安全_;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @time 19:50
  */
 public class ListTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         /**
          *
          * 并发下arrayList 不安全的
@@ -48,17 +49,21 @@ public class ListTest {
          *         }
          * */
 
-        /*List<String> list = new ArrayList<>();
-        list = new Vector<>();
-        list = Collections.synchronizedList(new ArrayList<>());*/
+//        List<String> list = new ArrayList<>();
+//        list = new Vector<>();
+//        list = Collections.synchronizedList(new ArrayList<>());
         List<String> list = new CopyOnWriteArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 100; i++) {
             new Thread(() -> {
-                list.add(UUID.randomUUID().toString().substring(0,5));
-                System.out.println(list);
+                for (int i1 = 0; i1 < 100; i1++) {
+                    list.add(UUID.randomUUID().toString().substring(0,5));
+                }
+//                System.out.println(list);
             },String.valueOf(i)).start();
-
         }
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println(list.size());
+//        list.forEach(System.out::println);
     }
 
 }
