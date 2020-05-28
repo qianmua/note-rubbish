@@ -42,6 +42,15 @@ public class Main2 {
         * 哈哈
         * 代替 synchronized ？？？
         *
+        *
+        *
+        * cas 缺陷
+        *
+        * 高并发下 性能问题
+        *
+        * ABA 问题 -> 乐观锁 解决
+        *
+        *
         * */
         int v1;
         while ( !compareAndSwap(v1 =getCount() , v1 + 1));
