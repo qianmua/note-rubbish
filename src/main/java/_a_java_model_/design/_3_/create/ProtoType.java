@@ -4,7 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author HJC
@@ -37,6 +41,19 @@ public class ProtoType {
         System.out.println(clone5);
         System.out.println(clone6);
 
+        List list = new ArrayList();
+        list.add("A");
+        list.add("C");
+        list.add("B");
+        list.add("D");
+        list.add("E");
+        list.add("F");
+        list.add("G");
+        list.add("C");
+        System.out.println(list);
+        Collections.sort(list);
+        System.out.println(list);
+
     }
 }
 
@@ -62,7 +79,6 @@ class Sheep implements Cloneable{
         * 就被叫做 浅拷贝
         *
         * */
-
         /*
         * 深拷贝 浅拷贝
         *
