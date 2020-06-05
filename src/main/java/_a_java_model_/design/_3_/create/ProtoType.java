@@ -42,14 +42,14 @@ public class ProtoType {
         System.out.println(clone6);
 
         List list = new ArrayList();
-        list.add("A");
+        /*list.add("A");
         list.add("C");
         list.add("B");
         list.add("D");
         list.add("E");
         list.add("F");
         list.add("G");
-        list.add("C");
+        list.add("C");*/
         System.out.println(list);
         Collections.sort(list);
         System.out.println(list);

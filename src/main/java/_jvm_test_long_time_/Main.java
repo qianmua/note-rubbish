@@ -32,12 +32,12 @@ public class Main {
     private static void test2() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         User user = new User();
         Class userClass = user.getClass();
-        Method getNames = userClass.getDeclaredMethod("getName", null);
+        Method getNames = userClass.getDeclaredMethod("getName", new Class[0]);
 
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < 1000000000; i++) {
-            getNames.invoke(user,null);
+            getNames.invoke(user,new Class[0]);
         }
         long end = System.currentTimeMillis();
         System.out.println(" : " + (end - start) + "/ms");
@@ -47,11 +47,11 @@ public class Main {
     private static void test3() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         User user = new User();
         Class userClass = user.getClass();
-        Method getNames = userClass.getDeclaredMethod("getName", null);
+        Method getNames = userClass.getDeclaredMethod("getName", new Class[0]);
         getNames.setAccessible(true);
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000000000; i++) {
-            getNames.invoke(user,null);
+            getNames.invoke(user,new Class[0]);
         }
         long end = System.currentTimeMillis();
         System.out.println(" : " + (end - start) + "/ms");
