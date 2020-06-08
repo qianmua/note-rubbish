@@ -10,4 +10,6 @@ package _a_java_model_.design._3_;
  * @time 21:57
  */
 public class Init {
+    public static void main(String[] args) {
+    }
 }
