@@ -1,5 +1,9 @@
 package _a_java_model_.design._3_;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -11,5 +15,25 @@ package _a_java_model_.design._3_;
  */
 public class Init {
     public static void main(String[] args) {
+
+        System.out.println("A".hashCode());
+        System.out.println("B".hashCode());
+        System.out.println("C".hashCode());
+        //
+        System.out.println("///==========//");
+        HashMap<Double , String> map = new HashMap(){{
+            put(10.1 ,"A");
+            put(10.2 ,"B");
+            put(10.3 ,"C");
+            put(10.4 ,"C");
+        }};
+        HashSet<Object> set = new HashSet<>();
+        set.add(null);
+        map.forEach( (k ,v) -> System.out.println(k.hashCode() + " " + k));
+        System.out.println("///==========//");
+
+
+
+
     }
 }
