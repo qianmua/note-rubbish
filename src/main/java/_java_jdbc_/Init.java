@@ -133,6 +133,16 @@ public class Init {
     *
     *
     *
+    * SQL 执行原理
+    *
+    * statement：通过jdbc将SQL语句放入数据库，由数据库进行解释操作，这样速度慢
+    *
+    * PreparedStatement： 将原始的SQL语句进行解释（预编译），
+    * 然后将中间码录入数据库，数据库直接执行
+    * 缓存SQL来提高性能
+    * 参数化防止SQL注入
+    *
+    *
     *
     *
     *
