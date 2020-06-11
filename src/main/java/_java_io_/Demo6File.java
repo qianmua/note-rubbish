@@ -26,5 +26,59 @@ public class Demo6File {
     * 计算机可以试别出来
     *
     *
+    * GBK 中文码表  （2字节 汉字）
+    *
+    * UTF8 国际标准码表 （3字节 汉字）
+    *
+    *
     * */
+
+
+    /*
+    *
+    * 转换流
+    *
+    *
+    * inputStreamReader FileReader
+    *
+    *
+    * */
+
+
+    /*
+    *
+    * 序列化
+    *
+    * 把对象 序列化成流
+    * 保存到文件中
+    *
+    * 把文件中的 对象流 读取出来
+    * 反序列化
+    *
+    *
+    * ObjectOutputStream -> writerObject
+    * ObjectInputStream -> readerObject
+    *
+    *
+    * 构造方法
+    * ObjectOutputStream（OutputStream）
+    * // 把对象 写入到 文件中
+    *
+    *
+    * //打印流
+    *
+    *
+    * PrintStream
+    * // 打印数据的表示形式
+    * // 只能输出
+    * //不会 抛出IOException
+    *
+    * 字节打印流
+    *
+    *
+    **/
+
+
+    public static void main(String[] args) {
+    }
 }
