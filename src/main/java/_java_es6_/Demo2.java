@@ -21,13 +21,14 @@ public class Demo2 {
         FileInputStream fis=null;
         FileOutputStream fos=null;
 
+        // 注意序列化顺序
         fis=new FileInputStream("C:\\Users\\HJC\\IdeaProjects\\god-way\\src\\main\\java\\_java_es6_\\demo1.txt");
         fos=new FileOutputStream("C:\\Users\\HJC\\IdeaProjects\\god-way\\src\\main\\java\\_java_es6_\\demo1.txt");
         oos=new ObjectOutputStream(fos);
         ois=new ObjectInputStream(fis);
-        oos.writeObject(s1);
-        oos.writeObject(s2);
-        oos.writeObject(s3);
+//        oos.writeObject(s1);
+//        oos.writeObject(s2);
+//        oos.writeObject(s3);
         Object obj=ois.readObject();
         System.out.println(obj);
 
