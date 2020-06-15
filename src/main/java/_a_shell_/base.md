@@ -1,5 +1,8 @@
 
 
+> 查找 文本 按下/ 
+    然后输入查找的字符串 回车ok
+
 # shell 脚本
 
 ## 什么是shell
@@ -229,8 +232,70 @@ make install
     
 > 变量类型
 
+    格式 变量名=值
+    变量名 和 值之间不可以 有空格
     
+    
+    本地变量 只能本地用户使用 家目录下 .bash_profile \ .bashrc 目录
+    全局变量 /etc/profile \ /ect/bashrc 目录下
+    自定义变量 //脚本中的变量
+    临时变量  控制台中 变量 // 退出终端就没有啦~
+    
+    
+    字符串变量 使用 "" 或者 '' 包围起来
+    可以使用下划线开头
+    不可以是中文
+    
+    取消变量名 
+    unset
+    
+    
+    在家目录下的变量生效 source ~/.bash_profile 
+    //去加载家目录下的私有变量保存 
 
+
+    全局变量 前面需要 加上 export  // 就可以所有用户访问了
+    
+    
+## 数组
+
+    数组之间使用 （）
+    arr=(1 2 3 4 5)    
+    
+    数组使用 ${arr[下标]}
+    
+    // 
+    数组赋值
+    arr[4] = 6
+    
+    
+    // 查看数组
+    declare -a 查看系统所有声明的数组
+    
+    arr[@] // 访问所有元素
+    
+    #arr[@] // 统计数组中多少元素
+    
+    !arr[@] // 得到索引
+    
+    arr[@]:1 // 从第一个开始访问
+    arr[@]:1：2 // 从第一个开始访问，总共访问俩
+    
+    
+> 关联数组
+
+    用户可以自定义索引 // 类似map k v
+    
+    
+    声明一个关联数组
+    
+    declare -A arr
+    
+    // 赋值
+    arr([name]="3" [age]=11)
+    或者 
+    arr[name]="3"
+    
         
 #### demo
 
@@ -242,13 +307,322 @@ make install
     done
     echo       
     
- 
+    
+## shell 比较运算 流程控制
+
+
+    使用 test 判断
+    
+    // 或者
+    
+    使用 if 判断
+
+> 运算符 
+
+    -eq 等于 
+    -gt 大于
+    -lt 小于
+    -ge 大于等于
+    -le 小于等于
+    -ne 不等于
+    
+    // shell 判断 返回 0 or 其他值 // 0为 真 其他假
+    
+    test 1 -eq 1; echo $?           // 使用test 判断
+    
+    shell 对小数点不太友好 可以使用cut 截取
+    eg:
+    test `echo "1.5*10"|bc|cut -d '.' -f1` -eq 20; echo $?
+    
+    -f1 // 分割的 只需要第一个值   
+    // 小数需要处理 
+    
+    
+> 文件类型 比较运算
+    
+    -d 文件是否存在 且是否未目录 
+    -e 文件是否存在                   // 文件 或者 目录
+    -f 文件存在 且未文件
+    -r 存在 且 可读
+    -s 存在 且 不为空
+    -w 存在 且 可写
+    -x 存在 且 可执行
+    -o 存在 且 当前用户 是否拥有
+    -G 存在 且 为当前用户拥有
+    file1 -nt file2  检查file1 是否比 file2 新
+    file1 -ot file2  检查file1 是否比 file2 旧
+    
+    // 注意 root 用户 的权限 // 特殊
+    
+    // 给文件 添加权限
+    //
+    chmod o+w files
+    
+    
+    
+>  字符串比较运算
+
+    ==
+    !=
+    -n  // 字符串长度 是否大于零
+    -z  // 字符串长度是否为0
+    
+    
+    test -z ""; echo $?
+    
+    
+> 逻辑运算
+
+    //if 支持
+
+    &&
+    ||
+    ！
+    
+    eg: 
+        if [1 -eq 1] && [2 -eq 2 ];then echo "1" ;else echo "2";fi
+        
+        
+> if 运算
+
+    运算 
+    
+    if []
+        then
+            pass
+            exit 1  # 退出脚本
+    fi
+    
+    if []
+        then
+            pass
+            exit 1  # 退出脚本
+        else
+            pass
+            
+    fi
+    
+    可以在 if 条件表达式 中植入  （数学运算）    (())
+    
+    if (( 100%3+1 >10 )); then echo "1" fi
+    
+    [[]] 可以做 字符串 条件匹配
+    
+    for i in r1 r2 r3 rr rr4
+        do
+            if [[ $i == r* ]] ;then
+                echo $i
+            fi
+    done        
+            
+            
+            
+> for 循环
+
+    // seq跟 .. 差不多
+    seq 1 9
+    seq 9 -1 0
+    seq 9 -2 0
+
+
+    语法: 
+    
+    // foreach
+    for var in v1 v2 v3 v4..
+        do
+            pass
+    done
+    
+    //条件
+    for ((i=1 ;i<10;i++))
+        do  
+            echo $i
+    done
+
+
+    死循环
+    for((;;))
+        do
+        
+    done
+    
+> 条件退出
+    
+    ping 判断主机存活
+    ping -c1 $1 &>/dev/null
+    if [$? -eq 0]
+        echo "date: `data + "%F %H:%M:%S"` : $1 is \033[32m UP \033[0m"      
+    fi
+    
+    // 跳过本次迭代
+    continue
+    
+    // 跳出循环
+    break 
+    break 2 // 双层循环 跳出外循环
+    
+    
+> while
+
+    语法格式
+        
+        while [条件]
+            do
+            
+            done
+            
+    eg:
+    while [! -p /temp/demp ]
+        do
+            echo "111"
+    done
+    
+    while [$m -lt 1000 ] || [$c -lt 1] 
+        do
+            echo "fail ->"
+    done            
+    
+> 封装起来
+
+    m1() {
+        while......
+    }
+    
+    // 调用
+    m1()
+    
+
+> case 语句
 
     
+    语法结构
+        
+        case 变量 in
+            条件1）
+                pass
+            ;;
+            条件2）
+                pass
+            ;;
+            条件3）
+                pass
+            ;;
+            .....
+            *)              //其他匹配
+                pass
+            ;;
+        esac    
+        
+
+
+## 函数
+
+    语法格式
+    函数名 () {
+        代码块
+        
+        return N
+    }
+    
+    第二种
+    fuction name {
+        
+        return N
+    }            
+    
+    // shell 中
+    return 意义不大
     
     
+    // 函数 没有 调用 是不会执行的
     
-     
+    调用函数
+    直接调用 name 就可以拉~~
+    m1
+    
+### Demo
+
+> nginx 启动脚本
+
+    nginx_install_doc=/usr/lcoal/nginx
+    nginxd=$nginx_install_doc/sbin/nginx
+    pid_file=$nginx_install_doc/lgos/nginx.pid
+    proc=nginx
+
+    # 系统函数库
+    if [-f /etc/init.d/functions ];then
+        . /etc/init.d/functions
+    else
+        echo "not found init.d/functions in /etc/init.d/functions"
+        exit
+    fi
+    
+    # 判断 nginx 是否启动
+    if [ -f $pid_file ];then
+        nginx_process_id=`cat $pid_file`
+        nginx_process_num=`ps -aux|grep $nginx_process_id|grep -v "grep"|wc -l`
+    fi
+        
+    start () {
+        
+        if [ -f $pid_file ] && [ $nginx_process_num -ge 1 ] ;then
+            echo "nginx running.."
+        else
+            if [ 0f $pid_file ] && [ $nginx_process_num -lt 1 ] ;then
+                rm -f $pid_file
+                # 函数库 里面的 执行
+                # action 也可以
+                daemon $nginxd
+            fi
+            daemon $nginxd
+        fi        
+    }
+    
+    stop () {
+        if [ -f $pid_file ] && [ $nginx_process_num -ge 1 ] ;then
+            action "nginx stop" killall -s QUIT $proc
+            rm -f $pid_file
+        else
+            # kill 会报一个 没找到进程错误 ，直接重定向输出放垃圾堆
+            echo "stop fail" killall -s QUIT $proc 2>/dev/null  
+        fi
+    }     
+    
+    resart () {
+         stop
+         sleep 2
+         start
+    }
+    
+    reload () {
+        if [ -f $pid_file ] && [ $nginx_process_num -ge 1 ] ;then
+            action "nginx reload ->" killall -s HUP $proc
+        else
+            action "nginx reload ->" killall -s HUP $proc 2>/dev/null
+        fi        
+    }
+    
+    status () {
+        if [ -f $pid_file ] && [ $nginx_process_num -ge 1 ] ;then
+            echo "nginx running..."
+        else
+            echo "nginx stop..."
+        fi
+    }
+    
+    # 接收第一个参数
+    case $1 in
+        start) start ;;
+        stop) stop ;;
+        resart) resart ;;
+        reload) reload ;;
+        status) status ;;
+        *) echo "USAGE: $0 start|stop|resart|reload|status"
+    easc
+
+
+    // 测试 
+    sh demo.sh start // start 参数
     
     
     
