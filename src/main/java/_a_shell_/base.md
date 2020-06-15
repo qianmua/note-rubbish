@@ -598,6 +598,7 @@ make install
         if [ -f $pid_file ] && [ $nginx_process_num -ge 1 ] ;then
             action "nginx reload ->" killall -s HUP $proc
         else
+            # reload HUP killall md
             action "nginx reload ->" killall -s HUP $proc 2>/dev/null
         fi        
     }
