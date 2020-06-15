@@ -20,6 +20,9 @@ public class Observer {
         // 注册观察者
         person.addObserver(new MyObServer());
 
+        // 观测的数量
+        System.out.println(person.countObservers());
+
         person.setName("1");
         person.setRealName("2");
     }
