@@ -628,6 +628,161 @@ make install
     
     
     
+## 正则表达式
+
+> 定位符
+ 
+    ^ // ^a开头
+    $ // c$结尾
+    
+    
+> 匹配符
+    
+    . //匹配除回车任意一个字符
+    
+    []  // 匹配一个 // 可以指定范围 [^  ] 取反
+    
+    \ 转义字符
+    | 管道 // 或的意思
+    a|b //a 或者b
+    
+    () // 字符串分组
+    
+> 限定符
+
+    * // 某个字符 出现0次或者多次 a*
+    
+    ? // 某个字符 出现0次或者1次
+    
+    + // 出现 1次 或者 多次
+    
+    {n,m} // 最少n次 最多m次
+    
+    {m} // 正好出现m次
+    
+    
+    
+> posix 特殊字符
+
+    [:alnum:]       匹配 0-9a-zA-X
+    
+    [:alpha:]       匹配任意字母
+    
+    [:digit:]       数字0-9
+    
+    [:graph:]       非空字符
+
+    [:lower:]       小写
+
+    [:upper:]       大写
+
+    [:cntrl:]       控制字符
+
+    [:print:]       非空 包括空格
+
+    [:punct:]       标点符号
+
+    [:blank:]       空格和tab
+
+    [:xdigit:]      16进制数字
+
+    [:space:]       所有空白字符 新行 空格 制表
+
+
+    //eg:
+        ^a[[:alnum:]]c$  // 注意[] 里面不能有空格   
+        
+        
+        
+## shell 操作 文件
+
+    sed //命令 //shell操作文本
+    
+    sed 是一个行编辑器 // 一次处理一行的数据
+    
+    原理：
+    
+    文本行 -> 缓存 （sed处理） -> 打印到屏幕
+    
+    语法：
+    sed option '{操作}[标记]' [文件名]
+    
+    -e          将文件中指定命令添加到处理输入执行的命令 ，多条件
+    -f          将文件中指定命令添加到处理输入执行的命令
+    -n          抑制自动输出
+    -i          编辑文件
+    -i.bak      修改时创建备份
+    -r          正则
+    !           取反
+    
+    操作命令
+    a   后面添加
+    i   前面添加
+    p   打印
+    d   删除
+    s   查找替换
+    c   更改
+    y   转换 N P O
+    
+    标记命令
+    
+    数字 //新文本替换的模式
+    g   //新闻本替换所有匹配
+    p   //打印原始数据
+    w fileName: //替换结果输入到新文件       
+    
+    eg:
+    sed 'ahello world' file //第一个字符是命令 // 后面的后在每一行处理
+    sed '3ahello world' file //第一个字符是命令 // 在第三行处理
+    sed '1,3ahello world' file //第一个字符是命令 // 在1-3处理
+    
+    
+    sed '/3 demo/a\hello world' file //匹配模式  '//' 匹配模式 /3 demo/ 行号 匹配 
+    
+    //操作的是内存中的数据 // 文件没改
+    
+    eg:
+    sed -r '/^#/d' file         // 匹配删除
+    
+    sed 'y/abc/xyz/' file       // abc 转换为 xyz
+    
+    sed 's/dog/cat' file        // 替换
+    
+    sed -e 's/green/red/;s/dog/cat/' file   // 多条件 // 可以写入文件中 
+    //  执行文件
+    se'd -f fileScript file         //
+    
+    sed -i '/s/dog/cat/g' file      // 修改文件 // 不可逆
+    // 建议备份原文件
+    send -i.bak 's/dog/cat/g' file //
+    
+    
+    
+    // 使用管道
+    echo "hello qianmuna "|sed 's/hello/world/g'
+    
+    
+    eg：
+    统计文本有多少行
+    sed -n '$=' file
+    
+    正则匹配
+    send -n -r '/^(root)(.*)(bash)$/p' file
+    
+    
+## awk 处理数据
+
+    
+        
+    
+    
+    
+    
+    
+     
+    
+    
+    
     
     
 
