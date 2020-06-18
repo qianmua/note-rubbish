@@ -124,6 +124,36 @@
     
     
     
+## tomcat 类加载器
+
+> 类加载器工作
+
+    .java -> .class
+    类加载器 classLoader
+    读取.class -> 转化为 -> Class对象（方法区）
+    
+    类加载器 
+        bootstrap           jre/lib 下jvm 指定包
+        
+        extenstion          jre/lib/ext 的包
+        
+        application         用户类
+        
+    双亲委派
+    
+    自定义 类加载器
+        继承ClassLoader 实现 方法
+        
+        
+        
+> tomcat 加载 机制
+
+    
+        
+    
+    
+    
+    
     
     
     
