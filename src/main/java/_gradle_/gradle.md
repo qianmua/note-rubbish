@@ -162,6 +162,126 @@
     
     task   project 包含多个 task 表示原子操作 -> 打包 javadoc 发布。。。。。
     
+    
+    task 任务动作
+        dependOn
+        doFitst
+        dolast
+        
+> eg: task
+
+    task a1 {
+        prinln "666"
+    }
+    
+    执行 a1
+    task a2(dependOn 'a1'){
+        //
+        doFirst{
+            prinln 'a2执行之前'
+        }
+        
+        doLast{
+            prinln 'a2执行之后'
+        }
+    }
+    
+    // 会在 配置 project时候 执行
+    // 其他时间不会执行
+    // 只有 first last 才会 在 调用 或者 构建 时执行
+    // 建议 自定义任务写在 doFirst doLast 中
+    
+    
+> 自定义 任务
+
+    依赖 参数 dependOn
+    
+    // 带闭包形式
+    m1{}
+    //带括号形似
+    m2(){}
+    
+    
+    任务依赖 配置 dependOn
+    参数
+    内部
+    task m3{
+        dependOn 'm1'
+        doFirst{}
+    }
+    
+    dolast 简写 
+    task m4 << {
+    }
+    
+    
+> 动态任务
+
+    task {
+        task"tk${v1}" << {
+            prinln "is this ${v1}"
+        }
+    }
+    
+    
+## 生命周期 钩子函数
+
+>   初始化阶段
+
+    settings.gradle 初始化 项目
+
+>   配置阶段
+
+    执行 build.gradle
+    构造 task 关系
+
+>   执行阶段
+
+    执行 first 或者 last
+    
+### 钩子
+
+    项目 构建之前 钩子方法
+    
+    setting.gradle
+        
+        gradle.afterProject{}
+        gradle.beforeEvaluate{}
+        gradle.projectEvaluated{}
+        gradle.afterEvaluate{}
+
+
+    build.gradle
+    
+        gradle.afterProject{}
+        
+        // 钩子 方法
+    
+    // 读取任务图
+    
+        gradle.taskGraph.whenReady{}
+        gradle.taskGraph.beforeTask{}
+        gradle.taskGraph.afterTask{}
+        gradle.taskGraph.buildFinished{}
+
+
+## 仓库
+
+    依赖  
+    compile runtime         源码依赖
+    testCompile run time    测试依赖
+    
+    依赖配置
+    compileruntime
+    runtime
+    testCompile
+    testRuntime
+    
+    
+    
+    
+    
+    
         
     
     
