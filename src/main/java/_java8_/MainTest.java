@@ -150,8 +150,7 @@ public class MainTest {
         //排序
         //sorted // Comparator.comparing()
 
-
-
+        //映射
 
 
     }
@@ -164,6 +163,31 @@ public class MainTest {
     void m10_1(Integer[] itns){
 
     }
+
+    @Test
+    public void m11(){
+        int[] arr = {19,12,11,14,18,8,6,6,13,9,8,3,10,10,1,10,5,12,13,13,9};
+        System.out.println(findLucky(arr));
+    }
+
+    public int findLucky(int[] arr) {
+        int[] fund = new int[501];
+        for (int i : arr) {
+            fund[i] = fund[i]+1;
+        }
+        int max = -1;
+        // 倒叙
+        for (int i : arr) {
+            if (fund[i] == i){
+                max = max > fund[i] ? max : fund[i];
+            }
+        }
+//        return -1;
+        return max;
+    }
+
+
+
 
 
 }
