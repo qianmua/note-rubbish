@@ -1,17 +1,15 @@
 package _java8_;
 
 import org.junit.Test;
-import org.junit.runner.Runner;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -143,14 +141,57 @@ public class MainTest {
         Stream<Integer> limit1 = Stream.generate(() -> 1).limit(10);
         limit1.forEach(System.out::println);
 
-        // 筛选 filter
+        // 筛选 filter distinct // 去重
 
         // 切片 limit
+        // skip 跳过 前三个元素
 
         //排序
         //sorted // Comparator.comparing()
 
         //映射
+
+        // 终端操作 -》
+
+        // 匹配 // 终端操作
+        // anyMatch // 匹配到第一个就返回
+        // allMatch // 匹配到最后一个在返回
+        // noneMatch // 取反
+
+        // 查找
+        //  findFirst
+        // findAll
+
+
+        // 规约
+        //reduce // 将流元素 规约成一个值
+        // eg:
+        // 所有 的 和
+
+        // max
+        // min // 最大最小值
+
+        //count // 求和
+
+
+        // 收集
+        //collect
+
+
+        // 生成值
+        //collectors.counting // 或者count
+        //avg //
+        // sum //
+        // max
+        // min
+        // summarizing // 统计
+
+        // 分块 分组
+        // partitioningBy // 根据 true or false 分块
+        // groupBy // 按照 属性分组   一个参数
+        //  。。。 groupBy(v1 -> v1 > 1000 ? "搞" : "低" ， Collectors.toList())  两个参数
+        // 三个参数  （组，k类型 ， v类型）
+
 
 
     }
@@ -177,6 +218,7 @@ public class MainTest {
         }
         int max = -1;
         // 倒叙
+        // 全遍历 。。
         for (int i : arr) {
             if (fund[i] == i){
                 max = max > fund[i] ? max : fund[i];
@@ -185,6 +227,28 @@ public class MainTest {
 //        return -1;
         return max;
     }
+
+
+    @Test
+    public void m12(){
+        // 数值 流
+        // IntStream
+
+        // 生成流
+        IntStream stream = IntStream.of(1, 2, 3, 4, 5);
+
+        // range
+        IntStream range = IntStream.range(1, 10); // [1,10)
+
+
+
+
+
+    }
+
+
+
+
 
 
 
