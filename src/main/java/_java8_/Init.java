@@ -1,7 +1,6 @@
 package _java8_;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Arrays;
 
 /**
  * @author HJC
@@ -13,7 +12,13 @@ import java.util.HashSet;
 public class Init {
 
     public static void main(String[] args) {
-        System.out.println("add(1,2) = " + add(1, 2));
+        System.out.println("add(1,2) = " + add2(-1, 0));
+    }
+
+    public static int add2(int a , int b){
+        int[] arr  = {a,b};
+        int sum = Arrays.stream(arr).sum();
+        return sum;
     }
 
     public static int add(int a, int b){
