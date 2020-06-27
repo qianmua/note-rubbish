@@ -3,6 +3,7 @@ package _java_study_offer_;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * @author HJC
@@ -20,5 +21,12 @@ public class Init {
     public void m1(){
         arr2[1] = 3;
         System.out.println(Arrays.toString(arr2));
+    }
+
+    @Test
+    public void m2(){
+        long time = new Date().getTime();
+        java.sql.Date date = new java.sql.Date(time);
+        System.out.println(date);
     }
 }
