@@ -81,10 +81,349 @@
             
 ## 网络
 
-    ifconfig // 查看ip   
+    ifconfig // 查看ip   （内网IP）
     
     设置静态ip
+    vim /etc/sysconfig/netwprk-scripts/ifcfg-etc-o 
+    修改
+    onboot=yes
+    bootroto=static # 静态的ip
+    ipaddr=192.168.1.XXX
+    gateway=192.168.XX.XX
+    dns1=
+    dns2=
+    执行重启
+    servie network restart
+    
+    
+    查看主机名
+    hostname
+    /etc/sysconfig/network 下面可以修改主机名 (主机名不要有 下划线)
+    vim /etc/hosts  # host 文件
+    
+    
+## 防火墙
+    
+    service 后台服务管理 // 临时命令
+    
+        service 服务名 start/stop/restart/status
+    
+        // eg:
+        查看所有服务
+        service --status-all
+        
+    chkconfig   设置后台服务自动启动
+    chkconfig --list // 查看程序运行级别
+        进程运行级别
+        0   关闭  停机状态  
+        1   关闭  但用户状态，用于系统维护，禁止远程登录
+        2   启动  多用户，无nfs 无网络
+        3   启动  常用 有nfs 命令行
+        4   启动  未使用 保留
+        5   启动  常用  gui
+        6   关闭  系统正常关闭重启
+    
+    //关闭自启
+    chkconfig off/on
+    
+    
+## 重启
+
+    sync    同步 ， 将缓冲区数据 同步到磁盘    
+    halt    1分钟后关机
+    rebot   重启
+    shutdown    
+        -h
+        -r  
+        
+        参数
+        now
+        数字
+        
+        
+## 修改密码
+
+
+
+## 帮助命令
+
+    man 命令
+    eg：
+    man ls
+    
+    
+    ll = ls -l
+    
+    
+> help 得到shell 内置命令 信息
+
+    
+## 常用快捷键
+    
+    ctrl+c  停止进程
+    
+    ctrl+l  清屏 彻底清reset
+    
+    ctrl+q    退出
+    
+    tab     提示
+    
+    ctrl + alt  linux win 之间切换
+    
+
+## 文件目录
+
+    ll
+    权限  链接数 文件属主    文件属组    文件大小（byte）  新近修改时间  名字
+    
+    cd ~ cd 家目录
+    cd - 上一次所在目录
+    cd .. 上一级目录
+    cf -P 跳转到实际物理路jing    
+    
+> mkdir
+
+    mkdir -p 创建多级目录
+    
+    
+> rmdir
+
+    删除一个空目录
+    
+> touch
+
+    创建空文件
+    
+    可以直接 vim 文件名
+    
+> cp
+
+    cp -r 递归复制
+    
+    
+> mv 
+
+    也可以用来重命名
+    
+> cat 
+
+    查看文件内容 （一般小文件）
+    
+    cat -n 显示行
+    
+    
+    more 查看：
+    
+    命令
+    空格  翻页
+    回车  翻行
+    q   离开
+    ctrl f  滚以屏
+    ctrl b  上一屏
+    =   当前行号
+    ：f  文件名和当前行号
+    
+    
+    less （大型）    
+    
+    搜索
+    /
+    ？
+    pagedown 翻页
+    
+    
+>echo   
+
+    输出
+    echo -e 支持转义 
+    
+
+> head
+
+    查看文件头部内容
+    
+>tail 
+    
+    查看文件尾部信息
+    
+    tail -f 动态显示
+    
+    日志
+    
+>   
+
+    >覆盖 
+    >>追加
+
+> ln
+
+    软连接 相当于快捷方式
+    ln -s 源目录 目标目录
+    
+    wo -> 源
+    
+> rm
+    
+    移除
+    -r  递归删除
+    -f  强制执行 不提示
+    -v  显示详细操作过程
+    
+## 日期
+    
+> date
+
+    date -d // 格式   
+    date -s // 设置时间    
+    
+    date "+%Y-%m-%d %H %M %S"
+    
+    date -d '1 days ago' 前一天
+    date -d '-1 days ago' 明天
+    
+    
+> cal 日历
+
+    cal 年份
+    cal 当月
+    
+## 用户管理
+
+    useradd name 添加用户
+    
+    passwd 设置密码
+        passwd username
+        
+    id username 查看用户存在
+    
+    su 切换用户 不能得到环境变量
+    su - username 可以得到 
+    
+    userdel 删除用户 保存用户主目录
+    userdel -r 完全删除
+    
+    who 查看用户信息
+    whoami      你自己
+    who am i    上一个登录是谁
+    
+    sudo    设置普通用户有管理员权限 （管理员执行）    
+    // 
+    修改配置文件 /etc/sudoers
+    改为 all
+    然后用sudo 就可以管理员 操作了 （管理员执行）
+    
+    usermod 修改用户
+    usermod -g 修改用户组
+    
+    组管理
+    
+    groupadd 添加组
+    groupdel
+    groupmod -n 新 老
+    
+
+## 文件权限
+
+    ll
+    10个字符
+    第一个
+    是d 表示目录 是- 表示文件 1链接文档
+    下三个（主）u
+    rwx 读写执行 权限
+    下三个（组）g
+    r-X 读写执行
+    下三个（其他）o
+    r-x 读写执行
+        
+    chmod 改变权限
+    chmod [{ugoa}{+-=}{rwx}] file
+    chmod 数字
+    eg:
+    chmod a+r filename
+    数字
+    r 4 w 2 x 1
+    rwx = 7
+    chmod 777 
+    chmod 666
+    comod 444
+        
+        
+    chown   改变所有者
+    
+    chown username filename
+    chown -R    递归改变
+    
+    
+    chgrp   改变所属组   类似chown
+    
+    
+## 文件查找
+
+    find
+    查找方式
+    find -name
+    find -user
+    find -size
+    
+    find -name  sName/  "type"
+    
+    grep 过滤 | 管道
+    -n 显示行号
+    ll |grep    name
+    
+    which 查找 
+    which ll
+    
+    
+## 压缩
+
+    gzip    压缩 只能是 .gz 不会保留原文件
+    gunzip  解压缩
+    不能压缩目录
+    
+    zip 可保留原文件
+    unzip
+    -r 压缩目录
+    -d 指定解压后文件目录
+    
+    zip dmeo.zip file1  file2   ...
+    -> demo.zip
+    
+    
+    tar 打包
+    tar [选项]  xxx.tar.gz  内容    
+    选项：
+        -z  打包同时压缩
+        -c  产生 .tar打包文件
+        -v  显示详细信息
+        -f  指定压缩的文件名
+        -x  解包 .tar 文件
+    
+    
+    tar -zxcf demo.tar.gz   file1   file2   .....
+    
+    tar -zxvf
+      
+      
+## 磁盘分区命令
+
+    df
+    查看磁盘空余空间
+    -h  GB  MB 等显示
+    df -h
+    
+    fdisk 查看分区
+    -l  查看详情
+    
+    
+    mount/umount    挂载卸载
+    
+    
+## 进程   线程
+
+
     
     
     
+            
     
