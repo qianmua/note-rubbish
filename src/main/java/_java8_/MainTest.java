@@ -200,7 +200,7 @@ public class MainTest {
         System.out.println(statistics);
         Optional<Integer> reduce = list.stream().reduce(Integer::sum);
         System.out.println(reduce.orElse(0));
-        DoubleSummaryStatistics collect = list.stream().collect(Collectors.summarizingDouble(v -> v));
+        DoubleSummaryStatistics collect = list.stream().collect(Collectors.summarizingDouble(Double::new));
         IntSummaryStatistics collect1 = list.stream().collect(Collectors.summarizingInt(Integer::new));
         System.out.println(collect);
         System.out.println(collect1);

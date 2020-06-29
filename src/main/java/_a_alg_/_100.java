@@ -83,7 +83,9 @@ public class _100 {
         dfs2(root,root.val);
         return res;
     }
+
     int res;
+
     void dfs2(TreeNode r , int chain){
         if ( r.right == null && r.left == null){
             res += chain;
