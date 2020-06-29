@@ -73,6 +73,31 @@ public class _100 {
         }
     }
 
+    @Test
+    public void m3(){
+
+    }
+
+    public int sumNumbers(TreeNode root) {
+        if (root == null) return 0;
+        dfs2(root,root.val);
+        return res;
+    }
+    int res;
+    void dfs2(TreeNode r , int chain){
+        if ( r.right == null && r.left == null){
+            res += chain;
+            return ;
+        }
+        if (r.left != null){
+            dfs2(r.left , chain * 10 + r.left.val);
+        }
+        if (r.right != null){
+            dfs2(r.right , chain * 10 + r.right.val);
+        }
+    }
+
+
 
 
 

@@ -2,8 +2,7 @@ package _java8_;
 
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
@@ -192,8 +191,19 @@ public class MainTest {
         //  。。。 groupBy(v1 -> v1 > 1000 ? "搞" : "低" ， Collectors.toList())  两个参数
         // 三个参数  （组，k类型 ， v类型）
 
-
-
+        int[] arr = {2,4,5,6,1,5,9,8,7};
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        IntSummaryStatistics statistics = Arrays.stream(arr).summaryStatistics();
+        System.out.println(statistics);
+        Optional<Integer> reduce = list.stream().reduce(Integer::sum);
+        System.out.println(reduce.orElse(0));
+        DoubleSummaryStatistics collect = list.stream().collect(Collectors.summarizingDouble(v -> v));
+        IntSummaryStatistics collect1 = list.stream().collect(Collectors.summarizingInt(Integer::new));
+        System.out.println(collect);
+        System.out.println(collect1);
     }
 
     @Test
