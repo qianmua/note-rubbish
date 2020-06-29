@@ -1,5 +1,7 @@
 package _java_servlet_;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author HJC
  * @version 1.0
@@ -8,16 +10,4 @@ package _java_servlet_;
  * @description :
  */
 public class Init {
-
-}
-
-//class A extends C{
-//
-//}
-
-class B {
-
-}
-class C{
-
 }
