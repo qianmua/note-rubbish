@@ -86,15 +86,36 @@
 ## springboot 嵌入servlet容器限制
 
     不支持web.xml      
-        Bean去注册
+        RegisterBean、Bean去注册
     
     不支持servletContainerInit 接口  //servlet spi （自动化装配）   
-        去实现servletContextInit
+        去实现servletContextInit       // lambda？ - -!
+        // 重新注入
+        // onStartUp
+        // 子类 包含RegisterBean
+        （不会生成 日志 打印 (没写)）
+        
+        
     
     注解驱动限制 （@WebServlet filter listener等）    
         依赖ServletComponsentScan 去扫描
+        //  扫描  定义 注册bean
+        注册了一个 RegisterBean // 扫描 WebServlet.class -> Bean 定义    filter linstener //同理
+        //
+        使用 Bean 去注册 // 不太友好
+        使用ServletRegisterBean 去注册 servlet
         
+    @Order（Ordered.）    //  提高运行顺序 
+    // 内部 会有一个 Order 的排序
+    
+    
+    
+    
         
+
+            
+
+            
             
         
     
