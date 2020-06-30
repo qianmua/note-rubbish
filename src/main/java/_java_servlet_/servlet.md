@@ -109,10 +109,92 @@
     // 内部 会有一个 Order 的排序
     
     
+    servlet 部署 springboot
+    springboot 部署 servlet （嵌入式） （不支持spi 哦）
     
-    
-        
 
+## mvc
+    
+    servlet spi
+    
+    spring适配 （springServletContainerInit）    
+    
+    spring spi
+    接口  webApp
+    编码  abs
+    注解  absAnno
+    
+    
+    
+## boot 传统 servlet
+
+    SpringBootServletInitializer
+    扩展 config 方法        
+
+    tomcat 插件
+    
+    
+##  reactive
+
+    webflux 底层框架
+    
+>  反应堆 模式 reactor
+
+>   ProActor
+
+>   观察者模式   ob
+
+>   迭代器模式
+
+>   java 并发 模型
+
+    reactive
+    
+        实现框架
+        RxJava  
+        Reactor webFlux 类库（Spring）    
+        Flow API    java9 API 实现
+        
+> reactive 观点
+
+    阻塞 导致性能 瓶颈 与 资源浪费
+    并行 并发
+    并行 不能 解决所有
+    
+    烧开水 模型-》 烧开水 的时候 我去 干点 别的 事情
+    
+##  reactive eg：
+
+    ！springboot-all
+    
+    
+>  future 阻塞？
+
+    是的
+    future#get()
+    会强制 等待 完成
+    // 
+    虽然 也是 线程池
+    //
+    阻塞源泉
+    //
+    
+    
+> future 链式
+
+    future 依赖 问题
+    //  异步的
+    F1 -> F2 -> F3    
+    //
+    
+    CompletableFuture   // j8   // 串行
+    // 另起线程
+    // 不阻塞 了 main
+    // 一定程度上
+    // future 数据 问题 // 链式的
+    
+    
+    
             
 
             
