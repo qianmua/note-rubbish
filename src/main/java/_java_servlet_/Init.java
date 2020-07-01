@@ -10,4 +10,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @description :
  */
 public class Init {
+
+    public static void main(String[] args) {
+        /*int[] ints = new int[10];
+        for (int i : ints) {
+            System.out.println(i);
+        }*/
+        boolean[] booleans = new boolean[10];
+        for (boolean b : booleans) {
+            System.out.println(b);
+        }
+        boolean b1;
+    }
+
 }
