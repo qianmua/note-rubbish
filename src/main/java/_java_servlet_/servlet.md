@@ -248,7 +248,6 @@
 >   reactive stream
 
     java stream 提供了 大量 运算符 （filter map ， count ,, 等等..）
-    
 
     框架
 
@@ -322,8 +321,76 @@
     实现  ScheduleThreadPoolExecutor
     
     
+> web flux
+
+    function    endpoints
+    event loop
+    model
+    netty
+    
+>   spring mvc
+
+    logic
+    simple write    debug    
+    jdbc
+    jpa
+    blocking
     
     
+> and
+
+    controller
+    reactive client
+    tomcat
+    netty jetty undertow
+    
+    
+
+## vert.x
+
+    函数式 ， 响应式
+    也是 基于netty
+    内部完全 函数编程
+    
+
+## web flux
+    
+
+    动机
+    
+    去servlet        
+    
+    默认采用 netty web server 形成新体系
+        
+        
+    技术栈
+    
+    reactive
+    netty servlet 3.1
+    reactive stream
+    spring security reactive
+    webflux
+    data reactive mongodb redis。。。
+    
+    servlet
+    servlet
+    servlet api
+    security
+    mvc
+    data jpa 等等。。。。
+    
+    
+    
+    注解驱动
+    与 springmvc 相同
+    
+    差异：
+    跨域：
+    mvc crosFilter  flux crosWebFilter
+    注册：
+    mvc webmvcconfig    flux    webfluxconfig
+    
+            
     
         
     
