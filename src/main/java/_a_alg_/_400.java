@@ -43,4 +43,59 @@ public class _400 {
         }
         return ints[maxW][vNum];
     }
+
+
+    @Test
+    public void m2(){
+        // 最小 子数组
+
+        // 双指针 应用
+        // 标记 一段 范围
+        System.out.println(minSubArrayLen(11, new int[]{1,2,3,4,5}));
+    }
+
+    int m2_2(int s , int[] nums){
+        int l = -1,r = -1;
+        int sum = 0, min = Integer.MAX_VALUE;
+        int len = nums.length;
+        while (l <= r) {
+            if (sum < s){
+                r ++;
+                if (r>= len)
+                    break;
+                sum += nums[r];
+            }else {
+                if (r - l < min){
+                    min =  r - l;
+                }
+                l++;
+                if (l > r)break;
+                sum -= nums[l];
+            }
+        }
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums.length <= 0) return 0;
+        int minL = -1;
+        int i1 = nums.length;
+        int f = 0;
+        int e = 0;
+        int temp = 0;
+        for (int i = 0; i < i1 ; i++) {
+            if (nums[i] >= s){
+                return 1;
+            }else {
+                temp += nums[i];
+                e++;
+                if (temp >= s){
+                    temp = 0;
+                    minL = minL == -1 ? e-f : minL < e-f ? minL : e-f ;
+                    f = e;
+                }
+            }
+        }
+        return minL;
+    }
 }
