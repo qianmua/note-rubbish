@@ -221,7 +221,7 @@
     // 新分支 状态 就是 v1.0 状态
     
 ### 删除标签
-
+    
     git tag -d v0.1 // 删除 本地 的标签
     
     git push origin :refs/tags/v0.1 // 删除 远程 标签

@@ -46,5 +46,15 @@ public class _600 {
         }
     }
 
-
+    @Test
+    public void m2(){
+        int a = 7;
+        int temp = 0;
+        temp = a >> 1;
+        a = a ^ temp;
+//        a = a >> 2;
+//        a = a >> 4;
+//        a |= a >> 8;
+        System.out.println(a);
+    }
 }
