@@ -29,6 +29,8 @@ public class DDispatcherServlet {
         HandlerAdapter handler = getHandler( controller);
         // 同故宫 适配器
         // 调用 handler 方法//
+
+        // 完成了 扩展
     }
 
     public HandlerAdapter getHandler(DController dController){
