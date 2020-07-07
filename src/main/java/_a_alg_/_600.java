@@ -50,11 +50,13 @@ public class _600 {
     public void m2(){
         int a = 7;
         int temp = 0;
-        temp = a >> 1;
-        a = a ^ temp;
-//        a = a >> 2;
-//        a = a >> 4;
-//        a |= a >> 8;
-        System.out.println(a);
+        a |= a >> 1;
+        a |= a >> 2;
+        a |= a >> 4;
+        a |= a >> 8;
+        a |= a >> 16;
+//        a |= a >> 32;
+//        a |= a >> 64;
+        System.out.println(a+1);
     }
 }
