@@ -74,4 +74,33 @@ public class _800 {
         }
         return res;
     }
+
+
+    @Test
+    public void m2(){
+
+    }
+
+    public int[] divingBoard(int shorter, int longer, int k) {
+        if(k==0){
+            return new int[]{};
+        }
+        if(shorter==longer){
+            return new int[]{k*shorter};
+        }
+        int[] arr=new int[k+1];
+        // 短板
+        arr[0]=k*shorter;
+        // 固定 差
+        int num=longer-shorter;
+        // 剩余板
+        for(int i=1;i<k+1;i++){
+            // 固定 增长
+            // 优秀
+            // 原作者 太厉害了！
+            arr[i]=arr[i-1]+num;
+        }
+        return arr;
+    }
+
 }
