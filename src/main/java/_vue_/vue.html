@@ -37,12 +37,33 @@
         <!-- v-if v-else v-show -->
         <br>
         <!-- 渲染否？-->
+        <!--移除-->
         <p v-if="success">success</p>
         <p v-else="success">fail</p>
         <!--style 样式 隐藏 // 没有 移除掉 哦-->
         <p v-show="success">success</p>
         <p v-show="!success">fail</p>
         <button @click="success=!success">success</button>
+
+
+        <!--列表渲染-->
+        <!--v-for-->
+        <br>
+        <ul>
+            <!--遍历 数组-->
+            <li v-for="(p,index) in listVal" :key="index">
+                {{p.name + ' ' + p.age + ' ' + index}}
+                <!--更新 的 注意 vue 只是 监视了list 没有 监视 list的内部 数据 -->
+                <!-- 数组 观察 // 触发视图 更新-->
+                <!--重写-->
+                <button @click="deletev(index)" type="button">delete</button>
+            </li>
+            <!--遍历 对象-->
+            <li v-for="(value , key) in listVal[0]" :key="key">
+                {{value}} --- {{key}}
+            </li>
+        </ul>
+
 
 
 
@@ -80,6 +101,13 @@
             class1 : 'class1',
             isclass1: false,
             success: false,
+            listVal : [
+                {name:'ss' , age: 12},
+                {name:'aa' , age: 13},
+                {name:'cc' , age: 14},
+                {name:'dd' , age: 15},
+                {name:'ee' , age: 16},
+            ],
         },
         mounted () {
 
@@ -128,7 +156,10 @@
             change(){
                 this.class1 = this.class1 ==='class1' ? 'class2' : 'class1';
                 this.isclass1 = !this.isclass1;
-            }
+            },
+            deletev(v1){
+                this.listVal.splice(v1,1)
+            },
         }
 
     });
