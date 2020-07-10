@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <p>hello {{name.toUpperCase()}}</p>
+        <p v-text="name"></p>
+        <p v-html="test1"></p>
+        <img :src="imgsrc" alt="aaa">
+
+        <button @click="demo2" type="button">demo2</button>
+        <button @click="demo3(test1)" type="button">demo2</button>
+
+        <br>
+        sex:<input type="text" name="sex" v-model="sex"><br>
+        name:<input type="text" name="userName" v-model="userName"><br>
+        fff_sex:<input type="text" name="userName" v-model="fffsex"><br>
+<!--        CCC_name:<input type="text" name="userName" v-model="fffname"><br>-->
+        3333:<input type="text"  v-model="f333"><br>
+
+        {{sex}}
+        {{userName}}
+
+        <!-- 绑定 class 和 样式-->
+        <br>
+        <span :class="class1">class color</span><br>
+        <button type="button" @click="change">click</button>
+        <br>
+        <span :class="{class1:isclass1}">span style</span>
+
+
+        <!--条件 渲染-->
+        <!-- v-if v-else v-show -->
+        <br>
+        <!-- 渲染否？-->
+        <p v-if="success">success</p>
+        <p v-else="success">fail</p>
+        <!--style 样式 隐藏 // 没有 移除掉 哦-->
+        <p v-show="success">success</p>
+        <p v-show="!success">fail</p>
+        <button @click="success=!success">success</button>
+
+
+
+
+
+    </div>
+</body>
+<style>
+    .class1{
+        color: red;
+    }
+    .class2{
+        color: blue;
+    }
+</style>
+
+<script src="vue.min.js"></script>
+<script>
+    /*
+    *
+    * mvvm
+    * model (object data)
+    * view (dom)
+    * viewModel (vue) dom 监听 数据绑定
+    * */
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            info : null,
+            name: 'qian_mu_na' ,
+            test1 : '<a href="#" >demo</a>',
+            imgsrc: 'demo',
+            sex: '',
+            userName: '',
+            class1 : 'class1',
+            isclass1: false,
+            success: false,
+        },
+        mounted () {
+
+        },
+        // 计算属性
+        // 存在 缓存 中 多次计算 只执行一次 getter计算
+        computed : {
+            // 方法
+            // 单向
+            fffsex(){
+                return this.sex + '' + this.userName;
+            },
+            // d对象
+            // 双向
+            // 高级 方法 -》
+            // get
+            // set  方法
+            f333 :{
+                // 回调
+                get(){
+                    return this.sex;
+                },
+                //
+                set(v1){
+                    this.sex = v1;
+                }
+            }
+        },
+        // 监视
+        // 单向
+        watch :{
+            // sex : function(v1){
+            //     this.fffname = v1 + "hello";
+            // },
+            // userName: function(v1,v2){
+            //     this.fffname = v1 + v2 + "hello";
+            // }
+        },
+        methods:{
+            demo2(){
+                alert("6");
+            },
+            demo3(v1){
+                alert(v1)
+            },
+            change(){
+                this.class1 = this.class1 ==='class1' ? 'class2' : 'class1';
+                this.isclass1 = !this.isclass1;
+            }
+        }
+
+    });
+</script>
+</html>
