@@ -65,6 +65,18 @@
         </ul>
 
 
+        <!--排序-->
+        <!-- 按照 年龄 顺序-->
+        <input type="text" v-model="searchName">
+        <ul>
+            <li v-for="(v,index) in filterName" :key="index" v-text="v.age + ' ' + v.name"></li>
+        </ul>
+        <!--升 降 原来-->
+        <button @click="v1(0)" type="button">排序1</button>
+        <button @click="v1(1)" type="button">排序2</button>
+        <button @click="v1(2)" type="button">排序3</button>
+
+
 
 
 
@@ -108,6 +120,10 @@
                 {name:'dd' , age: 15},
                 {name:'ee' , age: 16},
             ],
+            searchName: '',
+            // 排序
+            orderType: 0,
+
         },
         mounted () {
 
@@ -134,6 +150,24 @@
                 set(v1){
                     this.sex = v1;
                 }
+            },
+            // eg:排序 计数
+            filterName(){
+                // 拿到数据
+                const {searchName, listVal,orderType} = this;
+                // 排序
+                // 返回 负数
+                // v1在前
+                // 否则 v2 在前
+                listVal?.sort( (v1,v2) => {
+                    return orderType === 1 ? v1.age - v2.age :
+                        (orderType === 2 ? v2.age - v1.age : v1.age - v2.age);
+                });
+                //return val
+                let list;
+                // 过滤
+                list = listVal.filter( v1 => v1.name.indexOf(searchName) !== -1 );
+                return list;
             }
         },
         // 监视
@@ -160,6 +194,9 @@
             deletev(v1){
                 this.listVal.splice(v1,1)
             },
+            setOrder(v1){
+                this.orderType = v1;
+            }
         }
 
     });
