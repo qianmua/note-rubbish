@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--指令-->
+    <div id="app" v-cloak>
+        <!--
+
+        内置·指令
+
+        v-if
+        v-else
+        v-show
+        v-on
+        v-bind
+        v-model
+        ref 指定唯一标识 可以通过 $refs 访问
+        v-cloak //防止 闪现 // 跟 css一块配合
+
+        -->
+
+        <p>{{demos}}</p>
+
+        <!--
+
+        自定义 指令
+
+        全局指定
+        局部指令
+
+
+
+        -->
+
+
+    </div>
+    <style>
+        /*属性选择器*/
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</body>
+<script src="vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+
+            demos: '1111111111111',
+        },
+        methods:{
+
+        }
+    })
+</script>
+</html>
