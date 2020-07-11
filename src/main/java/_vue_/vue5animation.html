@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- vue 动画-->
+    <div id="app">
+
+
+        <button type="button" @click="btn1">btn1</button>
+        <!-- 动画 过渡-->
+        <transition name="fate">
+            <p v-show="isShows">hello world</p>
+        </transition>
+
+        <button type="button" @click="btn1">btn2</button>
+    </div>
+
+<style>
+
+    /*enter*/
+    /*live*/
+    /* v-enter-active*/
+    /* v === name*/
+
+    /*过度*/
+    .fate-enter-active, .fate-leave-active{
+        transition: all .5s;
+    }
+    /*隐藏*/
+    .fate-enter , .fate-leave-to{
+        opacity: 0;
+        transform: translateX(20px);
+    }
+</style>
+</body>
+<script src="vue.min.js"></script>
+<script>
+    /*
+    *
+    * 原理 媒体化
+    * 添加 减去 css Class
+    *
+    * */
+    new Vue({
+        el: '#app',
+        data:{
+            isShows: true,
+        },
+        methods:{
+            btn1(){
+                this.isShows = !this.isShows
+            }
+        }
+    })
+</script>
+</html>
