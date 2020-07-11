@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+
+        <!--表单数据 收集-->
+        <form action="1" method="post" @submit.prevent="frominit">
+            <input type="text" v-model="username">
+            <br>
+            <input type="password" v-model="password">
+            <br>
+            <input type="radio" v-model="sex" name="sex" value="1">
+            <input type="radio" v-model="sex" name="sex" value="2"><br>
+
+            <input type="checkbox" name="hard" value="1" v-model="hard">
+            <input type="checkbox" name="hard" value="2" v-model="hard">
+            <input type="checkbox" name="hard" value="3" v-model="hard"><br>
+            <select name="sel" v-model="sel">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+
+            <input type="button" value="submit">
+        </form>
+    </div>
+</body>
+<script src="vue.min.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data:{
+            username: 'userName',
+            password: 'passWord',
+            sex: '1',
+            hard: [1],
+            sel: '1',
+
+
+        },
+        methods: {
+            frominit(){
+
+            }
+        }
+
+    })
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+
+        <!--事件处理-->
+
+        <!--事件监听-->
+        <button @click="test1" type="button"></button>
+        <!--事件对象-->
+        <button @click="test2($event)">button values</button>
+        <button @click="test3(123456,$event)">button values</button>
+
+
+        <input type="text" @keyup.enter="test4"><br>
+    </div>
+</body>
+<script src="vue.min.js" ></script>
+<script>
+    new Vue({
+        el: '#app',
+        data : {
+
+            test1(){
+               console.log("1")
+            },
+            /*会默认传进去的*/
+            test2(event){
+                // 事件冒泡
+                /*停止 事件 冒泡*/
+                //比如 两个 div 在一块嵌套 点击事件 // 清除冒泡
+                event.stopPropagation();
+
+                // 事件 修饰符
+                //@click.stop
+
+                //eg : a标签跳转
+                //@click.prevent
+                event.preventDefault();
+                console.log(event.target.innerHTML)
+
+
+                /*按键修饰符*/
+                //@leyup.13
+                //@leyup.enter
+                // 不用去判断 ascii 值
+
+
+            },
+            test3(v1,event){
+                console.log(event.target.innerHTML);
+                console.log(v1)
+            },
+            test4(event){
+                console.log(event.target.value);
+            }
+        },
+    })
+</script>
+</html>
