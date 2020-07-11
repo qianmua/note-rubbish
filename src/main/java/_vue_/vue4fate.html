@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <!--vue 生命 周期-->
+    <!--
+    1、init
+        回调（钩子函数）
+    2、update
+        回调
+    3、deal
+        回调
+
+    -->
+<div id="app">
+
+    <button type="button" @click="dis">deal</button>
+    <p v-show="sh"> hello world</p>
+</div>
+
+</body>
+<script src="vue.min.js"></script>
+<script>
+
+    new Vue({
+        // vue 管理 的区域
+        // 手动
+        // 自动 mounted
+        //template 区域？
+        //没有 则 解析el 渲染（内存）
+        // 内存 中 处理
+        // 然后 挂载
+
+
+        //
+        el: '#app',
+        data:{
+            sh: true,
+        },
+        // 挂载
+        // 初始化 调用1次
+        mounted() {
+            // 注意 箭头函数
+            // function（）
+            //  dom 对象
+            this.invId = setInterval(() => this.sh = !this.sh ,1000);
+        },
+        methods: {
+            dis(){
+                // 销毁 vue demo
+                // 计时器 还没挂掉
+                // 内存 泄露
+                this.$destroy()
+            }
+        },
+        // 回调
+        // 更新
+        beforeUpdate(){
+
+        },
+        updated(){
+
+        },
+        // 死亡
+        // deal之前 调用1次
+        beforeDestory(){
+            clearInterval(this.invId)
+        },
+        destory(){
+
+        }
+
+    })
+</script>
+</html>

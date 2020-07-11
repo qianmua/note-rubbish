@@ -20,10 +20,12 @@
             <input type="checkbox" name="hard" value="2" v-model="hard">
             <input type="checkbox" name="hard" value="3" v-model="hard"><br>
             <select name="sel" v-model="sel">
+                <option value="" selected disabled>未选择</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-            </select>
+            </select><br>
+            <textarea name="vi" v-model="texts" cols="30" rows="10"></textarea>
 
 
             <input type="button" value="submit">
@@ -40,7 +42,8 @@
             password: 'passWord',
             sex: '1',
             hard: [1],
-            sel: '1',
+            sel: '',
+            texts : '6666',
 
 
         },
