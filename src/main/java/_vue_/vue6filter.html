@@ -6,5 +6,42 @@
 </head>
 <body>
 
+    <div id="app">
+        <!--过滤器-->
+        <!--vue.filter-->
+        <!--接收 一个 值 返回一个 新的值-->
+        <p>
+            {{date}}
+        </p>
+        <p>
+            <!--|就跟 shell管道符差不多-->
+            {{date | filterName}}
+        </p>
+        <p>
+            <!--参数-->
+            {{date | filterName('YYYY')}}
+        </p>
+    </div>
 </body>
+
+<script src="vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script>
+
+    Vue.filter( 'filterName' , (v1,v2) => {
+        return moment(v1).format(v2 || 'YYYY-MM-DD HH:mm:ss' )
+    });
+
+    new Vue({
+        el: '#app',
+        data:{
+            date: new Date(),
+
+        },
+        methods:{
+
+        }
+    })
+
+</script>
 </html>
