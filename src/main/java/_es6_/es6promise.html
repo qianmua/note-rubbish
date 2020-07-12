@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+// 异步编程 解决 方案
+// 封装 异步 并得到 回调
+</body>
+
+<script>
+
+    // 是一个 构造函数
+    // 用来 封装 异步 操作
+    //
+
+    //use
+    // 状态  初始化 成功 失败
+    // 成功 then
+    // 失败 catch
+
+    // 回调 函数
+    // v1
+    // v2
+    const p = new Promise( (v1,v2) => {
+        let suc = 2
+        suc === 1 ? v1(suc) : v2(suc)
+    })
+    //
+    p.then( (suc)=> console.log("success" , suc) , (err)=> console.error("err" , err))
+</script>
+</html>

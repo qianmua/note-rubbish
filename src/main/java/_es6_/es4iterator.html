@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+
+<script>
+
+    // 迭代器
+
+    // 新的 遍历 命令
+    // for ... of
+    //
+
+    const arr1 = [1,2,3,5,7,8,9,0]
+    // of value
+    // in key(下标)
+    for (v of arr1){
+        console.log(v)
+    }
+
+    // iterator
+
+
+    ///
+    //
+    const arr2 = {
+        name : 1,
+        name2 : 2,
+        v1(){
+        },
+        stu: [
+            '----',2,3,4,5,6,7,8
+        ],
+        // 需要 迭代器 属性 哦
+        [Symbol.iterator](){
+            // 注意 this 访问
+            _this = this
+            let index = 0
+            let len = this.stu.length
+            // obj
+            return {
+                next() {
+                     return index < len ?
+                        {value: _this.stu[index++] , done: false} :
+                        {value: undefined , done: true}
+                }
+            }
+        }
+    }
+    // 遍历自定义
+    //
+    for (let arr2Key of arr2) {
+        console.log(arr2Key)
+    }
+
+</script>
+</html>

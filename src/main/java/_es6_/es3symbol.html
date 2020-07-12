@@ -10,6 +10,56 @@
 
 <script>
 
+    // 数据类型 symbol
+    // 唯一类型
+    // 解决 命名冲突的
+    //不能 遍历
+    // 不能参与运算
+    //js 第7个数据类型
+
+    // 创建
+    let symbol = Symbol();
+
+    let s2 = Symbol('描述');
+
+
+    // for 创建
+    let s2 = Symbol.for('描述');
+    let s3 = Symbol.for('描述');
+    // s2 !== s3
+    // 唯一
+
+    // 不能 运算哦
+
+
+
+    // 使用
+    //
+    // 向对象中 安全得 添加 一个方法
+    let m1 = {
+        up: Symbol(),
+        down: Symbol(),
+    }
+
+    let game = function(){
+        
+    }
+    game[m1.up] = function () {
+
+    }
+
+    // 内置值
+    // 属性
+    // hasinstance
+    // isContatSpreadable
+    // upScopables
+    // match
+    // replace
+    // search
+    //split
+
+
+
 
 </script>
 </html>

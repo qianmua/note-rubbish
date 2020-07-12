@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+// 生成器
+// es 异步 编程 一种解决
+
+
+ 特殊的 函数
+</body>
+
+<script>
+
+    // 使用
+    // 函数 生成器
+    // 也可以 for of 遍历
+    // 遍历 yield
+    function * gen(){
+        // 函数 代码 分割
+        // 分割为 一块 一块
+        // 后面的 时返回结果
+        // yield
+        console.log(11)
+        console.log(11)
+        yield '1'
+        console.log(22)
+        console.log(22)
+        yield '2'
+        console.log(33)
+        console.log(33)
+        yield '3'
+    }
+    // 执行
+    //gen() //没反应
+    let iterator = gen();
+    console.log(iterator.next());
+    iterator.next()
+    iterator.next()
+
+
+
+    // 参数 传递
+    // 生成器 函数
+    // 传递 参数
+    //
+    // 调用 next 可以传入 实参
+    // 可以在 gen() 写入 参数
+    function * g2(v1) {
+        console.log(v1)
+        let one = yield 1
+        console.log(one)
+        let two = yield 2
+        console.log(tow)
+    }
+
+    console.log(g2('A').next());
+    console.log(g2('B').next());
+
+
+    // 异步编程
+    // js单线程
+
+
+    function  * g3() {
+        // 抽成 方法
+        // 或者 写道 yield
+        // 回调 使用
+        setTimeout( () => {
+            console.log('1');
+            },1000)
+        yield 1
+        setTimeout( () => {
+            console.log('1');
+            iterator.next();
+        },1000)
+    }
+
+    g3().next()
+
+
+
+</script>
+</html>
