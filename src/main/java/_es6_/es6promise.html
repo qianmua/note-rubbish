@@ -25,10 +25,63 @@
     // v1
     // v2
     const p = new Promise( (v1,v2) => {
+        // 是异步 操作 哦
+        // 先 下面 后 666
+        setTimeout(() => console.log(666) , 1000)
         let suc = 2
         suc === 1 ? v1(suc) : v2(suc)
     })
     //
     p.then( (suc)=> console.log("success" , suc) , (err)=> console.error("err" , err))
+
+    /// ajax 封装
+    const request = new XMLHttpRequest();
+    request.open('GET' , 'https://api.apiopen.top/getJ');
+    request.send();
+
+    // 绑定 事件
+    request.onreadystatechange = function () {
+        if (request.readyState === 4){
+            if (200){
+
+            } else{
+                //...
+            }
+        }
+    }
+
+    // 封装 文件 操作
+
+
+
+
+    // then 方法
+    // then 可以 跟 then
+    //
+    const p1 = new Promise( (v1,v2) => {
+        v2('6666')
+        v1('7777')
+        v1('8888')
+    })
+
+    // then的 返回结果
+    var then = p1.then(res => console.log(res)).then(res => console.log(res)).catch( (err) =>console.log("errr"));
+    console.log(then)
+
+
+    // 嵌套 请求？
+
+    // promise 嵌套
+    //
+
+
+
+    // catch
+    //  指定 失败 的回调
+    //
+
+
+
+    //
 </script>
 </html>

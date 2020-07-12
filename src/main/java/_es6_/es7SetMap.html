@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+// 集合 set
+</body>
+<script>
+
+    // 类似 数组 值唯一
+    //
+    var set = new Set();
+    set.add('1')
+    set.add(2)
+    set.delete('1')
+    console.log(set.has(2));
+    set.clear()
+    // 可以用 for of  ... 运算符
+
+
+
+    // 去重
+    let arr = [1,2,35,6,7,8,6,5,7,4,5,6,3,1,1,2]
+    let arr2 = [...new Set(arr)]
+
+    //交集
+    let arr3 = [3,4,5,6,78,94]
+    arr2 = [ ...new Set(arr)].filter( v1 => new Set(arr3).has(v1) )
+
+
+    // 并集
+    arr2 = [...new Set([...arr , ...arr3])]
+
+    // 差集同理
+
+
+
+
+
+
+    // Map
+    // key value
+    // key 可以是 各种类型
+    //
+
+    // 同样 可以 ... for of
+    var map = new Map();
+    map.set( [1,2,3,4] , [5,6,7,8])
+    map.set( [1,2,3,3] , [5,6,7,9])
+    map.set( [1,2,3,2] , [5,6,7,10])
+
+    for (let v1 of map){
+        console.log(v1)
+    }
+
+</script>
+</html>
