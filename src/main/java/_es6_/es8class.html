@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ // class
+// 语法糖
+// 像 面向对象 的 语法
+</body>
+
+<script>
+
+    // use
+    //
+
+    class Class1{
+        // 构造 方法
+        // 名字 固定
+        constructor(v1){
+            console.log(`hello ${v1}`)
+        }
+
+
+        // 方法
+        // 必须这样用
+        // 不可以 function
+        m1(){
+
+        }
+    }
+
+
+    var class1 = new Class1('1');
+    class1.m1()
+
+
+
+    /// 带静态成员 的 class
+    ///
+
+
+    class Demo2{
+        static name = 'san'
+        static m1(){
+
+        }
+    }
+    //
+
+    // 继承
+    //
+    class Demo3 extends Class1{
+
+        // 重写 父类方法
+        m1() {
+            super.m1();
+        }
+    }
+
+
+    // getter
+    // setter
+    class Demo4{
+        name
+        age
+        get name(){
+            return this.name
+        }
+
+        set name(v1){
+            this.name = v1
+        }
+
+
+    }
+
+
+</script>
+</html>

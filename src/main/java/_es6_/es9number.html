@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    数值扩展
+</body>
+
+<script>
+
+    /// js 最小的数
+    // 俩数 差 小于 这个 数 那么 就表示相等
+    Number.EPSILON
+
+    // 进制
+    a = 0b1010101
+    b = 0o777
+    c =100
+    d = 0xfff
+
+    // 一个数 是否有限数
+    Number.isFinite(1)
+
+    //是否 是个Nan not a number
+    Number.isNaN(1)
+
+    //string to int
+    Number.parseInt('11')
+
+    // 是integer？
+    Number.isInteger(1)
+
+    // 去掉 小数
+    Math.trunc(1.1)
+
+    // 整数？
+    // 1 0 -1
+    Math.sign(-1)
+
+
+
+    // 对象方法 扩展
+    //
+    //is 对象判断
+    // Object.assign 对象合并
+    const v1 = {name:'111'}
+    // 重复得 后面 会 覆盖前面
+    const v2 = Object.assign({age:66} , v1)
+    // setPrototypeOf // 设置 原型对象
+    // getPrototypeOf // 得到原型对象
+
+
+</script>
+</html>
