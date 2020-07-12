@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 200px ; height: 200px; border: 1px solid red;" id="div"></div>
+</body>
+
+<script>
+    var byId = document.getElementById("div");
+    byId.addEventListener( 'click' , function() {
+        setTimeout( () => {
+            this.style.background = 'pink'
+        }, 2000)
+    } )
+
+
+
+    const res = [1,4,6,7,89,9,6,3]
+    console.log( res.filter( v1 => v1%2 === 0 ))
+
+    // 箭头 函数 不适合 事件回调
+    // 对象方法
+    // this 指向 上一级 作用域
+    //
+
+    // 参数 默认值
+    //
+    let fun1 = (v1=10 , v2=20) => {
+        return v1 + v2;
+    }
+
+    /// 解构
+    function func2({name , v1,v2}){
+        console.log(name)
+        console.log(v1)
+        console.log(v2)
+    }
+    func2({name:'111' , v1 : '6' , v2: 111})
+
+
+    //rest 参数
+    // 得到 函数的实参 // 代替 arguments
+
+    // 对象
+    function d1(){
+        console.log(arguments)
+    }
+
+    d1('111' , '2222')
+
+    // rest
+    // 要放到最后
+    // 前面用 ...
+    function d2(...args){
+        console.log(args)
+    }
+    // 数组
+    // 可以用数组的方法哦
+    d2('1' ,2 ,3, 5)
+
+
+    //
+
+
+
+
+</script>
+</html>
