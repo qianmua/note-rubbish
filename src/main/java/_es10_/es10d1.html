@@ -14,8 +14,37 @@
     // es8 转换 对象 为 数组 entries
     // es10 数组 or map 等等 为对象 fromEntries
 
+    const arr1 = [1,2,3,4,8,6,7]
+    // var entries = Object.fromEntries(arr1);
+    // console.log(entries)
 
 
     // 字符串 扩展
+
+    // trim
+    // es10 trimStart   trimEnd
+    let str1 = '        asdsad         sad  ';
+    console.log(str1);
+    console.log(str1.trimStart());
+    console.log(str1.trimEnd());
+
+
+
+
+    /// 数组 扩展方法
+    // flat
+    // flatMap
+    // 将数组 维度 降低 3 -> 2 -> 1
+    const arr2 = [1,2,3,[4,5,6,[7,8,9]]];
+    console.log(arr2.flat());
+    // 维度 2 参数 深度
+    console.log(arr2.flat(2));
+
+
+    // flatMap
+    // 相当于 把 js里面 map的操作
+    // js 数组 map 操作 相当于 java stream map
+    //
+
 </script>
 </html>

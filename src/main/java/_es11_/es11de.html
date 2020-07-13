@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ //es 11 新特性
+
+
+
+ul>li*2>a[href='test$']{hrefDemo$}+p{text$}^^button[type='button']{btn$}>p{txt$}^span
+
+ <ul>
+     <li><a href="test1">hrefDemo1</a>
+         <p>text1</p>
+     </li>
+     <li><a href="test2">hrefDemo2</a>
+         <p>text2</p>
+     </li>
+ </ul>
+ <button type="button">btn1</button>
+ <span></span>
+ <button type="button">btn2</button>
+ <span></span>
+
+
+</body>
+
+<script>
+
+
+    // es11 新特性
+    // 私有属性
+    class Person{
+        // 公有
+        name
+        age
+        // 私有
+        #tel
+        #addr
+
+
+        constructor(name, age, tel, addr) {
+            this.#tel = tel;
+            this.#addr = addr;
+            this._name = name;
+            this._age = age;
+            this._tel = tel;
+            this._addr = addr;
+        }
+
+
+        get name() {
+            return this._name;
+        }
+
+        set name(value) {
+            this._name = value;
+        }
+
+        get age() {
+            return this._age;
+        }
+
+        set age(value) {
+            this._age = value;
+        }
+
+        get tel() {
+            return this._tel;
+        }
+
+        set tel(value) {
+            this._tel = value;
+        }
+
+        get addr() {
+            return this._addr;
+        }
+
+        set addr(value) {
+            this._addr = value;
+        }
+    }
+
+
+    // allSettled
+    // promise 数组
+    // 全部成功 成功
+    // 一个失败 失败
+
+
+
+
+    // 字符串 扩展
+    // matchAll
+    // 得到 正则 匹配 所有 的
+    //
+
+    let str1 = `<ul>
+     <li><a href="test1">hrefDemo1</a>
+         <p>text1</p>
+     </li>
+     <li><a href="test2">hrefDemo2</a>
+         <p>text2</p>
+     </li>
+    </ul>`
+
+    // 注意 修饰 模式
+    const reg = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/gs
+    console.log(str1.matchAll(reg).next());
+
+
+    const arr2 = [...str1.matchAll(reg)]
+
+
+
+
+
+    // 可选链 操作符
+    // ?.
+    // 对象类型参数时
+    // 不要做 层级 判断
+
+
+    // 就跟 空值 判断 差不多啦。。。
+    // 就这？
+    // 你在教我做事？
+
+
+
+    /// 动态 import
+    //  使用 import 函数
+    // import('url').then()
+
+
+
+
+
+
+
+    // 数据类型
+    // bgiInt
+    //
+    // user
+    let big = 100n;
+    // 后面 加n
+
+    var int = BigInt(1000000);
+    // 不能直接 跟 普通类型 运算
+    //
+
+
+
+
+
+    // 绝对 全局 对象
+    // globalsThis
+    // 始终 指向 全局对象
+    //
+
+
+
+
+</script>
+</html>
