@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+// es8 对象方法扩展
+</body>
+
+<script>
+
+    const v1 = {
+        name:'a',
+        name2:[1,2,34,5,6,7,8],
+        name3:'a',
+    }
+
+    // 得到 对象 所有 键
+    console.log(Object.keys(v1));
+
+    // 得到 所有 值
+    console.log(Object.values(v1));
+
+    // k v 转化为 数组
+    // 方便 创建一个map
+    const v2 = new Map(Object.entries(v1))
+    console.log(v2)
+
+
+    /// 对象属性的描述对象
+    // 可以对 对象 进行 深层次 的clone
+    //
+
+</script>
+</html>

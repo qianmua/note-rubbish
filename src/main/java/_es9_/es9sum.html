@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ // es9 新特性
+ <input type="text" size="30px">
+</body>
+
+<script>
+    /// ajax 请求
+    function AJAX(url){
+        return new Promise( (res , err) => {
+            const request = new XMLHttpRequest();
+            request.open('GET' , url , true);
+            request.setRequestHeader('Access-Control-Allow-Origin' , 'http://www.netbian.com')
+            request.send(null);
+            request.onreadystatechange = function(){
+                if (request.readyState === 4){
+                    if (request.status === 200){
+                        res(request.response);
+                    }else{
+                        err(request.status);
+                    }
+                }
+            }
+        })
+    }
+
+    // const ajax = AJAX('https://api.apiopen.top/getJoke').then( res => console.log(res));
+
+
+
+
+    // rest 参数
+    //  与 扩展运算符
+    // 可以 对 对象 进行 操作啦~
+
+    // rest 对 对象 的 支持
+    function f({host , ...restTest}) {
+        
+    }
+    f({host:'1' , userName:'2' , age: 1})
+
+
+
+    // 正则 扩展
+
+    //命名捕获分组
+    let str = '6666666<a href="www.baidu.com">test A</a>>'
+    // 提取 数据
+    // group 为 空
+    const reg = /<a href="(.*)">(.*)<\/a>/
+    // 执行
+    console.log(reg.exec(str));
+
+    // 命名 // 起别名 差不多
+    // group 对象 k v
+    const reg2 = /<a href="(?<url>.*)">(?<text>.*)<\/a>/
+    console.log(reg2.exec(str));
+
+
+    // const reg2 = /<a href="(?<url>.*)">(?<text>.*)<\/a>/
+    // 注意 跨域 。。
+    // 可以 放到 服务器 上运行 或者 添加 参数解决跨域
+    async function f3(){
+        const {code,message ,result} =JSON.parse(await AJAX('http://www.netbian.com/dongman/'))
+        console.log(code,message,result)
+    }
+    f3()
+
+
+
+
+
+
+    // 反向断言
+
+    // 正向 断言
+    let str2 = 'asdm564189asdertgdf54182069234sdw'
+    // 后面
+    let reg = /\d+(?=s)/
+    reg.exec(str2)
+    // 反向 断言
+    // 前面
+    let reg2 = /(?<=f)\d+/
+
+</script>
+</html>

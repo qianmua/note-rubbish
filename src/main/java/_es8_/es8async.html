@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+//async 函数
+</body>
+
+<script>
+
+    //async 函数 把
+
+    // 返会一个 promise 对象
+    // 成功 就返回一个 成功的 promise对象
+    // 自定义 返回 请 new Promise
+    async function f1(){
+        setTimeout('' , 1000);
+        return '111'
+    }
+
+    const v1 = f1().then( (res) => {
+
+    }).catch(() => {
+
+    });
+
+    console.log(v1);
+
+
+    // await 表达式
+    // 同 async 可以达到 同步 效果
+    // await 可以放一个 表达式 在 async 里面
+
+
+    async function f2(){
+
+        await new Promise( (res) => {
+
+        }).catch( (err)=> {
+
+        })
+    }
+
+
+
+    // req
+
+
+    /// ajax 请求
+    function AJAX(url){
+        return new Promise( (res , err) => {
+            const request = new XMLHttpRequest();
+            request.open('GET' , url);
+            request.send();
+            request.onreadystatechange = function(){
+                if (request.readyState === 4){
+                    if (request.status === 200){
+                        res(request.response);
+                    }else{
+                        err(request.status);
+                    }
+                }
+            }
+        })
+    }
+
+    // const ajax = AJAX('https://api.apiopen.top/getJoke').then( res => console.log(res));
+
+
+
+    // async
+    // axios // 返回的 是 promise 对象
+    // 开心 - -！
+    async function f3(){
+        const {code,message ,result} =JSON.parse(await AJAX('https://api.apiopen.top/getJoke'))
+        // console.log(await AJAX('https://api.apiopen.top/getJoke'));
+        console.log(code,message,result)
+    }
+
+    f3()
+
+
+</script>
+</html>
