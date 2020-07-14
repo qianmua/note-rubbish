@@ -20,12 +20,17 @@ import java.util.concurrent.*;
 public class Demo {
 
     public static void main(String[] args) {
-        // http://www.netbian.com/youxi/index_2.htm // max 75
-        //http://www.netbian.com/dongman/index_2.htm // max 142
+        // http://www. .com/youxi/index_2.htm // max 75
+        //http://www. .com/dongman/index_2.htm // max 142
         initJsoupAndGetUrl("youxi",75);
         initJsoupAndGetUrl("dongman",142);
     }
 
+    /**
+     * 初始化
+     * @param pathName 网页路径
+     * @param maxPage 最大页数
+     */
     private static void initJsoupAndGetUrl(String pathName, int maxPage)  {
         // 开线程池去 爬
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
@@ -55,19 +60,25 @@ public class Demo {
         }
     }
 
+    /**
+     * 解析 dom
+     * @param pathName 路径
+     * @param index 页码
+     * @throws IOException
+     */
     private static void toJsoup(String pathName ,int index) throws IOException {
-        //http://www.netbian.com/dongman/
+        //http://www. .com/dongman/
         // 地址
         // index_2.htm
         // index_1
         // index_2
         // index_3 ....
-        String url = "http://www.netbian.com/" + pathName +"/index_"+ index +".htm";
+        String url = "http://www. .com/" + pathName +"/index_"+ index +".htm";
         // 磁盘 路径
         // 路径下必须要有 文件夹
         // 不玩会报NPE
         String path = "G:\\Java_Test\\img\\img1";
-        //http://www.netbian.com/
+        //http://www. .com/
         // 得到 document 对象
         Document document = Jsoup.parse(new URL(url) , 3000);
         // 选择 标签 -> 分析 网页 得到
@@ -75,6 +86,11 @@ public class Demo {
         GetUrl(path, list);
     }
 
+    /**
+     * 解析 图片 地址
+     * @param path 路径
+     * @param list dom 表
+     */
     private static void GetUrl(String path, Elements list) {
         //System.out.println(list);
         // each -> data
@@ -101,7 +117,7 @@ public class Demo {
                         try {
                             // 拼接 url
                             // 重复 解析
-                            Document parse = Jsoup.parse(new URL("http://www.netbian.com"+ href), 3000);
+                            Document parse = Jsoup.parse(new URL("http://www. .com"+ href), 3000);
                             //得到标签解析
                             parse.getElementsByClass("pic")
                                     // 死亡 嵌套
