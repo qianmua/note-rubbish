@@ -1,5 +1,7 @@
 package _a_juc_._AQS_.current;
 
+import sun.misc.Unsafe;
+
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.LockSupport;
 
@@ -110,7 +112,22 @@ public class CustomLock {
      * @return bool
      */
     public final boolean compareAndSwapState(int exec , int update){
-        return false;
+        assert unsafe != null;
+        return unsafe.compareAndSwapInt(this , stateOffset , exec , update);
+    }
+
+    // unsafe
+    private static final Unsafe unsafe = UnSafeInstance.refelectGetUnsafe();
+
+    private static long stateOffset;
+
+    static {
+        try {
+            assert unsafe != null;
+            stateOffset = unsafe.objectFieldOffset(CustomLock.class.getDeclaredField("state"));
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
 
