@@ -3,6 +3,10 @@
 
 # aqs 同步器
 
+## AQS
+
+    abstract queue sync 抽象 队列 同步器
+
 > java 并发的核心封装包 CAS
 
     //synchronized java的基于c语言设计的同步机制
@@ -26,6 +30,19 @@
     公平/非公平
     可重入
     允许中断
+    
+### 公平锁/非公平锁
+    
+        公平锁：
+            队列？ 拿锁
+            无锁？ 初始化队列 拿锁？ 排队 cas
+            无锁？ 队列？ 排队 cas
+        
+        非公平锁：
+            拿锁 cas
+                true  next
+                false 检查 cas       
+                
 
 
  ## cas
