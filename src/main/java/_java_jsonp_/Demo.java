@@ -20,8 +20,8 @@ import java.util.concurrent.*;
 public class Demo {
 
     public static void main(String[] args) {
-        // http://www. .com/youxi/index_2.htm // max 75
-        //http://www. .com/dongman/index_2.htm // max 142
+        // http://www.netbian.com/youxi/index_2.htm // max 75
+        //http://www.netbian.com/dongman/index_2.htm // max 142
         initJsoupAndGetUrl("youxi",75);
         initJsoupAndGetUrl("dongman",142);
     }
@@ -67,18 +67,18 @@ public class Demo {
      * @throws IOException
      */
     private static void toJsoup(String pathName ,int index) throws IOException {
-        //http://www. .com/dongman/
+        //http://www.netbian.com/dongman/
         // 地址
         // index_2.htm
         // index_1
         // index_2
         // index_3 ....
-        String url = "http://www. .com/" + pathName +"/index_"+ index +".htm";
+        String url = "http://www.netbian.com/" + pathName +"/index_"+ index +".htm";
         // 磁盘 路径
         // 路径下必须要有 文件夹
         // 不玩会报NPE
         String path = "G:\\Java_Test\\img\\img1";
-        //http://www. .com/
+        //http://www.netbian.com/
         // 得到 document 对象
         Document document = Jsoup.parse(new URL(url) , 3000);
         // 选择 标签 -> 分析 网页 得到
@@ -117,7 +117,7 @@ public class Demo {
                         try {
                             // 拼接 url
                             // 重复 解析
-                            Document parse = Jsoup.parse(new URL("http://www. .com"+ href), 3000);
+                            Document parse = Jsoup.parse(new URL("http://www.netbian.com"+ href), 3000);
                             //得到标签解析
                             parse.getElementsByClass("pic")
                                     // 死亡 嵌套
@@ -173,7 +173,7 @@ public class Demo {
         // 不过 用不上
         // 建议 上面 写好
         if(!sf.exists()){
-            sf.mkdirs();
+            boolean b = sf.mkdirs();
         }
         // 扩展名
         String extensionName = urlString.substring(urlString.lastIndexOf(".") + 1);
