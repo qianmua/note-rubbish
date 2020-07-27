@@ -161,6 +161,7 @@
         
         FROM java:8
         
+        # 修改 
         COPY *.jar /app.jar
         
         CMD ["--server.port=9090"]
@@ -190,9 +191,13 @@
                 .....
                 
                 
-
-
-        
+    // 重新 部署
+    docker-compose up --build
+    
+    工程 服务 容器
+    
+    容器 -> docker run -> k8s apply                
+                
         
 ## docker swarm
 
