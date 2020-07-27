@@ -10,6 +10,7 @@ package _a_juc_._Runnable_;
 public class Main {
 
     /*
+    *
     * runnable 不是一个 线程。。/
     * 是一个 入口
     *

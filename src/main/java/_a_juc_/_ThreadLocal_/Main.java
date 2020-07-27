@@ -65,7 +65,7 @@ public class Main {
 
         executor.shutdown();
 
-        int a = 1 < 2? f() : f();
+        int a = 1 < 2 ? f() : f();
 
 
     }
