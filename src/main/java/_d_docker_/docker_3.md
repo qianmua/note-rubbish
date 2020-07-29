@@ -95,3 +95,28 @@
     docker service rm nginx-1
     
     
+## 
+
+
+    swarm 集群 管理
+    node docker 节点 多个节点 组成一个 网络
+    service 在管理 或者 工作节点运行 ， 核心操作
+    
+    task 容器内命令 (副本)    
+    
+    --mode // 调整 副本以什么 方式 启动 // worker 还是 master
+    
+    
+    
+> docker stack 
+    
+    docker-compose // 单机部署
+    docker stack 集群部署
+    
+    docker stack deploy file.yml
+   
+> docker secret    
+
+    安全 配置密码 整数
+
+> docker config    
