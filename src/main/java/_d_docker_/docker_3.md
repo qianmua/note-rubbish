@@ -108,6 +108,8 @@
     
     
     
+## 逐渐 k8s 替代
+    
 > docker stack 
     
     docker-compose // 单机部署
@@ -120,3 +122,16 @@
     安全 配置密码 整数
 
 > docker config    
+
+    配置
+    
+
+### 云原生 时代
+
+    go （docker k8s）
+    etcd
+    
+    //  并发语言
+    
+    
+    
