@@ -33,7 +33,6 @@ public class Strategy {
 
     private interface Alg{
         void alg();
-
     }
 
     private class MD5 implements Alg{
