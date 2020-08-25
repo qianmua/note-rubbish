@@ -59,7 +59,7 @@
     
     servlet3.0 anyncContext
     
-    DispatcherSerblet // 整合
+    DispatcherServlet // 整合
     
     
 ## servlet 实现
