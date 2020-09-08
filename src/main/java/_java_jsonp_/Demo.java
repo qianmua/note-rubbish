@@ -22,8 +22,8 @@ public class Demo {
     public static void main(String[] args) {
         // http://www.netbian.com/youxi/index_2.htm // max 75
         //http://www.netbian.com/dongman/index_2.htm // max 142
-        initJsoupAndGetUrl("youxi",75);
-        initJsoupAndGetUrl("dongman",142);
+//        initJsoupAndGetUrl("youxi",1);
+        initJsoupAndGetUrl("dongman",1);
     }
 
     /**
@@ -42,16 +42,20 @@ public class Demo {
                 Executors.defaultThreadFactory(),
                 new ThreadPoolExecutor.DiscardPolicy());
         try {
-
-            for (int i = 1; i <= maxPage; i++) {
-                int finalI = i;
-                executor.execute( () -> {
-                    try {
-                        toJsoup(pathName, finalI);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+            // min
+            if( maxPage <= 1){
+                toJsoup(pathName, 0);
+            }else {
+                for (int i = 1; i <= maxPage; i++) {
+                    int finalI = i;
+                    executor.execute( () -> {
+                        try {
+                            toJsoup(pathName, finalI);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +77,16 @@ public class Demo {
         // index_1
         // index_2
         // index_3 ....
-        String url = "http://www.netbian.com/" + pathName +"/index_"+ index +".htm";
+//        String url = ;
+        String url = index > 0 ?
+                "http://www.netbian.com/" + pathName +"/index_"+ index +".htm"
+                : "http://www.netbian.com/" + pathName +"/index.htm";
+
+//        StringBuilder url = new StringBuilder();
+//        url.append( index > 0 ?
+//                "http://www.netbian.com/" + pathName +"/index_"+ index +".htm"
+//                : "http://www.netbian.com/" + pathName +"/index"+ index +".htm" );
+
         // 磁盘 路径
         // 路径下必须要有 文件夹
         // 不玩会报NPE
