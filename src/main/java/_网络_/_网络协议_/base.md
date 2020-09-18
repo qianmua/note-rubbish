@@ -77,6 +77,22 @@ PDU 数据单元
     双向通道    全双工（交换机）      双向 同时
     
     
+## TCP 三次握手
+
+    发送 SYN = 1 ,seq = x
+    接收到回复   SYN = 1 ， ACK = 1 ，seq = y , ack = x+1
+    接收回复    ACK = 1 seq = x+1 ack = y+1
+    建立连接
+
+
+## TCP 四次挥手
+
+    主动关闭发送  FIN = 1 ， seq = u
+    收到回复        ACK = 1 ， seq = v ack = u+1    
+    继续回复数据      FIN = 1 ACK = 1 , seq = w , ack = U+1
+    收到回复        ACK = 1 ， seq = u+1 , ack = w+1
+    
+    
     
 
     
