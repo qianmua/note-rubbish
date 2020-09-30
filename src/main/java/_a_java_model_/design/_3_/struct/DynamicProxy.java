@@ -9,7 +9,7 @@ import java.lang.reflect.Proxy;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/8/4  22:34
- * @description :
+ * @description : 动态代理
  */
 public class DynamicProxy {
 

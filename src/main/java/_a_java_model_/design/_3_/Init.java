@@ -21,14 +21,16 @@ public class Init {
         System.out.println("C".hashCode());
         //
         System.out.println("///==========//");
-        HashMap<Double , String> map = new HashMap(){{
+        HashMap<Double ,String> map = new HashMap<Double , String>(){{
             put(10.1 ,"A");
             put(10.2 ,"B");
             put(10.3 ,"C");
             put(10.4 ,"C");
         }};
+
         HashSet<Object> set = new HashSet<>();
         set.add(null);
+
         map.forEach( (k ,v) -> System.out.println(k.hashCode() + " " + k));
         System.out.println("///==========//");
 
