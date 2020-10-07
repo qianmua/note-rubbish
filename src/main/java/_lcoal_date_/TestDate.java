@@ -92,4 +92,11 @@ public class TestDate {
         System.out.println(format);
     }
 
+    @Test
+    public void m4(){
+        TestPo testPo = new TestPo();
+        testPo.setName("A");
+        testPo.setBir(LocalDateTime.now());
+        System.out.println(testPo);
+    }
 }

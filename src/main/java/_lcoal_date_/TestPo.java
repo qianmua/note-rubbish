@@ -2,6 +2,7 @@ package _lcoal_date_;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ public class TestPo {
     private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private LocalDateTime bir;
 
 }
