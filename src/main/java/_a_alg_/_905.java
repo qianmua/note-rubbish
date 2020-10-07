@@ -20,7 +20,7 @@ public class _905 {
      *
      */
 
-    @Test
+//    @Test
     public int jump(int n){
         if (n <= 2)
             return n;
@@ -39,8 +39,9 @@ public class _905 {
      */
 
     @Test
-    public int jump2(int n){
-        int[] dp = new int[n];
+    public void jump2(){
+        int n = 99;
+        int[] dp = new int[99];
         // init
         Arrays.fill(dp , 1);
 
@@ -49,7 +50,8 @@ public class _905 {
                 dp[i] += dp[i1];
             }
         }
-        return dp[n-1];
+        System.out.println(dp[n - 1]);
+//        return dp[n-1];
     }
 
 }
