@@ -18,8 +18,8 @@ public class TestPo {
 
     private String name;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat( pattern = "yyyy-MM-dd")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private LocalDateTime bir;
 
 }

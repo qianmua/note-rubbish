@@ -16,4 +16,15 @@ public class Mark {
     //HACK 粗糙的解决方案
 
     //XXX 有问题
+
+
+    public static void main(String[] args) {
+        int main = main(new int[]{0, 1, 2, 45, 5, 4});
+        System.out.println(main);
+    }
+
+    public static int main(int[] args) {
+        return args[0];
+    }
+
 }
