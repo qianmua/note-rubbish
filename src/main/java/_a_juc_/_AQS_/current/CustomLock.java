@@ -34,9 +34,11 @@ public class CustomLock {
      * add lock
      */
     public void lock(){
+        // 可以得到锁?
         if (acquire()) {
             return;
         }
+        // local thread
         Thread currentThread = Thread.currentThread();
 
         // add wait queue
@@ -49,10 +51,12 @@ public class CustomLock {
             // un use cpu and acquire
             // park LockSupport
             if (( currentThread == waitQueue.peek() ) && acquire()){
+                // 唤醒线程，拿到锁，从队列移除
                 // 移除 队列
                 waitQueue.poll();
                 return ;
             }
+            // 阻塞其他队列
             LockSupport.park(currentThread);
         }
 
@@ -70,9 +74,11 @@ public class CustomLock {
 
         // change status
         int state = getState();
-
+        // cas state
         if (compareAndSwapState(state , 0)){
+            // init thread
             setLockHolder(null);
+            // 队头??
             Thread first = waitQueue.peek();
             if (null != first){
                 // 唤醒队列 -> first
@@ -82,23 +88,24 @@ public class CustomLock {
     }
 
 
+    /**
+     * 比较器
+     * @return 是否得到锁
+     */
     private boolean acquire() {
-        // use unsafe?
-        // 反射
-
+        // local thread
         Thread currentThread = Thread.currentThread();
-        // init state
+        // aqs state
         int c = getState();
-
+        // can get lock
         if (c == 0){
             // 无锁
-
             // safe
-            // 空队列？
-            // 队列头？
+            // 空队列 队列头
             if ( (waitQueue.size() == 0 || currentThread == waitQueue.peek() )
                     && compareAndSwapState(0 , 1)){
                 // 当前 thread
+                // get lock
                 setLockHolder(currentThread);
                 return true;
             }
