@@ -15,9 +15,13 @@ public class UnSafeInstance {
 
     public static Unsafe refelectGetUnsafe(){
         try {
-            Field unfases = Unsafe.class.getDeclaredField("theUnfase");
-            unfases.setAccessible(true);
-            return (Unsafe) unfases.get(null);
+            // 反射
+            // unsafe
+            Field unsafe = Unsafe.class.getDeclaredField("theUnsafe");
+            // 可访问
+            unsafe.setAccessible(true);
+            // return
+            return (Unsafe) unsafe.get(null);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }

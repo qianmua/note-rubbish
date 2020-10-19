@@ -2,6 +2,7 @@ package _a_juc_._AQS_.current;
 
 import sun.misc.Unsafe;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.LockSupport;
 
@@ -121,10 +122,14 @@ public class CustomLock {
 
     private static long stateOffset;
 
+
+    /**
+     * init
+     */
     static {
         try {
-            assert unsafe != null;
-            stateOffset = unsafe.objectFieldOffset(CustomLock.class.getDeclaredField("state"));
+//            assert unsafe != null;
+            stateOffset = Objects.requireNonNull(unsafe).objectFieldOffset(CustomLock.class.getDeclaredField("state"));
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
