@@ -19,7 +19,7 @@ public class LazyMain {
 
 
     /**双重锁DCL*/
-    public static LazyMain get(){
+    public synchronized static LazyMain get(){
         if (hungry == null){
             synchronized (LazyMain.class){
                 if (hungry == null){

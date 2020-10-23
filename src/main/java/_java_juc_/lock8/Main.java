@@ -19,13 +19,13 @@ public class Main {
         * 先A 后 B
         * 锁的存在，谁先拿到谁先执行！
         * */
-        new Thread(() -> { phone.s1();}).start();
+        new Thread(phone::s1).start();
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        new Thread(() -> { phone.s2();}).start();
+        new Thread(phone::s2).start();
 
     }
 }

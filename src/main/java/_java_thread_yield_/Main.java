@@ -28,5 +28,10 @@ class YieldTest implements Runnable{
         System.out.println(Thread.currentThread().getName() + " 第一次");
         Thread.yield();
         System.out.println(Thread.currentThread().getName() + " 第二次");
+        try {
+            this.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

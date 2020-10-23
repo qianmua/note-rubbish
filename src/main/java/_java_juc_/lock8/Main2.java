@@ -23,5 +23,8 @@ public class Main2 {
 }
 
 class Phone2{
-
+    public void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread();
+        thread.join();
+    }
 }
