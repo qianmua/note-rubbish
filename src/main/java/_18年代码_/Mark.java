@@ -1,5 +1,7 @@
 package _18年代码_;
 
+import java.util.HashMap;
+
 /**
  * @author HJC
  * @version 1.0
@@ -24,6 +26,19 @@ public class Mark {
     }
 
     public static int main(int[] args) {
+        // hashmap 扩容
+        // size 属性 int类型
+        // 添加值会自增
+        // 要是 ++size > (负载因子 * 容器大小)
+        // 扩容 原来的两倍
+
+        // 最大扩容为：
+        // Integer.MAX_VALUE
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        String s = new String("111");
+        int i = s.length();
+
+
         return args[0];
     }
 
