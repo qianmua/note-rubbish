@@ -51,6 +51,11 @@ EOF
     
     // 版本 选择1.17.3
     
+    安装报错可以不指定版本安装
+    或者关闭掉防火墙
+    并设置：
+    setenforce 0
+    
 > 使用yum安装程序时，提示xxx.rpm公钥尚未安装
 
     使用 yum install xxx.rpm --nogpgcheck 命令格式跳过公钥检查，如下：
