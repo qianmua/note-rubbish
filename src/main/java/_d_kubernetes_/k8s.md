@@ -130,3 +130,47 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config　　
     使用提供的kube-flannel.yml   
     
 `kubectl apply -f kube-flannel.yml`
+
+## 加入节点
+
+    如果没有先生成一个
+    
+`kubeadm token create --ttl 0 --print-join-command` 
+
+    生成的token + sha 直接复制 到子节点 直接执行
+    
+    
+## 安装过程问题
+
+    版本不一致：
+    master节点版本1.17.3
+    node节点版本 1.19.3
+    
+    
+### 更新master 节点版本
+
+    在master_images.sh 
+    修改版本后重新执行下载
+    
+    执行命令：
+    升级检查和方案
+    kubeadm upgrade plan
+    执行更新操作
+    kubeadm upgrade apply v1.19.3
+    systemctl daemon-reload
+    systemctl restart kubelet
+    记得执行：
+    kubeadm reset
+    // 然后删除旧的配置目录
+    rm -rf $HOME/.kube
+    在重新执行
+    
+```
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+``` 
+    然后子节点加入master 就可以了
+        
+
+    
