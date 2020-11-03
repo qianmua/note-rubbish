@@ -178,6 +178,19 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config　　
     
 
     然后子节点加入master 就可以了
-        
+    
+    
+    
+### 缩写
+
+    ep
+    limits
+    ns
+    no
+    pvc
+    svc
+    pv
+    po
+            
 
     
