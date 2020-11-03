@@ -68,6 +68,27 @@ EOF
 
     或者直接添加在 yum install -y kubelet-1.17.3 kubectl-1.17.3 kubeadm-1.17.3 --nogpgcheck
     
+    要是无法找到 package
+    可以先清理yum缓存 
+    yum clean all 
+    
+> 安装方式2
+
+```
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+```
+   setenforce 0
+   yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+   安装的是最新版 
     
 ### 添加 并启动
 
@@ -178,6 +199,10 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config　　
     
 
     然后子节点加入master 就可以了
+    
+## 监听状态
+
+    watch kubectl get pod -n kube-system -o wide
     
     
     
