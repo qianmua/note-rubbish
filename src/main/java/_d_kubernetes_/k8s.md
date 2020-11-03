@@ -170,6 +170,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config　　
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ``` 
+
+    更新成功之后记得 kubectl apply -f buke-flannel.yml
+    
+    不然没有网络桥接
+    子节点一直是 not ready 状态
+    
+
     然后子节点加入master 就可以了
         
 
