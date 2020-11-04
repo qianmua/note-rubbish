@@ -1,5 +1,9 @@
 package _d_kubernetes_;
 
+import org.springframework.web.servlet.resource.HttpResource;
+
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -36,6 +40,5 @@ public class Main {
     * */
 
     public static void main(String[] args) {
-
     }
 }
