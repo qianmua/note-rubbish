@@ -13,7 +13,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
 public class Demo2 {
 
     /*
-    * 原空间 默认 大小 21M
+    * 元空间 默认 大小 21M
     * 不够会GC 然后 扩容与 虚拟内存 差不多
     * full GC 的牵引 （比较麻烦 对性能 由严重损耗）
     *
