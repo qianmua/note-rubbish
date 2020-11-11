@@ -20,12 +20,12 @@ public class Mark {
     //XXX 有问题
 
 
-    public static void main(String[] args) {
-        int main = main(new int[]{0, 1, 2, 45, 5, 4});
-        System.out.println(main);
-    }
+//    public static void main(String[] args) {
+//        int main = main(new int[]{0, 1, 2, 45, 5, 4});
+//        System.out.println(main);
+//    }
 
-    public static int main(int[] args) {
+    public static void main(String[] args) {
         // hashmap 扩容
         // size 属性 int类型
         // 添加值会自增
@@ -34,12 +34,22 @@ public class Mark {
 
         // 最大扩容为：
         // Integer.MAX_VALUE
-        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        /*HashMap<String, String> stringStringHashMap = new HashMap<>();
         String s = new String("111");
-        int i = s.length();
+        int i = s.length();*/
+
+        String str1 = "aabbccAABBCC";
+        int i = str1.lastIndexOf(97); // a
+        int i1 = str1.lastIndexOf("AB"); // string
+        int i2 = str1.lastIndexOf('c' , 5); // char 起始搜索下标
+        int i3 = str1.lastIndexOf("bb" , 2); // string 起始搜索下标
+
+        System.out.println(i); //  1    最后一次出现的位置
+        System.out.println(i1); // 7
+        System.out.println(i2); // 5    结果与第二个参数有关系 理解起始搜索下标
+        System.out.println(i3); // 2    结果与第二个参数有关系 理解起始搜索下标
 
 
-        return args[0];
     }
 
 }
