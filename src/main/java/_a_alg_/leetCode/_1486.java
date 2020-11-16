@@ -2,6 +2,9 @@ package _a_alg_.leetCode;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 /**
  * @author HJC
  * @version 1.0
@@ -37,6 +40,26 @@ public class _1486 {
         }
 
         return r;
+    }
+
+
+    @Test
+    public void m2(){
+        int[] arr = {1, 3, 7, 8};
+        int[] num = getTargetNum(arr, 10);
+        System.out.println(Arrays.toString(num));
+    }
+    public int[] getTargetNum(int arr[] , int target){
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++)
+            map.put(arr[i] , i);
+
+        for (int i : arr) {
+            if (map.containsKey(target - i))
+                return new int[]{map.get(i)+1 , map.get(target - i) + 1};
+        }
+        return null;
     }
 
 

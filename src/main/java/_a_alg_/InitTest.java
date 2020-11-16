@@ -2,7 +2,11 @@ package _a_alg_;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * @author HJC
@@ -11,7 +15,7 @@ import java.util.Arrays;
  * @date 2020/6/23  22:00
  * @description :
  */
-public class InitTest {
+public class InitTest  {
 
     @Test
     public void m1(){
@@ -86,4 +90,20 @@ public class InitTest {
         long b = 0b1;
         System.out.println(a);
     }
+
+
+    @Test
+    public void m6(){
+
+        StringBuilder sb = new StringBuilder("AAAddddasdas");
+        sb.reverse();
+    }
+
+
+
+    public List<String> distinct(String[] array) {
+        HashSet<String> hSet = new HashSet<>(Arrays.asList(array));
+        return new ArrayList<>(hSet);
+    }
+
 }
