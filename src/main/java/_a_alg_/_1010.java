@@ -1,5 +1,7 @@
 package _a_alg_;
 
+import org.junit.Test;
+
 /**
  * @author HJC
  * @version 1.0
@@ -8,7 +10,18 @@ package _a_alg_;
  * @description :
  */
 public class _1010 {
-    // 在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。
-    // 数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。
-    // 请找出数组中任意一个重复的数字。
+    /**
+     * 字符串匹配问题场景
+     *
+     * - 有一个字符串str1 = "abcdefg"  和 str2 = "def"
+     * - 现在要判断str1 是否含有str2，如果存在，就返回第一次出现的位置，如果没有，则返回-1
+     */
+
+    @Test
+    public void m1(){
+        String s1 = "abcdefg";
+        String s2 = "def";
+        int i = s1.indexOf(s2);
+        System.out.println(i);
+    }
 }
