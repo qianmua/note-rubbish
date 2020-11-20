@@ -101,6 +101,7 @@
     * sinter 交集
     * sunion 并集
     *
+    
  >   * Hash类型
   
     * 跟map集合差不多
@@ -120,6 +121,7 @@
     * hsetnx 存在怎么不存在怎么
     * 跟string操作差不多前面多了个h
     *
+    
 >    * Zset类型
  
     * 在set的基础上增加了一个值 排序
@@ -132,6 +134,7 @@
     * zcount 大小
     *
     *
+    
 ##    * 三种特数的数据类型
 
 >    * geospatial地理位置
@@ -159,6 +162,7 @@
     * pfcount mykey 计数
     * pfmerge mukey1 mykey mykey2 合并 到 新的mykey1
     *
+    
 >    * bitmap 位存储
  
     * 统计两种信息 是，否 就有两种结果 0 1
@@ -171,6 +175,7 @@
     * bitcount mysign 统计记录
     *
     *
+    
 ##    * redis事务
   
     * mysql ACID原则
@@ -196,7 +201,9 @@
     * 比如 除零 给一个不存在的值incr
     *
     *
+    
 ##    * 监控watch
+
     * 悲观锁 什么时候都会出问题 无论做什么都会加锁
     *
     * 乐观锁 什么时候都不会出现问题 所以不会加锁 更新的时候判断一下是不是有人修改过
