@@ -52,4 +52,14 @@ public class Mark {
 
     }
 
+//    public final static native int w();
+
+
+    interface Ains{
+    }
+
+    abstract class Abs{
+//        abstract final double hype;
+    }
+
 }
