@@ -1,6 +1,7 @@
 package _a_alg_.easy.list;
 
-import com.leosanqing.leetcode.medium.list.ListNode;
+
+import _a_alg_.medium.list.ListNode;
 
 /**
  * @Author: rtliu

@@ -1,6 +1,7 @@
 package _a_alg_.easy.tree;
 
-import com.leosanqing.leetcode.medium.tree.TreeNode;
+
+import _a_alg_.medium.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
