@@ -22,10 +22,13 @@ public class _29 {
 
         int ans = -1;
         int sign = 1;
+
+
         if (dividend > 0) {
             sign = opposite(sign);
             dividend = opposite(dividend);
         }
+
         if (divisor > 0) {
             sign = opposite(sign);
             divisor = opposite(divisor);
@@ -33,6 +36,7 @@ public class _29 {
 
         int origin_dividend = dividend;
         int origin_divisor = divisor;
+
         if (dividend > divisor) {
             return 0;
         }

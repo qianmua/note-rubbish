@@ -22,11 +22,14 @@ private transient Object[] elementData;
 用于保存对象。它会随着元素的添加而改变大小。在下面的叙述中，容量指的是elementData.length，而不是size。
 
 >size不是容量，ArrayList对象占用的内存不是由size决定的。
+
 >size的大小在每次调用add(E e)方法时加1。
+
 >如果是调用ArrayList(Collection<? extends E> c)构造方法，则size的初始值为c
 
 * 如果在初始化时，没有指定大小，则容量大小为0。
 * 当大小为0时，第一次添加元素容量大小变为10。
+
 * 之后每次添加时，会先确保容量是否够用
 * 如果不够用，每次增加的容量为 newCapacity = oldCapacity + (oldCapacity >> 1)；即，每次增加为原来的1.5倍。
 

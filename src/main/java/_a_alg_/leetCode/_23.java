@@ -28,7 +28,7 @@ public class _23 {
         Comparator<ListNode> cmp = Comparator.comparingInt(o -> o.val);
 
         // 优先队列
-        PriorityQueue<ListNode> queue = new PriorityQueue<>();
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(cmp);
         for (ListNode list : lists) {
             if (list != null)
                 queue.add(list);

@@ -12,8 +12,8 @@
 * Java SDK不提供直接继承自Collection的类，Java SDK提供的类都是继承自Collection的“子接口”如List和Set。
 
 ##如何遍历Collection中的每一个元素？
-* 不论Collection的实际类型如何，它都支持一个iterator()的方法，该方法返回一个迭代子，使用该迭代子即可逐一访问Collection中每一个元素，代码如下：
-
+* 不论Collection的实际类型如何，它都支持一个iterator()的方法，该方法返回一个迭代子，
+使用该迭代子即可逐一访问Collection中每一个元素，代码如下：
 
 
 ```
