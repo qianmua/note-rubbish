@@ -50,12 +50,15 @@ public class Mark {
         System.out.println(i3); // 2    结果与第二个参数有关系 理解起始搜索下标
 
 
+        HashMap<String, String> map = new HashMap<>();
+
+
     }
 
 //    public final static native int w();
 
-
-    interface Ains{
+    // strictfp
+    strictfp interface Ains{
     }
 
     abstract class Abs{
