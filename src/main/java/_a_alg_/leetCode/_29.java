@@ -59,7 +59,7 @@ public class _29 {
             }
         }
     }
-    public int opposite(int x) {
+    private int opposite(int x) {
         return ~x + 1;
     }
 }
