@@ -42,12 +42,14 @@ public void stringTest() {
 }
 ```
 
-也就是说第一段代码经过了编译期优化，原因是编译器发现"a"+"b"+1和"ab1"的效果是一样的，都是不可变量组成。但是为什么他们的内存地址会相同呢？如果你对此还有兴趣，那就一起看看String类的一些重要源码吧。
+也就是说第一段代码经过了编译期优化，原因是编译器发现"a"+"b"+1和"ab1"的效果是一样的，都是不可变量组成。
+但是为什么他们的内存地址会相同呢？如果你对此还有兴趣，那就一起看看String类的一些重要源码吧。
 
 
 一 String类
 
-String类被final所修饰，也就是说String对象是不可变量，并发程序最喜欢不可变量了。String类实现了Serializable, Comparable<String>, CharSequence接口。
+String类被final所修饰，也就是说String对象是不可变量，并发程序最喜欢不可变量了。
+String类实现了Serializable, Comparable<String>, CharSequence接口。
 
 Comparable接口有compareTo(String s)方法，CharSequence接口有length()，charAt(int index)，subSequence(int start,int end)方法。
 
@@ -198,7 +200,9 @@ public int hashCode() {
 }
 ```
 
-String类重写了hashCode方法，Object中的hashCode方法是一个Native调用。String类的hash采用多项式计算得来，我们完全可以通过不相同的字符串得出同样的hash，所以两个String对象的hashCode相同，并不代表两个String是一样的。
+String类重写了hashCode方法，Object中的hashCode方法是一个Native调用。
+String类的hash采用多项式计算得来，我们完全可以通过不相同的字符串得出同样的hash，
+所以两个String对象的hashCode相同，并不代表两个String是一样的
 
 ```
 boolean startsWith(String prefix,int toffset)
@@ -286,7 +290,8 @@ public String replace(char oldChar, char newChar) {
 }
 ```
 
-这个方法也有讨巧的地方，例如最开始先找出旧值出现的位置，这样节省了一部分对比的时间。replace(String oldStr,String newStr)方法通过正则表达式来判断。
+这个方法也有讨巧的地方，例如最开始先找出旧值出现的位置，这样节省了一部分对比的时间。
+replace(String oldStr,String newStr)方法通过正则表达式来判断。
 
 ```
 String trim()
@@ -349,7 +354,8 @@ int hash32() {
 }
 ```
 
-在JDK1.7中，Hash相关集合类在String类作key的情况下，不再使用hashCode方式离散数据，而是采用hash32方法。这个方法默认使用系统当前时间，String类地址，System类地址等作为因子计算得到hash种子，通过hash种子在经过hash得到32位的int型数值。
+在JDK1.7中，Hash相关集合类在String类作key的情况下，不再使用hashCode方式离散数据，而是采用hash32方法。
+这个方法默认使用系统当前时间，String类地址，System类地址等作为因子计算得到hash种子，通过hash种子在经过hash得到32位的int型数值。
 
 ```
 public int length() {

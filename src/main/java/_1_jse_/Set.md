@@ -4,6 +4,7 @@
 * 继承了接口Collection
 * 子接口：NavigableSet、SortedSet
 * 子类：EnumSet、HashSet、LinkedHashSet、TreeSet、AbstractSet等
+
 * 不允许重复元素
 
 两个注意点
