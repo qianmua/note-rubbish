@@ -657,7 +657,8 @@ public class LinkedList<E>
 
 ![](http://img.blog.csdn.net/20140629153056171)
 
-2、注意两个不同的构造方法。无参构造方法直接建立一个仅包含head节点的空链表，包含Collection的构造方法，先调用无参构造方法建立一个空链表，然后将Collection中的数据加入到链表的尾部后面。
+2、注意两个不同的构造方法。无参构造方法直接建立一个仅包含head节点的空链表，包含Collection的构造方法，
+先调用无参构造方法建立一个空链表，然后将Collection中的数据加入到链表的尾部后面。
 
 3、在查找和删除某元素时，源码中都划分为该元素为null和不为null两种情况来处理，LinkedList中允许元素为null。
 

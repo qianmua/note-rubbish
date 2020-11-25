@@ -21,5 +21,7 @@
 
 **boolean addAll(int index, Collection<? extends E> c)**
 
+//
+
 **boolean addAll(Collection<? extends E> c)**
 
