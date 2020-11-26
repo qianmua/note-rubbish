@@ -6,7 +6,8 @@
 
 
 ```java
-ComparableTest.java
+
+//ComparableTest.java
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,4 +74,5 @@ public class ComparableTest {
    }
   }
 ```
+
 2.添加 Comparable 接口，重写 compareTo 方法。然后你可以用 TreeSet 结构进行排序。它会自动排序。
