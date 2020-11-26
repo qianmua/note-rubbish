@@ -1,5 +1,7 @@
 ### HashMap And HashTable
-HashMap和Hashtable两个类都实现了Map接口，二者保存K-V对（key-value对）；HashSet则实现了Set接口，性质类似于集合。Hashtable的应用非常广泛，HashMap是新框架中用来代替Hashtable的类，也就是说建议使用HashMap，不要使用Hashtable。可能你觉得Hashtable很好用，为什么不用呢？这里简单分析他们的区别。
+HashMap和Hashtable两个类都实现了Map接口，二者保存K-V对（key-value对）；HashSet则实现了Set接口，性质类似于集合。
+Hashtable的应用非常广泛，HashMap是新框架中用来代替Hashtable的类，也就是说建议使用HashMap，不要使用Hashtable。
+可能你觉得Hashtable很好用，为什么不用呢？这里简单分析他们的区别。
 
 
 1）.HashTable的方法前面都有synchronized来同步，是线程安全的；HashMap未经同步，是非线程安全的。
@@ -23,7 +25,8 @@ interface 的一个实现。但二者都实现了Map接口。
 
 ### 二、线程安全性不同
 
-Hashtable 中的方法是Synchronize的，而HashMap中的方法在缺省情况下是非Synchronize的。在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理。
+Hashtable 中的方法是Synchronize的，而HashMap中的方法在缺省情况下是非Synchronize的。
+在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理。
 
 HashTable
 
@@ -40,7 +43,8 @@ HashMap
 ### 三、是否提供contains方法
 
 HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey，因为contains方法容易让人引起误解。
-Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同，实际上containsValue调用的是contains方法。
+Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同，
+实际上containsValue调用的是contains方法。
 
 	public synchronized boolean contains(Object value) {
         if (value == null) {
@@ -66,7 +70,10 @@ Hashtable则保留了contains，containsValue和containsKey三个方法，其中
 ### 四、key和value是否允许null值
 
 其中key和value都是对象，并且不能包含重复key，但可以包含重复的value。
-Hashtable中，key和value都不允许出现null值。HashMap中，null可以作为键，这样的键只有一个；可以有一个或多个键所对应的值为null。当get()方法返回null值时，可能是 HashMap中没有该键，也可能使该键所对应的值为null。因此，在HashMap中不能由get()方法来判断HashMap中是否存在某个键， 而应该用containsKey()方法来判断。
+Hashtable中，key和value都不允许出现null值。HashMap中，null可以作为键，这样的键只有一个；
+可以有一个或多个键所对应的值为null。当get()方法返回null值时，可能是 HashMap中没有该键，也可能使该键所对应的值为null。
+
+因此，在HashMap中不能由get()方法来判断HashMap中是否存在某个键， 而应该用containsKey()方法来判断。
 
 HashTable
 
