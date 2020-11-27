@@ -2,6 +2,9 @@ package _a_alg_;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author HJC
  * @version 1.0
@@ -23,5 +26,22 @@ public class _1010 {
         String s2 = "def";
         int i = s1.indexOf(s2);
         System.out.println(i);
+    }
+
+
+    List<Integer> list = new ArrayList<>();
+    private void ss(int n , int c){
+
+        while( c < n && n % c != 0 )
+            // 最小 质数公约数
+            c ++;
+
+        if (c < n){
+            list.add(c);
+            // 商 的最小公约数
+            ss(n / c , 2);
+        }else
+            list.add(c);
+
     }
 }
