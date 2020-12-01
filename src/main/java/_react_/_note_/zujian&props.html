@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--组件 & props  -->
+<div id="root"></div>
+
+<!--组件允许你将 UI 拆分为独立可复用的代码片段，并对每个片段进行独立构思。-->
+<!--组件，从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。-->
+
+
+
+</body>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script type="text/babel">
+    /*函数组件与 class 组件*/
+
+    // 定义组件最简单的方式就是编写 JavaScript 函数：
+    // 该函数是一个有效的 React 组件，因为它接收唯一带有数据的 “props”（代表属性）对象与并返回一个 React 元素。
+    // 这类组件被称为“函数组件”，因为它本质上就是 JavaScript 函数。
+    function welcome(props){
+        return <h1>Hello ,{props.name}</h1>
+    }
+
+    // 使用 ES6 的 class 来定义组件：
+
+    class Welcome extends React.Component {
+        render() {
+            return (
+                <div>
+                    <h1>hello {this.props.name}</h1>
+                </div>
+            );
+        }
+    }
+
+
+    // 渲染组件
+    // React 元素也可以是用户自定义的组件：
+    // 当 React 元素为用户自定义组件时，
+    // 它会将 JSX 所接收的属性（attributes）以及子组件（children）转换为单个对象传递给组件，这个对象被称之为 “props”。
+
+    // 组件名称必须以大写字母开头。
+    // React 会将以小写字母开头的组件视为原生 DOM 标签。例如，<div /> 代表 HTML 的 div 标
+    // 而 <Welcome /> 则代表一个组件，并且需在作用域内使用 Welcome。
+
+    const element = <Welcome name="Sara"  />
+
+    function hello (props) {
+        return <h1> hello {props.name}</h1>
+    }
+    ReactDOM.render(
+        element,
+        document.getElementById('root')
+    )
+
+    // 组合组件
+    // 组件可以在其输出中引用其他组件。
+    function App(){
+        return (
+            <div>
+                <Welcome name="zzzzz1"  />
+                <Welcome name="zzzzz2"  />
+                <Welcome name="zzzzz3"  />
+            </div>
+        )
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root1')
+    )
+
+    // 提取组件
+    // 该组件用于描述一个社交媒体网站上的评论功能，它接收 author（对象），text （字符串）以及 date（日期）作为 props。
+    function Comment(props){
+        return(
+            <div className="Comment">
+                <div className="UserInfo">
+                    /*<img className="Avatar"
+                         src={props.author.avatarUrl}
+                         alt={props.author.name}
+                    />*/
+                    <Avatar  user={props.author} />
+                    <div className="UserInfo-name">
+                        {props.author.name}
+                    </div>
+                </div>
+                <div className="Comment-text">
+                    {props.text}
+                </div>
+                <div className="Comment-date">
+                    {formatDate(props.date)}
+                </div>
+            </div>
+        )
+    }
+    // 由于嵌套的关系，变得难以维护，且很难复用它的各个部分。因此，让我们从中提取一些组件出来。
+    function Avatar(props){
+        return (
+            <img className="Avatar"
+                src={props.user.avatarUrl}
+                alt={props.user.name}
+            />
+        )
+    }
+    function UserInfo(props){
+        return (
+            <div className="Comment">
+                <UserInfo user={props.author} />
+                <div className="Comment-text">
+                    {props.text}
+                </div>
+                <div className="Comment-date">
+                    {formatDate(props.date)}
+                </div>
+            </div>
+        )
+    }
+
+
+    // Props 的只读性
+    // 所有 React 组件都必须像纯函数一样保护它们的 props 不被更改。
+    // 纯函数
+    function sum(a  ,b){
+        return a + b;
+    }
+    // 非纯函数
+    function w(account ,  amont){
+        account.v -= amont
+    }
+
+
+    // “state”。在不违反上述规则的情况下，state 允许 React 组件随用户操作、网络响应或者其他变化而动态更改输出内容。
+</script>
+</html>

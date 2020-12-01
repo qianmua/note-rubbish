@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script type="text/babel">
+    // JSX
+    const name  = 'qianmua';
+    const element = <h1>hello , {name}</h1>;
+    const element1 = (
+        <div>
+            <h1>Hello!</h1>
+            <h2>Good to see you here.</h2>
+        </div>
+    );
+
+
+    /// function
+    function formatName(user){
+        return user.firstName + '   ' + user.lastName
+    }
+    const user = {
+        firstName : ' jone',
+        lastName : ' parset'
+    };
+    const element3 = (
+        <h1>
+            hello {formatName(user)}!
+        </h1>
+    );
+
+
+    // JSX
+    // for if
+    function getAll(user){
+        if (user){
+            return <h1>Hello ,{formatName(user)} !</h1>
+        }
+        return <h1>Hello brother!</h1>
+    }
+    function loopBrother(){
+    }
+
+    // 属性
+    const element4 = <span  style="color:red;">hhhhhh</span>
+    const element5 = <span  id="span1">hhhhhh</span>
+    const element6 = <span id={name}>{name}</span>
+
+
+    /// 可以包含子元素
+
+
+    // 防止XSS 攻击
+    const responeValue = "res.."
+    const element7 = <h1>value : {responeValue}</h1>
+
+    /// JSX 表示对象
+    // Babel 会把 JSX 转译成一个名为 React.createElement() 函数调用。
+    const element1_1 = (
+        <h1 className="hhhh">
+            hello world
+        </h1>
+    )
+    // 等价于
+    const  element1_2 = React.createElement(
+        'h1',
+        {className : 'hhhh'},
+        'hello world'
+    )
+
+    // React.createElement() 会预先执行一些检查，以帮助你编写无错代码，但实际上它创建了一个这样的对象：
+    // 这些对象被称为 “React 元素”。它们描述了你希望在屏幕上看到的内容。
+    // React 通过读取这些对象，然后使用它们来构建 DOM 以及保持随时更新。
+    const element1_3 = {
+        type: 'h1',
+        props: {
+            className: 'hhhh',
+            children: 'hello world'
+        }
+    };
+
+
+
+    // Hello world
+    ReactDOM.render(
+    // <h1>Hello, world!</h1>,
+    element3,
+    document.getElementById('root')
+    );
+</script>
+</html>
