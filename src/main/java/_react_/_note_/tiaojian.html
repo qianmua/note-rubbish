@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script type="text/babel">
+
+    // 条件渲染
+    // 在 React 中，你可以创建不同的组件来封装各种你需要的行为。然后，依据应用的不同状态，你可以只渲染对应状态下的部分内容。
+
+    // React 中的条件渲染和 JavaScript 中的一样，使用 JavaScript 运算符 if 或者条件运算符去创建元素来表现当前的状态，
+    // 然后让 React 根据它们来更新 UI。
+
+    function Admin(props){
+        return <h1> hello admin {props.admin.readlName}</h1>
+    }
+    function Guest(props){
+        return <h1>hello guest !</h1>
+    }
+
+    function Chook(props){
+        if (props.isGuest){
+            return <Admin />
+        }else {
+            return <Guest/>
+        }
+    }
+    ReactDOM.render(
+        <Chook isGuest={false} />,
+        document.getElementById('root1')
+    )
+
+
+    // 元素变量
+    function LoginButton(props){
+        return (
+            <button onClick={props.onClock}>Login</button>
+        )
+    }
+    function LogoutButton(props){
+        return (
+            <button onClick={props.onClick}>Logout</button>
+        )
+    }
+    // LoginControl 的有状态的组件。
+    class LoginControl extends React.Component {
+        constructor(props){
+            super(props)
+
+            this.state = {
+                isLoggedIn: false
+            }
+
+            this.handleLoginClick = this.handleLoginClick.bind(this)
+            this.HandleLogoutClick = this.HandleLogoutClick.bind(this)
+
+        }
+
+        handleLoginClick(){
+            this.setState({isLoggedIn: true})
+        }
+        HandleLogoutClick(){
+            this.setState({isLoggedIn: false})
+        }
+
+        render() {
+            const isLoggedIn = this.state.isLoggedIn
+            let button;
+            if (isLoggedIn) {
+                button = <LogoutButton onClick={this.HandleLogoutClick()}/>
+            }else{
+                button = <LoginButton onClick={this.handleLoginClick()} />
+            }
+
+            return (
+                <div>
+                    <Chook isGuest={isLoggedIn} />
+                    {button}
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <LoginControl/>,
+        document.getElementById('root')
+    )
+
+
+
+    // 与运算符 &&
+    function Mailbox(props){
+        const readMessage = props.readMessage
+        return (
+            <div>
+                <h1>hello </h1>
+                /*在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false。*/
+                {readMessage.length > 0 &&
+                    <h2>
+                        you have a new Message! {readMessage.length}
+                    </h2>
+                }
+            </div>
+        )
+    }
+    const mesages = ['a' , 'sad' , 'dd' , 'AA:CC']
+    ReactDOM.render(
+        <Mailbox readMessage={mesages} />,
+        document.getElementById('root')
+    )
+
+
+
+    // 三目运算符
+    //  condition ? true : false
+
+
+
+    // 阻止组件渲染
+    // 在极少数情况下，你可能希望能隐藏组件，即使它已经被其他组件渲染。
+    // 若要完成此操作，你可以让 render 方法直接返回 null，而不进行任何渲染。
+    /**
+     * @return {null}
+     */
+    function WarningBanner(props){
+        if (!props.warn){
+            return null;
+        }
+        return (
+            <div>
+                Warning!
+            </div>
+        )
+
+    }
+    // 在组件的 render 方法中返回 null 并不会影响组件的生命周期。
+    // 例如，上面这个示例中，componentDidUpdate 依然会被调用。
+
+
+</script>
+</html>
