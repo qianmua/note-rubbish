@@ -16,11 +16,12 @@ public class Demo2 {
     private static int testTryReturn(){
         int a = 1;
         try {
-            return a;
+            return ++a;
         }catch (Exception e){
 
         }finally {
-            a = 2;
+            System.out.println(a);
+            a = 3;
         }
         return 0;
     }
