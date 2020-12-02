@@ -1,26 +1,36 @@
 ### 51、说一说Servlet的生命周期?
 
-  Servlet有良好的生存期的定义，包括加载和实例化、初始化、处理请求以及服务结束。这个生存期由`javax.servlet.Servlet`接口的`init(),service()和destroy`方法表达。
+  Servlet有良好的生存期的定义，包括加载和实例化、初始化、处理请求以及服务结束。
+  这个生存期由`javax.servlet.Servlet`接口的`init(),service()和destroy`方法表达。
 
-  Servlet被服务器实例化后，容器运行其init方法，请求到达时运行其service方法，service方法自动派遣运行与请求对应的doXXX方法（doGet，doPost）等，当服务器决定将实例销毁的时候调用其destroy方法。
+  Servlet被服务器实例化后，容器运行其init方法，请求到达时运行其service方法，
+  service方法自动派遣运行与请求对应的doXXX方法（doGet，doPost）等，当服务器决定将实例销毁的时候调用其destroy方法。
 
-  web容器加载servlet，生命周期开始。通过调用servlet的init()方法进行servlet的初始化。通过调用service()方法实现，根据请求的不同调用不同的do***()方法。结束服务，web容器调用servlet的destroy()方法。
+  web容器加载servlet，生命周期开始。通过调用servlet的init()方法进行servlet的初始化。通过调用service()方法实现，
+  根据请求的不同调用不同的do***()方法。结束服务，web容器调用servlet的destroy()方法。
 
 ### 52、Servlet API中forward()与redirect()的区别？
 
   1. 从地址栏显示来说
-      forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址.
-      redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.所以redirect等于客户端向服务器端发出两次request，同时也接受两次response。
+      forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.
+      浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址.
+      redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.
+      所以redirect等于客户端向服务器端发出两次request，同时也接受两次response。
+      
   2. 从数据共享来说
       forward:转发页面和转发到的页面可以共享request里面的数据.
       redirect:不能共享数据.
-      redirect不仅可以重定向到当前应用程序的其他资源,还可以重定向到同一个站点上的其他应用程序中的资源,甚至是使用绝对URL重定向到其他站点的资源.
+      redirect不仅可以重定向到当前应用程序的其他资源,还可以重定向到同一个站点上的其他应用程序中的资源,
+      甚至是使用绝对URL重定向到其他站点的资源.
+      
       forward方法只能在同一个Web应用程序内的资源之间转发请求.forward 是服务器内部的一种操作.
       redirect 是服务器通知客户端,让客户端重新发起请求.
       所以,你可以说 redirect 是一种间接的请求, 但是你不能说"一个请求是属于forward还是redirect "
+      
   3. 从运用地方来说
       forward:一般用于用户登陆的时候,根据角色转发到相应的模块.
       redirect:一般用于用户注销登陆时返回主页面和跳转到其它的网站等.
+      
   4. 从效率来说
       forward:高.
       redirect:低.
@@ -32,21 +42,27 @@
 
   2. getAttribute是返回对象,getParameter返回字符串
 
-  3. getAttribute()一向是和setAttribute()一起使用的，只有先用setAttribute()设置之后，才能够通过getAttribute()来获得值，它们传递的是Object类型的数据。而且必须在同一个request对象中使用才有效。,而getParameter()是接收表单的get或者post提交过来的参数
+  3. getAttribute()一向是和setAttribute()一起使用的，只有先用setAttribute()设置之后，才能够通过getAttribute()来获得值，
+  它们传递的是Object类型的数据。而且必须在同一个request对象中使用才有效。,而getParameter()是接收表单的get或者post提交过来的参数
 
 
 ### 54，jsp静态包含和动态包含的区别
 
-  1. <%@include file="xxx.jsp"%>为jsp中的编译指令，其文件的包含是发生在jsp向servlet转换的时期，而<jsp:include page="xxx.jsp">是jsp中的动作指令，其文件的包含是发生在编译时期，也就是将java文件编译为class文件的时期
+  1. <%@include file="xxx.jsp"%>为jsp中的编译指令，其文件的包含是发生在jsp向servlet转换的时期，
+  而<jsp:include page="xxx.jsp">是jsp中的动作指令，其文件的包含是发生在编译时期，也就是将java文件编译为class文件的时期
 
   2. 使用静态包含只会产生一个class文件，而使用动态包含会产生多个class文件
 
-  3. 使用静态包含，包含页面和被包含页面的request对象为同一对象，因为静态包含只是将被包含的页面的内容复制到包含的页面中去；而动态包含包含页面和被包含页面不是同一个页面，被包含的页面的request对象可以取到的参数范围要相对大些，不仅可以取到传递到包含页面的参数，同样也能取得在包含页面向下传递的参数
+  3. 使用静态包含，包含页面和被包含页面的request对象为同一对象，因为静态包含只是将被包含的页面的内容复制到包含的页面中去；
+  而动态包含包含页面和被包含页面不是同一个页面，被包含的页面的request对象可以取到的参数范围要相对大些，
+  不仅可以取到传递到包含页面的参数，同样也能取得在包含页面向下传递的参数
 
 
 ### 55，MVC的各个部分都有那些技术来实现?如何实现?
 
-  MVC是Model－View－Controller的简写。Model代表的是应用的业务逻辑（通过JavaBean，EJB组件实现），View是应用的表示面（由JSP页面产生），Controller是提供应用的处理过程控制（一般是一个Servlet），通过这种设计模型把应用逻辑，处理过程和显示逻辑分成不同的组件实现。这些组件可以进行交互和重用。
+  MVC是Model－View－Controller的简写。Model代表的是应用的业务逻辑（通过JavaBean，EJB组件实现），
+  View是应用的表示面（由JSP页面产生），Controller是提供应用的处理过程控制（一般是一个Servlet），
+  通过这种设计模型把应用逻辑，处理过程和显示逻辑分成不同的组件实现。这些组件可以进行交互和重用。
 
 ### 56，jsp有哪些内置对象?作用分别是什么?
 
@@ -76,12 +92,16 @@
 
   2. Get是获取信息，而不是修改信息，类似数据库查询功能一样，数据不会被修改
 
-  3. Get请求的参数会跟在url后进行传递，请求的数据会附在URL之后，以?分割URL和传输数据，参数之间以&相连,％XX中的XX为该符号以16进制表示的ASCII，如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密。
-  4. Get传输的数据有大小限制，因为GET是通过URL提交数据，那么GET可提交的数据量就跟URL的长度有直接关系了，不同的浏览器对URL的长度的限制是不同的。
+  3. Get请求的参数会跟在url后进行传递，请求的数据会附在URL之后，以?分割URL和传输数据，参数之间以&相连,
+  ％XX中的XX为该符号以16进制表示的ASCII，如果数据是英文字母/数字，原样发送，如果是空格，转换为+，
+  如果是中文/其他字符，则直接把字符串用BASE64加密。
+  4. Get传输的数据有大小限制，因为GET是通过URL提交数据，那么GET可提交的数据量就跟URL的长度有直接关系了，
+  不同的浏览器对URL的长度的限制是不同的。
 
   5. GET请求的数据会被浏览器缓存起来，用户名和密码将明文出现在URL上，其他人可以查到历史浏览记录，数据不太安全。
     在服务器端，用Request.QueryString来获取Get方式提交来的数据
-    Post请求则作为http消息的实际内容发送给web服务器，数据放置在HTML Header内提交，Post没有限制提交的数据。Post比Get安全，当数据是中文或者不敏感的数据，则用get，因为使用get，参数会显示在地址，对于敏感数据和不是中文字符的数据，则用post。
+    Post请求则作为http消息的实际内容发送给web服务器，数据放置在HTML Header内提交，Post没有限制提交的数据。
+    Post比Get安全，当数据是中文或者不敏感的数据，则用get，因为使用get，参数会显示在地址，对于敏感数据和不是中文字符的数据，则用post。
   6. POST表示可能修改变服务器上的资源的请求，在服务器端，用Post方式提交的数据只能用Request.Form来获取。
 
 ### 58，什么是cookie？Session和cookie有什么区别？
