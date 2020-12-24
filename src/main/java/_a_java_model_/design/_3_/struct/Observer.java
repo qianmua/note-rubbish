@@ -14,6 +14,7 @@ import java.util.Observable;
 public class Observer {
     /*
     * 观察者模式
+    * 行为模式
     * */
     public static void main(String[] args) {
         Person person = new Person();
