@@ -25,4 +25,44 @@ public class Demo11 {
     // readObject
     // writeObject
 
+
+    // 动态编译
+    // JavaFileObject
+
+    class D11_1{
+
+    }
+
+    class D11_2 extends D11_1{
+
+    }
+
+    class D11_2_1 extends D11_2 {}
+
+    class D11_2_2 extends D11_1 {}
+
+    class D11_3 {
+        void m1(){
+            D11_2 d112 = new D11_2();
+            // 用于对象得判断
+            // 基本类型不行
+            if (d112 instanceof D11_1){
+
+            }
+
+            if (d112 instanceof D11_2_1){
+
+            }
+
+            D11_2_1 d1122 = new D11_2_1();
+            /*if (d1122 instanceof D11_2_2){
+
+            }*/
+
+
+        }
+
+    }
+
+
 }
