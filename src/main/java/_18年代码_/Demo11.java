@@ -1,5 +1,10 @@
 package _18年代码_;
 
+import org.junit.Test;
+
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  * @author HJC
  * @version 1.0
@@ -8,6 +13,19 @@ package _18年代码_;
  * @description :
  */
 public class Demo11 {
+
+    private final String addr;
+    private final String tel;
+
+    {
+        addr = "12221";
+        tel = "11110";
+
+        System.out.println(addr);
+        System.out.println(tel);
+
+    }
+
 
     public static void main(String[] args) {
         int fee = 200;
@@ -28,6 +46,11 @@ public class Demo11 {
 
     // 动态编译
     // JavaFileObject
+
+
+    // 常量注意 要全部编译
+    // 注意常量 在编译期 就被定值
+    // 而非是一个引用
 
     class D11_1{
 
@@ -60,9 +83,81 @@ public class Demo11 {
             }*/
 
 
+            // 直接返回false
+            if (null instanceof Object){
+
+            }
+
+
         }
 
     }
 
+
+    @Test
+    public void chu(){
+        // -1
+        System.out.println( -1 % 2 == 1);
+        System.out.println( 2 % 2 == 1);
+    }
+
+
+    // 注意越界
+    @Test
+    public void yue(){
+        final int MAX_VALUE = 2000;
+
+        int cur = 100;
+
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+//        int input = 2147483647;
+
+        if (input > 0 && input + cur < MAX_VALUE){
+            System.out.println("SUCCESS: " + input);
+        }
+
+        System.out.println("Fail");
+
+
+    }
+
+
+    // 随机种子
+    @Test
+    public void seed(){
+        Random random = new Random(1000);
+        for (int i = 1; i < 4; i++) {
+            // 1
+            // -1244746321
+            // 1060493871
+            // -1826063944
+
+            // 2
+            // -1244746321
+            // 1060493871
+            // -1826063944
+
+            // 执行随机数
+            // 前三个一直固定
+            // 同一台机器
+            // 随机数被固定死了
+
+            System.out.println(random.nextInt());
+        }
+    }
+
+    //
+    @Test
+    public void interClass(){
+        IA.ib.m1("name");
+    }
+
+    interface IA{
+        IB ib = System.out::println;
+    }
+    interface IB{
+        void m1(String name);
+    }
 
 }
