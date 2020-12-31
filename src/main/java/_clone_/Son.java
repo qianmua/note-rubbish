@@ -23,4 +23,14 @@ public class Son implements Serializable , Cloneable {
 
     private Father father;
 
+    @Override
+    protected Son clone()  {
+        Son c = null;
+        try {
+            c = (Son) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
 }

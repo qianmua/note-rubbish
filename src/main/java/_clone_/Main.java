@@ -17,10 +17,17 @@ public class Main {
     public static void main(String[] args) {
         Father father = new Father("Jack");
         Son son = new Son("Slack" , father);
-        "A".intern();
 
+        Son son1 = son.clone();
         Son clone = CloneUtils.clone(son);
         System.out.println(clone);
+        System.out.println(son1);
+
+        son.getFather().setName("Hello");
+
+        System.out.println(clone);
+        System.out.println(son1);
+
 
 
     }
