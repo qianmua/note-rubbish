@@ -126,6 +126,9 @@ public class Demo11 {
     // 随机种子
     @Test
     public void seed(){
+        int a = 2;
+        a *= 2 + 3;
+        System.out.println(a);
         Random random = new Random(1000);
         for (int i = 1; i < 4; i++) {
             // 1
