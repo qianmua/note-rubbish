@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+A:<input type="text" class="A" > <br>
+A:<input type="text" class="A" > <br>
+A:<input type="text" class="A" > <br>
+A:<input type="text" class="A" > <br>
+A:<input type="text" class="A" > <br>
+sub:<input type="button" value="SUBMIT" id="submit">
+</body>
+<script src="Demo12_Map.js"></script>
+<script>
+
+    window.onload = function () {
+        let sub = document.getElementById('submit')
+        sub.onclick = () => {
+            const tagName = document.getElementsByClassName('A');
+
+            for (let i = 0; i < tagName.length; i++) {
+                console.log(tagName)
+                // addValue(tagNameKey.value)
+
+
+            }
+        }
+    }
+</script>
+
+</html>
