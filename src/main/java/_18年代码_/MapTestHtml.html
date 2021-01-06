@@ -17,7 +17,7 @@ sub:<input type="button" value="SUBMIT" id="submit">
 
     window.onload = function () {
         let sub = document.getElementById('submit')
-        sub.onclick = () => {
+        sub.onclick = function () {
             const tagName = document.getElementsByClassName('A');
 
             for (let i = 0; i < tagName.length; i++) {
