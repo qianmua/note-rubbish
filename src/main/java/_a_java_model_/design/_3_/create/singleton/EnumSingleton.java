@@ -10,10 +10,10 @@ public class EnumSingleton {
     private EnumSingleton(){}
 
 
-    enum SingletonEnum{
+    private enum SingletonEnum{
         SINGLETON_ENUM;
 
-        private EnumSingleton enumSingleton;
+        private final EnumSingleton enumSingleton;
 
 
         SingletonEnum(){

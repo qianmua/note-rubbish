@@ -44,5 +44,9 @@ public class Main {
     public static void main(String[] args) {
         // 登记式/静态内部类
 
+        // 枚举
+        System.out.println(EnumSingleton.getInstance().hashCode());
+        System.out.println(EnumSingleton.getInstance().hashCode());
+
     }
 }
