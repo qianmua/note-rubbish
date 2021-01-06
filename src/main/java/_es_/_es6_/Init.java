@@ -1,4 +1,4 @@
-package _es6_;
+package _es_._es6_;
 
 import java.util.Scanner;
 

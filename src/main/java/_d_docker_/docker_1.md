@@ -175,7 +175,7 @@
     
     * docker run -d --name es1 -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elstaticsearch:7.6.2
     
-    * es 很卡的哦
+    * _es_ 很卡的哦
     
     * docker stats 查看cpu状态
     

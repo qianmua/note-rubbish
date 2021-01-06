@@ -65,7 +65,8 @@ public class MessageServiceImpl implements MessageService {
 
 
 
-我们肯定很好奇，Spring 到底是怎么把 各个  Bean 放在 容器中管理的，他是怎么生成的。那就跟着源码来看下他是怎么初始化各个类，然后又怎么对其属性进行赋值的吧
+我们肯定很好奇，Spring 到底是怎么把 各个  Bean 放在 容器中管理的，他是怎么生成的。
+那就跟着源码来看下他是怎么初始化各个类，然后又怎么对其属性进行赋值的吧
 
 
 
@@ -251,17 +252,25 @@ protected final void refreshBeanFactory() throws BeansException {
 
 
 
-虽然 ApplicationContext 继承自 BeanFactory，但是 **他并不应该被理解为 BeanFactory 的实现(子类)**,而是他内部实例化了一个 BeanFactory(DefaultListableBeanFactory)，这个类很厉害，之后所有的 BeanFactory 相关的操作都是委托给他来干的
+虽然 ApplicationContext 继承自 BeanFactory，但是 **他并不应该被理解为 BeanFactory 的实现(子类)**,
+而是他内部实例化了一个 BeanFactory(DefaultListableBeanFactory)，
+这个类很厉害，之后所有的 BeanFactory 相关的操作都是委托给他来干的
 
-我们看图，他左边 继承自 `ConfigurableListableBeanFactory` ，而这个接口实现了 `BeanFactory`接口的 下一层的 所有的接口(三个接口)。 而他 右边 通过 实现 `AbstractAutowireCapableBeanFactory` 打通了右边所有的接口。所以`DefaultListableBeanFactory`他真的很牛皮
+我们看图，他左边 继承自 `ConfigurableListableBeanFactory` ，
+而这个接口实现了 `BeanFactory`接口的 下一层的 所有的接口(三个接口)。 
+而他 右边 通过 实现 `AbstractAutowireCapableBeanFactory` 打通了右边所有的接口。
+所以`DefaultListableBeanFactory`他真的很牛皮
 
-而我们 使用 ApplicationContext 的时候 能通过 `context.getAutowireCapableBeanFactory()`直接拿到 `AutowireCapableBeanFactory`，然后再经过转型就能拿到 `DefaultListableBeanFactory`。
+而我们 使用 ApplicationContext 的时候 
+能通过 `context.getAutowireCapableBeanFactory()`直接拿到 `AutowireCapableBeanFactory`，
+然后再经过转型就能拿到 `DefaultListableBeanFactory`。
 
 ### BeanDefinition
 
 既然是 BeanFactory ,那么 我们的 Bean 是什么东西
 
-spring 他不会直接管理你定义的 class 或者你自己定义的 bean，他会把他们转换成 BeanDefinition ，然后再用容器管理他们。这个 BeanDefinition 对象 存储了很多很多东西，如是否懒加载，是否单例，依赖哪些类，等等
+spring 他不会直接管理你定义的 class 或者你自己定义的 bean，他会把他们转换成 BeanDefinition ，然后再用容器管理他们。
+这个 BeanDefinition 对象 存储了很多很多东西，如是否懒加载，是否单例，依赖哪些类，等等
 
 ```java
 public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {

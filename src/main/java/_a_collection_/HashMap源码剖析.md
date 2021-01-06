@@ -676,8 +676,8 @@ public class HashMap<K,V>
 
     // 返回“HashMap的Entry集合”，它实际是返回一个EntrySet对象    
     private Set<Map.Entry<K,V>> entrySet0() {    
-        Set<Map.Entry<K,V>> es = entrySet;    
-        return es != null ? es : (entrySet = new EntrySet());    
+        Set<Map.Entry<K,V>> _es_ = entrySet;    
+        return _es_ != null ? _es_ : (entrySet = new EntrySet());    
     }    
 
     // EntrySet对应的集合    

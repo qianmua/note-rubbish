@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/6/23  10:23
- * @description :
+ * @description : Java8 新特性
  */
 public class MainTest {
 

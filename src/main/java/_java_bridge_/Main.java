@@ -11,6 +11,10 @@ package _java_bridge_;
  */
 public class Main {
 
+    /**
+     * 桥接模式
+     * @param args
+     */
     public static void main(String[] args) {
         new Desk(new A()).info();
         new Book(new A()).info();
