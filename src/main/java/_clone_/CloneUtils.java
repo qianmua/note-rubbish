@@ -14,6 +14,7 @@ public class CloneUtils {
     public static <T extends Serializable> T clone(T obj){
         T cloneObj = null;
 
+        // java7 菱形表达式
         try (ByteArrayOutputStream stream = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(stream)) {
 
