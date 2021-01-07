@@ -22,11 +22,42 @@ public class Demo2 {
 
         // abs enum
         double x = 1.1 ,y = 2.2;
-        for (Operation op : Operation.values()) {
+        for (Operation op : BasicOperation.values()) {
             System.out.printf("%f %s %f  = %f %n" , x , op , y , op.apply(x , y));
         }
-        for (Operation op : Operation.values()) {
-            System.out.println(Operation.formString(op.toString()).get());
+        for (Operation op : BasicOperation.values()) {
+            System.out.println(BasicOperation.formString(op.toString()).get());
+        }
+    }
+
+
+    // operation code
+    private interface Operation{
+        double apply(double x , double y);
+    }
+
+    private enum ExtendsOperation implements Operation {
+        EXP("^"){
+            @Override
+            public double apply(double x, double y) {
+                return 0;
+            }
+        } ,
+        REMAINDER("%") {
+            @Override
+            public double apply(double x, double y) {
+                return 0;
+            }
+        };
+
+        private final String symbol;
+        ExtendsOperation(String symbol){
+            this.symbol = symbol;
+        }
+
+        @Override
+        public String toString() {
+            return symbol;
         }
     }
 
@@ -85,7 +116,7 @@ public class Demo2 {
     /*
     abstract
      */
-    private enum Operation{
+    private enum BasicOperation implements Operation{
         PLUS("+") {
             @Override
             public double apply(double x, double y) {
@@ -116,11 +147,11 @@ public class Demo2 {
                 .of(values())
                 .collect(Collectors.toMap(Object::toString , e -> e));
 
-        Operation(String symbol){
+        BasicOperation(String symbol){
             this.symbol = symbol;
         }
 
-        public abstract double apply(double x , double y);
+//        public abstract double apply(double x , double y);
 
         @Override
         public String toString() {

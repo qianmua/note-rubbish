@@ -49,11 +49,11 @@ public class ListTest {
          *         }
          * */
 
-//        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
 //        list = new Vector<>();
 //        list = Collections.synchronizedList(new ArrayList<>());
-        List<String> list = new CopyOnWriteArrayList<>();
-        for (int i = 1; i <= 100; i++) {
+//        List<String> list = new CopyOnWriteArrayList<>();
+        for (int i = 1; i <= 1000; i++) {
             new Thread(() -> {
                 for (int i1 = 0; i1 < 100; i1++) {
                     list.add(UUID.randomUUID().toString().substring(0,5));
