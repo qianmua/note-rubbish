@@ -2,6 +2,7 @@ package _2_demo_;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.DoubleBinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,23 +37,16 @@ public class Demo2 {
         double apply(double x , double y);
     }
 
-    private enum ExtendsOperation implements Operation {
-        EXP("^"){
-            @Override
-            public double apply(double x, double y) {
-                return 0;
-            }
-        } ,
-        REMAINDER("%") {
-            @Override
-            public double apply(double x, double y) {
-                return 0;
-            }
-        };
+    private enum ExtendsOperation /*implements Operation*/ {
+        EXP("^" , (x , y) -> (int)x ^ (int)y),
+        REMAINDER("%", (x , y) -> x % y );
 
         private final String symbol;
-        ExtendsOperation(String symbol){
+        private final DoubleBinaryOperator doubleBinaryOperator;
+        ExtendsOperation(String symbol , DoubleBinaryOperator doubleBinaryOperator){
             this.symbol = symbol;
+            this.doubleBinaryOperator = doubleBinaryOperator;
+
         }
 
         @Override
