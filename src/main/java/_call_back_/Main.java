@@ -14,7 +14,8 @@ public class Main {
     java8 lambda 回调
      */
     public static void main(String[] args) {
-
+        java7Test();
+        java8Test();
     }
 
     /**
@@ -36,7 +37,7 @@ public class Main {
         tools.setJava7CallBack(new Java7CallBack() {
             @Override
             public void sendMessage(String callName) {
-                System.out.println(callName);
+                System.out.println(callName + "java7callBack");
             }
         });
         tools.toolsCall();
