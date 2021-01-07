@@ -1,7 +1,5 @@
 package _2_demo_;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +33,53 @@ public class Demo2 {
     /*
     switch
      */
+    enum PayrollDay{
+        MON , TUE , WED , THU , FRI , SAT (PayType.WEEKEND) , SUN(PayType.WEEKEND);
 
+        private final PayType payType;
+
+        PayrollDay(PayType payType){
+            this.payType = payType;
+        }
+
+        /**
+         * default
+         */
+        PayrollDay(){
+            this(PayType.WEEKDAY);
+        }
+
+        int pay(int minutesWorked, int payState){
+            return payType.pay(minutesWorked , payState);
+        }
+
+        private enum PayType{
+            WEEKDAY{
+                @Override
+                int overtimePay(int minus, int payRate) {
+                    return minus <= MINUS_PER_SHIFT ? 0 : (minus - MINUS_PER_SHIFT) * payRate / 2 ;
+                }
+            },
+            WEEKEND{
+                @Override
+                int overtimePay(int minus, int payRate) {
+                    return minus * payRate / 2;
+                }
+            };
+
+            abstract int overtimePay(int minus, int payRate);
+
+            private static final int MINUS_PER_SHIFT = 8 * 60;
+
+            int pay(int minusWorked , int payRate ){
+                int basePay = minusWorked * payRate;
+                return basePay + overtimePay(minusWorked, payRate);
+            }
+
+        }
+
+
+    }
 
 
     /*
