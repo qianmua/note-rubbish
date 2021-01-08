@@ -1,5 +1,10 @@
 package _call_back_;
 
+import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Optional;
+
 /**
  * @author jinchao.hu
  * @version 1.0
@@ -7,6 +12,41 @@ package _call_back_;
  * @description :
  */
 public class Main {
+
+    @Test
+    public void callbackFunctionTest(){
+        CallBackFunction backFunction = null;
+
+        callbackM1(backFunction);
+        callbackM2(backFunction);
+
+        backFunction.execute();
+
+
+    }
+
+    void callbackM1(CallBackFunction backFunction){
+        String token1 = "token1";
+        // 匿名内部类需要添加序列化字段？
+        if (backFunction == null) {
+            backFunction = () -> new HashMap<String, String>(){
+                private static final long serialVersionUID = -3374614459939984327L;
+                {
+                put(token1 , "1");
+            }};
+        }
+    }
+
+    void callbackM2(CallBackFunction backFunction){
+        String token2 = "token2";
+        if (backFunction == null) {
+            backFunction = () -> new HashMap<String, String>(){
+                private static final long serialVersionUID = -3374614459939984327L;
+                {
+                    put(token2 , "2");
+                }};
+        }
+    }
 
 
     /*
