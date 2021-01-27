@@ -61,6 +61,7 @@ public class DemoTest {
         // 只是引用指针拷贝了，
         // 传递的值是指针指向的地址
         System.out.println(stu.getName());
+        // 这里
         m1(stu);
         System.out.println(stu.getName());
 
