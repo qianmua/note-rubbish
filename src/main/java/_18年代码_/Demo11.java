@@ -163,4 +163,23 @@ public class Demo11 {
         void m1(String name);
     }
 
+
+    @Test
+    public void m9(){
+        int a = 3 * 2 / 3;
+        System.out.println(a);
+        a = 3 / 2 * 3;
+        System.out.println(a);
+    }
+
+    @Test
+    public void m10(){
+        int a = 18 , b = 13;
+        a += b;
+        b = a - b;
+        a = a - b;
+        System.out.println(a);
+        System.out.println(b);
+    }
+
 }

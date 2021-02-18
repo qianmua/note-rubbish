@@ -33,6 +33,7 @@ public class Mark {
         // 扩容 原来的两倍
 
         // 最大扩容为：
+        // 是 2 的30次幂 也就是int 表示的最大值（符号位一位，hashmap 要保证必须是2的次幂）
         // Integer.MAX_VALUE
         /*HashMap<String, String> stringStringHashMap = new HashMap<>();
         String s = new String("111");
