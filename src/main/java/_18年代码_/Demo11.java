@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/12/28  15:10
- * @description :
+ * @description : dfs 深度优先 bfs 广度优先
  */
 public class Demo11 {
 
