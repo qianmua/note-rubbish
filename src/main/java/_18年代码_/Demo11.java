@@ -3,11 +3,11 @@ package _18年代码_;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jmx.remote.internal.ArrayQueue;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author HJC
@@ -206,5 +206,62 @@ public class Demo11 {
         int[] ints1 = JSON.parseObject(jsonStr, int[].class);
         System.out.println(Arrays.toString(ints1));
     }
+
+    static class ListNode implements Iterator<ListNode> {
+        int val;
+        ListNode next = null;
+        ListNode(int val){
+            this.val = val;
+        }
+        @Override
+        public boolean hasNext() {
+            return this.next != null;
+        }
+
+        @Override
+        public ListNode next() {
+            return this.next;
+        }
+    }
+
+    ListNode node = new ListNode(0);
+    @Before
+    public void m13_bf(){
+        ListNode root = this.node;
+        for (int i = 1; i <= 10; i++) {
+            if (this.node.next == null){
+                this.node.next = new ListNode(i);
+                this.node = this.node.next;
+            }
+        }
+        this.node = root;
+    }
+
+    @Test
+    public void m13(){
+        if (node == null){
+            return ;
+        }
+        ListNode head = this.node;
+
+        for (int i = 0; i < 3; i++) {
+            if (head.hasNext()){
+                head = head.next;
+            } // 临界点
+        }
+        while (head.hasNext()){
+            this.node = this.node.next();
+            head = head.next();
+        }
+        System.out.println(this.node.val);
+    }
+
+
+    @Test
+    public void m14(){
+
+    }
+
+
 
 }
