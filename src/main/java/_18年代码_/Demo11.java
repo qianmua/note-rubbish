@@ -1,7 +1,11 @@
 package _18年代码_;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -180,6 +184,27 @@ public class Demo11 {
         a = a - b;
         System.out.println(a);
         System.out.println(b);
+    }
+
+    @Test
+    public void m11(){
+        String s1 = new StringBuffer().append("aa").append("bb").toString();
+        String s2 = new StringBuffer().append("ja").append("va").toString();
+        //
+        System.out.println(s1.intern() == s1);
+        System.out.println(s2.intern() == s2);
+    }
+    
+    @Test
+    public void m12() throws JsonProcessingException {
+        String jsonStr = "[1,2,3,4,5,6]";
+        // jackson
+        int[] ints = new ObjectMapper().readValue(jsonStr, int[].class);
+        System.out.println(Arrays.toString(ints));
+
+        // fastjson
+        int[] ints1 = JSON.parseObject(jsonStr, int[].class);
+        System.out.println(Arrays.toString(ints1));
     }
 
 }
