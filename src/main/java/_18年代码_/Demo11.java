@@ -259,7 +259,14 @@ public class Demo11 {
 
     @Test
     public void m14(){
+        int a = a = 1;
+        System.out.println(a);
+    }
+    class ObjectHeadTest{
 
+    }
+    class ObjectHeadTest2{
+        int count = 100;
     }
 
 
