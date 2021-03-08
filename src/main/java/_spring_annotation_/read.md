@@ -72,6 +72,8 @@
     @Value ("http://www.baidu.com")-->注入网址资源
     @Value ("${book.name}" ) --> 注入配置文件 注意: 使用的是$ 而不是 #
 
+    @Import 可以导入成为Bean 哦 ， 配合 ImportSelecter.. 使用
+
 
 
 # spring  ${} 使用
