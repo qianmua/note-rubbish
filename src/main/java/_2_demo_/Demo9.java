@@ -1,6 +1,8 @@
 package _2_demo_;
 
 import com.google.common.collect.Maps;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -45,21 +47,28 @@ public class Demo9 {
 
 
     @Test
-    public void m3(){
+    public void m3() throws InterruptedException, IOException {
 
         SyncObjTest test = new SyncObjTest();
-        new Thread(test::mm2).start();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        new Thread(test::mm1).start();
 
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new Thread(test::mm1).start();
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(test::mm2).start();
+
+        System.in.read();
+    }
+
+    class M4 {
+        @Setter
+        @Getter
+        private String names;
+    }
+
+    @Test
+    public void m4(){
+        M4 m4 = new M4();
+        String s = null;
+        m4.setNames(s);
+        System.out.println(m4.getNames());
     }
 }
