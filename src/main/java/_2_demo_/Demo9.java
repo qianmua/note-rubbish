@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * description :
@@ -71,4 +72,61 @@ public class Demo9 {
         m4.setNames(s);
         System.out.println(m4.getNames());
     }
+
+
+
+    @Test
+    public void m5(){
+        List<String> list = null;
+        list = new ArrayList<String>(){{
+            add("A");
+            add("B");
+            add("C");
+            add("D");
+            add("E");
+            add("F");
+            add("G");
+        }}.stream().filter(v -> v.equals("J")).collect(Collectors.toList());
+
+        System.out.println(list);
+    }
+
+    @Test
+    public void m6(){
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.put(null , "hello");
+
+    }
+
+    @Test
+    public void m7(){
+        int a = ra(), b = rb(); // init value 1
+
+        if (++a == 1 && ++b ==1){ // exec ++a == 1 false && 短路 ++b没有执行
+            doNothing(); // pass
+        }
+        System.err.printf("v1 : %d , v2 : %d \n" , a , b); // 2 , 1
+
+        a = ra();
+        b = rb(); // init value 1
+
+        if (++a == 1 & ++b ==1){ // exec ++a == 1 false & ++ b == 1 false
+            doNothing(); // pass
+        }
+        // 没有被短路
+        System.err.printf("v1 : %d , v2 : %d \n" , a , b); // 2 , 2
+
+        // | || 也是同理
+        // 部分场景 这个挺有用的；
+
+    }
+    int ra(){
+        return 1;
+    }
+    int rb(){
+        return 1;
+    }
+    void doNothing(){ /* pass */}
+
+
 }
