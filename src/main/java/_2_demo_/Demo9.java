@@ -128,5 +128,51 @@ public class Demo9 {
     }
     void doNothing(){ /* pass */}
 
+    @Test
+    public void m8(){
+        System.err.println("1".equals(1));
+        Object o = (Object) 1;
+        if (o instanceof String) {
+
+        }
+    }
+
+
+    @Test
+    public void m9() throws IOException, InterruptedException {
+        D9C d9C = new D9C();
+
+        new Thread(d9C , "A").start();
+        new Thread(d9C , "B").start();
+        new Thread(d9C , "C").start();
+
+        TimeUnit.SECONDS.sleep(2);
+    }
+}
+
+class D9C implements Runnable{
+    int m1 = 10;
+    boolean b = true;
+    @Override
+    public void run() {
+        while (b){
+            bud();
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private synchronized void bud(){
+        if (m1 <= 0){
+            b = false;
+            return;
+        }
+        System.out.println(" :" + Thread.currentThread().getName() + " :\t\t" + m1--);
+    }
+
 
 }
