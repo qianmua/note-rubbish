@@ -4,19 +4,27 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.toolkit.CollectionUtils;
 import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * description :
@@ -24,6 +32,7 @@ import java.util.stream.Collectors;
  * @author jinchao.hu
  * @date 2021/5/24  16:46
  */
+@Slf4j
 public class Demo1 {
 
     @Test
@@ -523,5 +532,344 @@ public class Demo1 {
             strings.addLast("A" + i);
         }
     }
+
+    @Test
+    public void m24(){
+        String ss = "Hello world";
+        System.out.println(firstLowercase(ss));
+    }
+
+    public static String firstLowercase(String sources) {
+        if (StringUtils.isEmpty(sources)){
+            return StringUtils.EMPTY;
+        }
+        String current = sources.trim();
+        char ct = current.charAt(0);
+        if (ct >= 'A' && ct <= 'Z'){
+            ct = (char) (ct + (1 << 5 ));
+            current = ct + current.substring(1);
+        }
+        return current;
+    }
+
+
+    @Test
+    public void m25(){
+        for (int i = 0; i < 10; i++) {
+            if (i % 3 == 0){
+                System.out.println("=");
+            }
+            System.out.println(i);
+
+            if ( (i + 1) % 3 == 0){
+                System.out.println("/=");
+            }
+        }
+    }
+
+    @Test
+    public void m26() {
+        int a = (Integer.MIN_VALUE+1) ^ Integer.MIN_VALUE;
+
+        System.out.println( -1 ^ 1); // -2
+        System.out.println( -1 ^ -2); // 1
+
+        System.out.println( -1 ^ 0); // -1
+
+        System.out.println( 1 ^ 0); // 1
+        System.out.println( 1 ^ 2); // 3
+
+        System.out.println(0 ^ -0); // 0
+    }
+
+
+    @Test
+    public void m27() {
+        FiledDemos fd = new FiledDemos();
+        fd.setV1("hello");
+        String v1 = Optional.ofNullable(fd).orElseGet(FiledDemos::new).getV1();
+        System.out.println(v1);
+    }
+
+    enum MEx{
+        ME1("1") {
+            boolean ex(MEx pre, MEx next) {
+                return !ME2.ex(pre, next);
+            }
+        },
+        ME2("2") {
+            boolean ex(MEx pre, MEx next) {
+                return !ME3.ex(pre, next);
+            }
+        },
+        ME3("3") {
+            boolean ex(MEx pre, MEx next) {
+                return !ME4.ex(pre, next);
+            }
+        },
+        ME4("4") {
+            boolean ex(MEx pre, MEx next) {
+                return !ME5.ex(pre, next);
+            }
+        },
+        ME5("5") {
+            boolean ex(MEx pre, MEx next) {
+                return next.equals(ME6) || next.equals(ME7);
+            }
+        },
+        ME6("6") {
+            boolean ex(MEx pre, MEx next) {
+                return false;
+            }
+        },
+        ME7("7") {
+            boolean ex(MEx pre, MEx next) {
+                return false;
+            }
+        },
+
+        ;
+        private final String symbol;
+        abstract boolean ex(MEx pre, MEx next);
+
+        MEx(String symbol){
+            this.symbol = symbol;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+    }
+
+
+    @Test
+    public void m28(){
+        MEx me1 = MEx.ME1;
+        System.out.println(me1.ex(null, MEx.ME2));
+    }
+
+    class V{
+        String v;
+
+        public V(String v) {
+            this.v = v;
+        }
+
+        public void setV(String v) {
+            this.v = v;
+        }
+
+        public String getV() {
+            return v;
+        }
+
+        @Override
+        public String toString() {
+            return "V{" +
+                    "v='" + v + '\'' +
+                    '}';
+        }
+    }
+
+    @Test
+    public void m29(){
+        List<V> strings = Arrays.asList(new V("A"), new V("B"), new V("C"), new V("D"), new V("E") , null , null);
+        strings.stream().filter(Objects::nonNull).forEach(v -> v.setV(v.getV() + "1"));
+        strings.forEach(System.out::println);
+    }
+
+    @Test
+    public void m30(){
+        System.out.println(abs(-20));
+        System.out.println(abs(-1));
+        System.out.println(abs(1));
+        System.out.println(abs(20));
+
+        System.out.println(abs(0));
+        System.out.println(abs(-0));
+    }
+
+    // 取反
+    // 反码 + 1 补码
+    int ne(int num){
+        return ~num + 1;
+    }
+
+    int abs(int num){
+        return (num ^ (num >> 31)) - (num >> 31);
+    }
+
+    @Test
+    public void m31(){
+        Map<Character , String> typeMapper = new HashMap<>();
+        typeMapper.put('一', "01");
+        typeMapper.put('二', "02");
+        typeMapper.put('三', "03");
+        typeMapper.put('四', "04");
+        String source = "一二三四";
+        StringBuilder target = new StringBuilder();
+        for (int i = 0; i < source.length(); i++) {
+            char currentChar = source.charAt(i);
+            if (typeMapper.containsKey(currentChar)){
+                target.append(typeMapper.get(currentChar));
+            }else {
+                target.append(currentChar);
+            }
+        }
+        System.out.println(target.toString());
+    }
+
+    @Test
+    public void m32(){
+        Map<String , Object> map = new HashMap<>();
+        map.put("A" , "B");
+        String str = (String) map.get("C");
+        if (StringUtils.isEmpty(str)){
+            System.out.println(str);
+        }
+    }
+
+    class PK {
+        private String k;
+
+        private LocalDateTime joinTime;
+
+        PK(String k , LocalDateTime joinTime){
+            this.k = k;
+            this.joinTime = joinTime;
+        }
+    }
+
+    ConcurrentHashMap<String , Object> map = new ConcurrentHashMap<>(32);
+
+    PriorityBlockingQueue<PK> queue = new PriorityBlockingQueue<>(32,
+            (o, n) -> o.joinTime.equals(n.joinTime) ? 0 : o.joinTime.isAfter(n.joinTime) ? -1 : 1);
+
+    ScheduledExecutorService schedule = new ScheduledThreadPoolExecutor(8);
+
+    private Object o = new Object();
+
+    void initSchedule(){
+        // init map
+        schedule.scheduleWithFixedDelay(() -> {
+            for (int i = 0; i < 100; i++) {
+                map.put(UUID.randomUUID().toString().replace("-" , "") , new Object());
+            }
+        }, 1L, 20L , TimeUnit.SECONDS);
+        // swap
+        schedule.scheduleWithFixedDelay(() -> {
+            String s = map.keySet().stream().findFirst().get();
+            log.info("swap join queue : {} , result : {}" , s , queue.offer(new PK(s, LocalDateTime.now())));
+        } ,2L ,1L , TimeUnit.SECONDS);
+        // init queue
+        schedule.scheduleWithFixedDelay(() -> {
+            for (;;){
+                PK poll = queue.poll();
+                if (poll == null){
+                    return;
+                }
+                map.remove(poll.k);
+                log.info("Remove k : {}" , poll.k);
+            }
+        } , 40L , 40L , TimeUnit.SECONDS);
+
+        // monitor
+        schedule.scheduleWithFixedDelay(() -> {
+            log.info("Map capacity : {}" , map.size());
+            log.info("Queue capacity : {}" , queue.size());
+        } , 1L , 1L , TimeUnit.SECONDS);
+    }
+
+    void init2(){
+
+    }
+
+    @Test
+    public void m33() throws IOException {
+        initSchedule();
+
+        System.in.read();
+    }
+
+    static ConcurrentHashMap<String , Object> c = new ConcurrentHashMap<>(128);
+
+    @Test
+    public void m34() throws InterruptedException {
+        for (int i = 0; i < 100; i++) {
+            c.put(i + "" , i + "");
+        }
+        c.entrySet().stream().map( se -> {
+            String key = se.getKey();
+            c.remove(key);
+            System.err.println(key);
+            return se.getValue();
+        }).forEach(System.out::println);
+        TimeUnit.SECONDS.sleep(2L);
+        System.err.println("========");
+        System.out.println(c);
+    }
+
+
+    @Test
+    public void m35() {
+        PriorityBlockingQueue<String> queue = new PriorityBlockingQueue<>(60);
+        for (int i = 0; i < 100; i++) {
+            System.out.println(queue.offer(UUID.randomUUID().toString()));
+        }
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class Rela{
+        private Long to;
+        private Long from;
+        private String lx;
+        private String ly;
+
+        private List<Long> toList;
+    }
+
+    @Test
+    public void m36(){
+        Rela r1_1 = new Rela(11L, 1L, "1", "1" , new ArrayList<>(Arrays.asList(11L)));
+        Rela r1_2 = new Rela(12L, 1L, "1", "1" , null);
+        Rela r1_3 = new Rela(13L, 1L, "1", "1" , null);
+        Rela r1_4 = new Rela(14L, 1L, "1", "1" , null);
+
+        Rela r2_1 = new Rela(21L, 2L, "2", "2" , new ArrayList<>(Arrays.asList(21L)));
+        Rela r2_2 = new Rela(22L, 2L, "2", "2" , null);
+        Rela r2_3 = new Rela(23L, 2L, "2", "2" , null);
+        Rela r2_4 = new Rela(24L, 2L, "2", "2" , null);
+
+        Stream.of(r1_1, r1_2, r1_3, r1_4, r2_1, r2_2, r2_3, r2_4)
+                .collect(Collectors.groupingBy(rk -> new StringJoiner("-")
+                        .add(rk.getFrom().toString())
+                        .add(rk.getLx())
+                        .add(rk.getLy()).toString()))
+                .values().stream().map(
+                relas -> relas.stream().reduce(
+                        (v1, v2) -> {
+                            List<Long> toList = v1.toList;
+                            toList.add(v2.to);
+                            return new Rela(v1.to,
+                                    v1.from,
+                                    v1.lx,
+                                    v1.ly,
+                                    toList);
+                        }).get()).collect(Collectors.toList());
+        Map<String, List<Rela>> map = Stream.of(r1_1, r1_2, r1_3, r1_4, r2_1, r2_2, r2_3, r2_4)
+                .collect(Collectors.groupingBy(rk -> new StringJoiner("-")
+                        .add(rk.getFrom().toString())
+                        .add(rk.getLx())
+                        .add(rk.getLy()).toString()));
+    }
+
+    @Test
+    public void m37(){
+        System.out.println(Duration.between(LocalDateTime.now().minusMinutes(100L),LocalDateTime.now()).toMinutes());
+    }
+
 
 }
