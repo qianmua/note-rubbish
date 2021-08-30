@@ -17,13 +17,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -33,7 +36,7 @@ import java.util.stream.Stream;
  * @date 2021/5/24  16:46
  */
 @Slf4j
-public class Demo1 {
+public class JTestCollection {
 
     @Test
     public void m1() {
@@ -130,7 +133,7 @@ public class Demo1 {
     public void m6() {
         String str1 = "KDS111111-11222";
 
-        System.out.println(Demo1.checkDataFormat(str1)); // true
+        System.out.println(JTestCollection.checkDataFormat(str1)); // true
         String s2 = "hello";
         String s3 = "he" + new String("llo");
         System.out.println(s2 == s3);
@@ -229,12 +232,12 @@ public class Demo1 {
 
     @Test
     public void m9() {
-        Demo1 demo1 = new Demo1();
-        System.out.println(demo1.a); // 0
-        System.out.println(demo1.a_1); // null
-        System.out.println(demo1.d);
-        System.out.println(demo1.d_1);
-        System.out.println(demo1.s);
+        JTestCollection JTestCollection = new JTestCollection();
+        System.out.println(JTestCollection.a); // 0
+        System.out.println(JTestCollection.a_1); // null
+        System.out.println(JTestCollection.d);
+        System.out.println(JTestCollection.d_1);
+        System.out.println(JTestCollection.s);
     }
 
     @Test
@@ -268,7 +271,7 @@ public class Demo1 {
     @Test
     public void m12() {
         for (int i = 0; i < 1000; i++) {
-            new Thread(() -> Demo1.testConcurrent(new TestConcurrentClass(1))).start();
+            new Thread(() -> JTestCollection.testConcurrent(new TestConcurrentClass(1))).start();
         }
     }
 
@@ -871,5 +874,117 @@ public class Demo1 {
         System.out.println(Duration.between(LocalDateTime.now().minusMinutes(100L),LocalDateTime.now()).toMinutes());
     }
 
+    @Test
+    public void m38(){
+        int[] ints = IntStream.of(1, 2, 3, 4, 5, 6).map(v -> v * 100).toArray();
+        System.out.println(Arrays.toString(ints));
+
+    }
+
+    @Test
+    public void m39(){
+        Double d1 = 2.35678;
+        System.out.println(NumberUtils.toScaledBigDecimal(d1).doubleValue());
+
+        DI di = new DA();
+        di.m1();
+    }
+
+    interface DI{
+        @Deprecated
+        void m1();
+    }
+
+    class DA implements DI{
+        @Override
+        public void m1() {
+
+        }
+    }
+
+    @Test
+    public void m40(){
+        EnumS.applyEnumOf(EnumSet.of(EnumS.Type.A , EnumS.Type.B) );
+    }
+
+    static class EnumS {
+        enum Type {A, B , C , D , E , F}
+
+        public static void applyEnumOf(Set<Type> types){
+
+        }
+    }
+
+    @Test
+    public void m41(){
+        EnumS2.P.T t = EnumS2.P.T.from(EnumS2.P.A, EnumS2.P.B);
+        System.out.println(t);
+    }
+
+    static class EnumS2{
+        enum P {
+            A, B , C ;
+            enum T {
+                D(A,B) , E(B,C) , F(A,C) ;
+                private final P from ;
+                private final P to;
+                T(P from , P to) {
+                    this.from = from;
+                    this.to = to;
+                }
+
+                private static final Map<P , Map<P , T>> m = Stream
+                        .of(values())
+                        .collect(Collectors.groupingBy(t -> t.from ,
+                                () -> new EnumMap<>(P.class) ,
+                                Collectors.toMap( t -> t.to ,
+                                        t -> t ,
+                                        (x , y) -> y ,
+                                        () -> new EnumMap<>(P.class))));
+
+                // from to
+                public static T from(P from , P to){
+                    return T.m.get(from).get(to);
+                }
+            }
+        }
+    }
+
+
+    @Test
+    public void m42(){
+
+    }
+
+    enum RT{
+        R1 , R2 , R3 , R4 ;
+        enum RTT {
+            TT1(EnumSet.of(R1 , R2)) , TT2(EnumSet.of(R2 , R3)) , TT3(EnumSet.of(R3 , R4))  ;
+            private final Set<RT> rt;
+            
+            RTT(Set<RT> rt){
+                this.rt = rt;
+            }
+        }
+
+    }
+
+
+    @Test
+    public void m43(){
+        DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
+        System.out.println(dayOfWeek.getValue());
+        System.out.println(dayOfWeek);
+
+        LocalTime now = LocalTime.now();
+        LocalTime parse = LocalTime.parse("12:34");
+        System.out.println(now.isAfter(parse));
+    }
+
+    @Test
+    public void m44(){
+        String str = "[1,2,3,4,5,6,7,8,9]";
+        log.info(" log params : {} ",str.substring(1 , str.length() - 1));
+    }
 
 }
