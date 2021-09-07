@@ -3,6 +3,9 @@ package _2_demo_._3_demo_;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.toolkit.CollectionUtils;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -985,6 +989,364 @@ public class JTestCollection {
     public void m44(){
         String str = "[1,2,3,4,5,6,7,8,9]";
         log.info(" log params : {} ",str.substring(1 , str.length() - 1));
+    }
+
+    @Test
+    public void m45(){
+        // limiter
+        for(;;){
+            SlidingLimiter.slideWindow();
+            try {
+                TimeUnit.SECONDS.sleep(1L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    static class SlidingLimiter {
+        private static final LoadingCache<Long, AtomicLong> counter =
+                CacheBuilder.newBuilder()
+                        .expireAfterWrite(10, TimeUnit.SECONDS)
+                        .build(new CacheLoader<>() {
+                            @Override
+                            public AtomicLong load(Long seconds) throws Exception {
+                                return new AtomicLong(0);
+                            }
+                        });
+
+        private static final long limit = 15;
+        private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+
+        /**
+         * 滑动时间窗口
+         * 每隔1s累加前5s内每1s的请求数量，判断是否超出限流阈值
+         */
+        public static void slideWindow() {
+            scheduledExecutorService.scheduleWithFixedDelay(() -> {
+                try {
+                    long time = System.currentTimeMillis() / 1000;
+                    //每秒发送随机数量的请求
+                    int reqs = (int) (Math.random() * 5) + 1;
+                    limiter(time , reqs);
+                } catch (Exception e) {
+                    log.error("slideWindow error", e);
+                }
+            }, 5000, 1000, TimeUnit.MILLISECONDS);
+        }
+
+        public static void limiter(long time , long reqs) throws Exception{
+            counter.get(time).addAndGet(reqs);
+            long nums = 0;
+            // time windows 5 s
+            for (int i = 0; i < 5; i++) {
+                nums += counter.get(time - i).get();
+            }
+            log.info("time=" + time + ",nums=" + nums);
+            if (nums > limit) {
+                log.info("限流了,nums=" + nums);
+            }
+        }
+    }
+
+    class Node {
+        Integer id;
+        Integer parentId;
+        String value;
+        List<Node> children;
+
+        public Node(Integer id, Integer parentId) {
+            this.id = id;
+            this.parentId = parentId;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "id=" + id +
+                    ", parentId=" + parentId +
+                    ", value='" + value + '\'' +
+                    ", children=" + children +
+                    '}';
+        }
+    }
+
+    @Test
+    public void m46(){
+        List<Node> nodes = new ArrayList<>();
+        nodes.add(new Node(1 , null));
+        nodes.add(new Node(2 , null));
+        nodes.add(new Node(3 , 1));
+        nodes.add(new Node(4 , 2));
+        nodes.add(new Node(5 , 3));
+        nodes.add(new Node(6 , 4));
+
+        List<Node> nodeList = buildRootNode(nodes);
+        for (Node node : nodeList) {
+            List<Node> children = buildToNode(node , nodes);
+            node.children = children;
+            System.out.println(node);
+        }
+
+
+    }
+
+    private List<Node> buildToNode(Node node, List<Node> nodes) {
+        // 子集树
+        List<Node> nodeList = nodes.stream().filter(n -> n.parentId != null && n.parentId.equals(node.id)).collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(nodeList)){
+            return null;
+        }
+        for (Node node1 : nodeList) {
+            node1.children = buildToNode(node1 , nodes);
+        }
+        return nodeList;
+    }
+
+    private List<Node> buildRootNode(List<Node> nodes) {
+        return nodes.stream().filter(node -> node.parentId == null).collect(Collectors.toList());
+    }
+    
+    @Test
+    public void m47() {
+        String heisi = "heisi";
+        method(heisi);
+        System.out.println(heisi + "wa");
+    }
+    private static void method(String h) {
+        System.out.println("将温柔给予黑丝");
+        System.exit(1);
+    }
+
+    @Test
+    public void m48(){
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        System.out.println(i);
+    }
+
+    @Test
+    public void m49(){
+        Scanner sc = new Scanner(System.in);
+        String res = "";
+        boolean reFlg = false;
+        System.out.println("天气:");
+        int flg = sc.nextInt();
+        re: {
+            switch (flg){
+                case 0:
+                    res = reFlg ? "女士,要下雨了,记得穿黑丝哇" : "一起玩耍啦";
+                    break ;
+                case 1:
+                    if (reFlg) {
+                        res = "男士,下雨啦,出去看~";
+                    }
+                    reFlg = true;
+                    System.out.println("性别:");
+                    flg = sc.nextInt();
+                    break re;
+                default:
+                    res = reFlg ? "性别参数错了~" : "天气参数错了~";
+            }
+
+        }
+        System.out.println(res);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(sc.next());
+        System.out.println("-------------------------------------");
+//        System.out.println(sc.nextLine());
+    }
+
+    @Test
+    public void m50(){
+        Scanner sc = new Scanner(System.in);
+        int score = sc.nextInt();
+        String level =
+                score >= 90 ? "A" :
+                score >= 75 ? "B" :
+                score >= 60 ? "C" : "D" ;
+
+        if (score >= 90){
+            level = "A";
+        }else if (score >= 75){
+            level = "B";
+        }else if (score >= 60){
+            level = "C";
+        }else{
+            level = "D";
+        }
+
+        log.info("成绩级别是: {};" ,level );
+    }
+
+    @Test
+    public void m51(){
+        jc(9 , 1);
+    }
+
+    private void jc(int s , int base){
+        if (s < base) return;
+        for (int i1 = 1; i1 <= base; i1++) {
+            System.out.printf("%d * %d = %d\t" , base , i1 , base * i1 );
+        }
+        System.out.println();
+        jc(s , ++ base);
+    }
+    
+    @Test
+    public void m52(){
+        int i = 0;
+        for(println("A") ; println("B") && i < 1; println("C")){
+            println("D");
+            i++;
+        }
+    }
+
+    private boolean println(String s){
+        System.out.println(s);
+        return true;
+    }
+
+    @Test
+    public void m53(){
+        CustomStack<Long> longCustomStack = new CustomStack<Long>(2);
+
+        longCustomStack.push(1L);
+        longCustomStack.push(2L);
+        longCustomStack.push(3L);
+
+        longCustomStack.pop();
+        longCustomStack.pop();
+        longCustomStack.pop();
+
+    }
+
+    @Slf4j
+    static class CustomStack<T> {
+
+        private int index = 0;
+
+        private List<T> elements;
+
+        private Integer cap = 10;
+
+        public CustomStack(){
+            elements = new ArrayList<>(cap);
+        }
+
+        public CustomStack(Integer cap){
+            this.cap = cap;
+            elements = new ArrayList<>(cap);
+        }
+
+        public void push(T val){
+            if (checkSize()){
+                log.warn("容器已经满啦~ , 当前大小 {} , 容器容量 {}" , index , cap);
+                return;
+            }
+            elements.add(val);
+            index++;
+        }
+
+        public T pop() {
+            if(checkSize()){
+                log.warn("我什么都没有了. , 当前大小 {} , 容器容量 {}" , index , cap);
+                return null;
+            }
+            T t = elements.get(index);
+            index--;
+            return t;
+        }
+
+        public boolean checkSize(){
+            return index >= cap;
+        }
+    }
+
+    @Test
+    public void m54(){
+        CustomStackObj stackObj = new CustomStackObj(2);
+        stackObj.push(1);
+        stackObj.push(2);
+        stackObj.push(3);
+
+        System.out.println(stackObj.pop());
+        System.out.println(stackObj.pop());
+        System.out.println(stackObj.pop());
+    }
+
+    class CustomStackObj {
+        // 索引下标
+        private int index = 0;
+        // 栈
+        private Object[] elements;
+        // 栈大小
+        private int cap = 10;
+
+        // 初始化栈大小
+        public CustomStackObj() { initElementCap(cap); }
+
+        public CustomStackObj(int cap) {
+            this.cap = cap;
+            initElementCap(cap);
+        }
+
+        // 压栈
+        public void push(Object element){
+            // 判断是否超容
+            if (index >= cap){
+                log.warn("已经满了. , 当前大小 {} , 容器容量 {}" , index , cap);
+                return;
+            }
+            // 添加到栈里面 并且 栈指针自增
+            elements[index++] = element;
+        }
+
+        // 弹栈
+        public Object pop() {
+            // 判断指针位置
+            if (index <= 0){
+                log.warn("我什么都没有了. , 当前大小 {} , 容器容量 {}" , index , cap);
+                return null;
+            }
+            // 返回该位置值 并且 栈指针回缩
+            return elements[--index];
+        }
+
+        private void initElementCap(int cap){
+            elements = new Object[cap];
+        }
+    }
+
+    @Test
+    public void m55() {
+        System.out.println(zanQian(100, 1, 0));
+    }
+
+    private int zanQian(double yuan , int day , double cun){
+        cun += 2.5;
+        if (cun >= yuan) {
+            return day;
+        }
+        if (day % 5 == 0) {
+            cun -= 6;
+        }
+        return zanQian(yuan, ++day, cun);
+    }
+
+    @Test
+    public void m56() {
+        List list = new ArrayList();
+        list.add(1);
+        list.add(1L);
+        list.add("1");
+        list.add(1.0);
+
+        Object[] objects = list.toArray();
+        System.out.println(Arrays.toString(objects));
     }
 
 }

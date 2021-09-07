@@ -1,0 +1,77 @@
+Classfile /C:/Users/HJC/IdeaProjects/god-way/src/main/java/_2_demo_/_3_demo_/CompilationOptimization.class
+  Last modified 2021-9-2; size 540 bytes
+  MD5 checksum b803cdb73929d316f107f84fd513a2b8
+  Compiled from "CompilationOptimization.java"
+public class _2_demo_._3_demo_.CompilationOptimization
+  minor version: 0
+  major version: 55
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #3.#24         // java/lang/Object."<init>":()V
+   #2 = Class              #25            // _2_demo_/_3_demo_/CompilationOptimization
+   #3 = Class              #26            // java/lang/Object
+   #4 = Utf8               a
+   #5 = Utf8               I
+   #6 = Utf8               ConstantValue
+   #7 = Integer            10
+   #8 = Utf8               b
+   #9 = Integer            1
+  #10 = Utf8               <init>
+  #11 = Utf8               ()V
+  #12 = Utf8               Code
+  #13 = Utf8               LineNumberTable
+  #14 = Utf8               LocalVariableTable
+  #15 = Utf8               this
+  #16 = Utf8               L_2_demo_/_3_demo_/CompilationOptimization;
+  #17 = Utf8               main
+  #18 = Utf8               ([Ljava/lang/String;)V
+  #19 = Utf8               args
+  #20 = Utf8               [Ljava/lang/String;
+  #21 = Utf8               c1
+  #22 = Utf8               SourceFile
+  #23 = Utf8               CompilationOptimization.java
+  #24 = NameAndType        #10:#11        // "<init>":()V
+  #25 = Utf8               _2_demo_/_3_demo_/CompilationOptimization
+  #26 = Utf8               java/lang/Object
+{
+  public static final int a;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 10
+
+  public static final int b;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 1
+
+  public _2_demo_._3_demo_.CompilationOptimization();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 9: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   L_2_demo_/_3_demo_/CompilationOptimization;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=1
+         0: bipush        10
+         2: istore_1
+         3: return
+      LineNumberTable:
+        line 15: 0
+        line 16: 3
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       4     0  args   [Ljava/lang/String;
+            3       1     1    c1   I
+}
+SourceFile: "CompilationOptimization.java"
