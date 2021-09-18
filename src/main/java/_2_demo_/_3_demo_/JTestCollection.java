@@ -419,7 +419,7 @@ public class JTestCollection {
         String ss = "\\x8f6f\\x4ef6\\x5bf9";
         System.out.println(new String(ss.getBytes() , StandardCharsets.UTF_8));
     }
-    
+
     @Test
     public void m19() {
         FiledDemos filedDemos = new FiledDemos();
@@ -482,7 +482,7 @@ public class JTestCollection {
         }
         return bilibili;
     }
-    
+
     @Test
     public void m20(){
 
@@ -965,7 +965,7 @@ public class JTestCollection {
         enum RTT {
             TT1(EnumSet.of(R1 , R2)) , TT2(EnumSet.of(R2 , R3)) , TT3(EnumSet.of(R3 , R4))  ;
             private final Set<RT> rt;
-            
+
             RTT(Set<RT> rt){
                 this.rt = rt;
             }
@@ -1106,7 +1106,7 @@ public class JTestCollection {
     private List<Node> buildRootNode(List<Node> nodes) {
         return nodes.stream().filter(node -> node.parentId == null).collect(Collectors.toList());
     }
-    
+
     @Test
     public void m47() {
         String heisi = "heisi";
@@ -1195,7 +1195,7 @@ public class JTestCollection {
         System.out.println();
         jc(s , ++ base);
     }
-    
+
     @Test
     public void m52(){
         int i = 0;
@@ -1348,5 +1348,115 @@ public class JTestCollection {
         Object[] objects = list.toArray();
         System.out.println(Arrays.toString(objects));
     }
+
+    @Test
+    public void m57(){
+        int i = 0;
+        do {
+            println("A" + i++);
+        }while (println("B") && i < 3);
+    }
+
+    @Test
+    public void m58() {
+
+    }
+
+    interface MA {
+        String m1(String m1);
+
+        default MA andThen(MA after) {
+            Objects.requireNonNull(after);
+            return ma -> after.m1(m1(ma));
+        }
+    }
+
+
+    @Test
+    public void m59() {
+        ValRef a = new ValRef(1, "A");
+        ValRef b = new ValRef(2, "B");
+        swap(a , b);
+        System.out.printf("%d ,\t %s \n" ,a.a , a.ma);
+        System.out.printf("%d ,\t %s \n" ,b.a , b.ma);
+    }
+
+    void swap(ValRef a , ValRef b) {
+        ValRef temp = a;
+        a = b;
+        b = temp;
+
+        a.ma = "C";
+        b.ma = "D";
+    }
+
+    class ValRef {
+        int a;
+        String ma;
+
+        ValRef(int a, String ma) {
+            this.a = a;
+            this.ma = ma;
+        }
+    }
+
+    @Test
+    public void m60() {
+        // bit map
+        int[] arr = new int[]{1,2,3,4,5,6};
+        BitSet bitSet = new BitSet(6);
+        for (int i : arr) {
+            bitSet.set(arr[i] , true);
+        }
+    }
+
+    void testBitMap01() {
+        int n = 5;
+        int index = 5/32;
+        int local = 5%32;
+    }
+
+    static class BitMap {
+        static final int[] arr = new int[6];
+        static void clear(int i) {
+            int shift = i % 32;
+            int index = i >> 5;
+
+            int bitPos = ~(1 << shift);
+            arr[index] &= bitPos;
+        }
+        static void add(int i) {
+            int shift = 1 % 32;
+            int index = i >> 5;
+            int bitPos = 1 << shift;
+            arr[index] |= bitPos;
+        }
+        static boolean contain(int i) {
+            int j = arr[i >> 5] & (1 << (i & 32));
+            return j == 0;
+        }
+    }
+
+    @Test
+    public void m61() {
+        // 错了
+
+
+        int n = 5, n1 = n;
+        int base = 2;
+        int colBase = 1;
+        for (int i = 0; i < n; i++) {
+            int rowBase = colBase + i; // 1 + 0 + 1 + 2
+            for (int j = 0; j < n; j++) {
+                System.out.print(rowBase + "\t");
+                rowBase += ( base + j );
+            }
+            colBase = colBase + i;
+            base +=(i + 1);
+            System.out.println();
+        }
+    }
+
+
 
 }
